@@ -1,4 +1,4 @@
-name: DEVTI
+name: CI
 
 env:
   CI: true
