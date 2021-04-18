@@ -21,7 +21,7 @@ interface Status {
   feedback: string;
 }
 
-export const callApi = async () => {
+export const fetchCats = async () => {
   const URL = 'https://cat-fact.herokuapp.com/facts';
   const { data } = await axios.get<Cat[]>(URL);
   return data;
