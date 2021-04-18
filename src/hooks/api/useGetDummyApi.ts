@@ -29,7 +29,7 @@ export const fetchCats = async () => {
 
 // 캐싱 될 필요 없는 경우 useMutation
 const useGetDummyApi = () => {
-  const { mutateAsync } = useMutation(callApi);
+  const { mutateAsync } = useMutation(fetchCats);
 
   return {
     mutateAsync,

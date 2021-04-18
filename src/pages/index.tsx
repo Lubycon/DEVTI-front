@@ -1,7 +1,7 @@
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
-import { callApi, Cat } from '../hooks/api/useGetDummyApi';
+import { fetchCats, Cat } from '../hooks/api/useGetDummyApi';
 
 const KEY = 'dummy';
 
@@ -18,7 +18,7 @@ const Index = () => {
 export const getStaticProps = async () => {
   const queryCache = new QueryClient();
 
-  await queryCache.prefetchQuery(KEY, callApi);
+  await queryCache.prefetchQuery(KEY, fetchCats);
   return { props: { dehydratedState: dehydrate(queryCache) } };
 };
 
