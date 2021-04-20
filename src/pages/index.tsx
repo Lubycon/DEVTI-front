@@ -1,19 +1,18 @@
-import { QueryClient, useQuery } from 'react-query';
+import Link from 'next/link';
+import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
-import { fetchCats, Cat } from '../hooks/api/useGetDummyApi';
+import { fetchCats } from '../hooks/api/useGetDummyApi';
 
 const KEY = 'dummy';
 
-const Index = () => {
-  const { data } = useQuery<Cat[]>(KEY);
-
-  return (
-    <div>
-      {data?.map(({ text, _id: id }) => <div key={id}>{text}</div>)}
-    </div>
-  );
-};
+const Index = () => (
+  <h1>
+    <Link href="/question/1">
+      <a>go to Question</a>
+    </Link>
+  </h1>
+);
 
 export const getStaticProps = async () => {
   const queryCache = new QueryClient();
