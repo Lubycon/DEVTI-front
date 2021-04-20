@@ -5,7 +5,7 @@ import { useRouter as nextRouter } from 'next/router';
 type CastQuery<T> = T & ParsedUrlQuery;
 
 const useRouter = <T>() => {
-  const { query: nextQuery, push: nextPush, ...route } = nextRouter();
+  const { query: nextQuery, ...route } = nextRouter();
 
   const query = nextQuery as CastQuery<T>;
 
