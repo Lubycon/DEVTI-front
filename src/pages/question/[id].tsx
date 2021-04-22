@@ -3,7 +3,9 @@ import Link from 'next/link';
 import useQueryParam from '../../hooks/useQueryParam';
 
 const Question = () => {
-  const { query: { id } } = useQueryParam<{ id:string }>();
+  const {
+    query: { id },
+  } = useQueryParam<{ id: string }>();
 
   return (
     <div>
