@@ -15,6 +15,6 @@ const buttons = {
       bg: 'gray.6',
     },
   },
-}
+};
 
-export default buttons
+export default buttons;
