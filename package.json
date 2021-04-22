@@ -17,6 +17,7 @@
     "emotion-reset": "^3.0.0",
     "emotion-theming": "^10.0.27",
     "next": "latest",
+    "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-query": "^3.13.10",
@@ -32,8 +33,10 @@
     "@typescript-eslint/parser": "^4.22.0",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.23.2",
     "husky": "4",
     "typescript": "4.0"
