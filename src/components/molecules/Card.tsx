@@ -1,29 +1,17 @@
-import { Box, Flex } from 'rebass';
-
-import Thumbnail from '../atoms/Thumbnail';
+import { Flex, Image, Text } from 'rebass';
 
 interface CardProps {
-  imageUrl?: string;
-  contents: string;
+  imageUrl: string;
+  description: string;
+  alt: string;
 }
 
-const PROFILE = 'https://www.w3schools.com/howto/img_avatar.png';
-
-const Card = ({ imageUrl, contents }: CardProps) => (
-  <Flex flexDirection="column" alignItems="center">
-    <Box
-      sx={{
-        position: 'relative',
-        top: '45px',
-      }}
-    >
-      <Thumbnail imageUrl={imageUrl || PROFILE} />
-    </Box>
-    <Box bg="gray.0" p={2} pt={5} width={300} height={300} sx={{ borderRadius: 10 }}>
-      <Box height={220} overflowY="scroll">
-        {contents}
-      </Box>
-    </Box>
+const Card = ({ imageUrl, description, alt }: CardProps) => (
+  <Flex flexDirection="column" mx={45}>
+    <Image src={imageUrl} alt={alt} width={247} />
+    <Text mt={40} fontSize={20}>
+      {description}
+    </Text>
   </Flex>
 );
 

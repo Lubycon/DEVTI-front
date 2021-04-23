@@ -1,6 +1,6 @@
 import { Flex } from 'rebass';
 
-import ThumbnailCard from '../../molecules/ThumbnailCard';
+import Card from '../../molecules/Card';
 import Section from '../../templates/Section';
 
 const CAT =
@@ -9,9 +9,9 @@ const CAT =
 const InformationSection = () => (
   <Section title={'분석적인 결과를 통해\n안정적인 커리어를 쌓아보세요'}>
     <Flex mb={267}>
-      <ThumbnailCard imageUrl={CAT} description="개발 사전 지식이 필요없어요" alt="고양이" />
-      <ThumbnailCard imageUrl={CAT} description="개발 사전 지식이 필요없어요" alt="고양이" />
-      <ThumbnailCard imageUrl={CAT} description="개발 사전 지식이 필요없어요" alt="고양이" />
+      <Card imageUrl={CAT} description="개발 사전 지식이 필요없어요" alt="고양이" />
+      <Card imageUrl={CAT} description="개발 사전 지식이 필요없어요" alt="고양이" />
+      <Card imageUrl={CAT} description="개발 사전 지식이 필요없어요" alt="고양이" />
     </Flex>
   </Section>
 );

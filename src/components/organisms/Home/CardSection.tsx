@@ -1,9 +1,9 @@
 import { Flex } from 'rebass';
 
-import Card from '../../molecules/Card';
+import ThumbnailCard from '../../molecules/ThumbnailCard';
 import Section from '../../templates/Section';
 
-const CardSection = () => {
+const ThumbnailCardSection = () => {
   const lorem =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
@@ -18,11 +18,11 @@ const CardSection = () => {
         }}
       >
         {Array.from({ length: 3 }, (_, i) => (
-          <Card key={new Date().getTime() + i} contents={lorem + lorem} />
+          <ThumbnailCard key={new Date().getTime() + i} contents={lorem + lorem} />
         ))}
       </Flex>
     </Section>
   );
 };
 
-export default CardSection;
+export default ThumbnailCardSection;
