@@ -17,7 +17,7 @@ const ThumbnailCard = ({ imageUrl, contents }: ThumbnailCardProps) => (
         top: '45px',
       }}
     >
-      <Thumbnail imageUrl={imageUrl || PROFILE} />
+      <Thumbnail imageUrl={imageUrl ?? PROFILE} />
     </Box>
     <Box bg="gray.0" p={2} pt={5} width={300} height={300} sx={{ borderRadius: 10 }}>
       <Box height={220} overflowY="scroll">
