@@ -8,11 +8,11 @@ const buttons = {
       outline: 'none',
     },
   },
-  example: {
+  dark: {
     variant: 'buttons.default',
-    bg: 'dark.0',
+    bg: 'gray.6',
     ':hover, :focus': {
-      bg: 'dark.0',
+      bg: 'gray.6',
     },
   },
 };

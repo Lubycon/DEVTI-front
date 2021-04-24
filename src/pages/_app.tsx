@@ -8,8 +8,7 @@ import { queryClient } from '../config/reactQuery';
 import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
 
-const App = ({ Component, pageProps }:AppProps) => (
-
+const App = ({ Component, pageProps }: AppProps) => (
   <QueryClientProvider client={queryClient}>
     <Hydrate state={pageProps.dehydratedState}>
       <ThemeProvider theme={theme}>

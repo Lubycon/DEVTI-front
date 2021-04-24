@@ -1,4 +1,3 @@
-const usePostDummyApi = () => {
-};
+const usePostDummyApi = () => {};
 
 export default usePostDummyApi;

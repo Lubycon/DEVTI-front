@@ -10,6 +10,4 @@ queryClient.setDefaultOptions({
   },
 });
 
-export {
-  queryClient,
-};
+export { queryClient };
