@@ -1,4 +1,4 @@
-import { Button, Image } from 'rebass';
+import { Button, Image, Text } from 'rebass';
 
 import Section from '../../templates/Section';
 
@@ -6,11 +6,11 @@ const WOMAN = 'https://user-images.githubusercontent.com/39829378/115711565-a43c
 
 const MainSection = () => (
   <Section
-    title={'나에게 딱 맞는\n개발자 직군을 찾아보세요'}
-    titleProps={{
-      fontWeight: 700,
-      fontSize: 65,
-    }}
+    title={
+      <Text variant="title" fontWeight={700} fontSize={65}>
+        {'나에게 딱 맞는\n개발자 직군을 찾아보세요'}
+      </Text>
+    }
     description="어느 직군에 더 적합한지 테스트 해보세요!"
     backgroundTheme="gray"
   >

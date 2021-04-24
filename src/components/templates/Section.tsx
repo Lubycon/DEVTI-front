@@ -1,19 +1,16 @@
-import { PropsWithChildren } from 'react';
-import { Flex, Text, TextProps } from 'rebass';
+import { isValidElement, PropsWithChildren, ReactNode } from 'react';
+import { Flex, Text } from 'rebass';
 
 interface SectionProps {
-  title: string | string[];
-  titleProps?: TextProps;
+  title: ReactNode;
   description?: string | string[];
   backgroundTheme?: 'gray' | 'white';
 }
 
-const Section = ({ title, description, backgroundTheme = 'white', children, titleProps }: PropsWithChildren<SectionProps>) => (
+const Section = ({ title, description, backgroundTheme = 'white', children }: PropsWithChildren<SectionProps>) => (
   <Flex variant={backgroundTheme !== 'gray' ? 'screen' : 'grayScreen'} as="section" pt={120}>
     <Flex flexDirection="column" alignItems="center">
-      <Text variant="title" {...titleProps}>
-        {title}
-      </Text>
+      {isValidElement(title) ? title : <Text variant="title">{title}</Text>}
       <Text variant="description" mt={12}>
         {description}
       </Text>
