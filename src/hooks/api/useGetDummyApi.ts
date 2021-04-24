@@ -27,7 +27,6 @@ export const fetchCats = async () => {
   return data;
 };
 
-// 캐싱 될 필요 없는 경우 useMutation
 const useGetDummyApi = () => {
   const { mutateAsync } = useMutation(fetchCats);
 
