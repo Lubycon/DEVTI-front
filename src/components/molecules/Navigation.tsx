@@ -1,7 +1,7 @@
 import { Button, Flex, Text } from 'rebass';
 
 const Navigation = () => (
-  <Flex as="nav" justifyContent="space-between" alignItems="center" px={140} height={80}>
+  <Flex as="nav" variant="navigation">
     <Text fontWeight={800} fontSize="30px" flex={2}>
       DEVTI
     </Text>

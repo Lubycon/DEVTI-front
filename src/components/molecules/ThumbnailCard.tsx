@@ -1,6 +1,6 @@
-import { Box, Flex } from 'rebass';
+import { Box, Flex, Text } from 'rebass';
 
-import Thumbnail from '../atoms/Thumbnail';
+import Profile from './Profile';
 
 interface ThumbnailCardProps {
   imageUrl?: string;
@@ -14,14 +14,26 @@ const ThumbnailCard = ({ imageUrl, contents }: ThumbnailCardProps) => (
     <Box
       sx={{
         position: 'relative',
-        top: '45px',
+        top: '78px',
       }}
     >
-      <Thumbnail imageUrl={imageUrl ?? PROFILE} />
+      <Profile imageUrl={imageUrl ?? PROFILE} nickname="dev****" />
     </Box>
-    <Box bg="gray.0" p={2} pt={5} width={300} height={300} sx={{ borderRadius: 10 }}>
-      <Box height={220} overflowY="scroll">
-        {contents}
+    <Box
+      bg="white"
+      p={3}
+      pt={100}
+      width={300}
+      height={300}
+      sx={{ borderRadius: 10, boxShadow: '5px 5px 20px rgba(0, 0, 0, 0.1)' }}
+    >
+      <Box height={188} overflowY="scroll">
+        <Text font-size={16} color="blue.0" fontWeight="bold" mb={2}>
+          취준생 / front-end
+        </Text>
+        <Text as="p" color="gray.3" fontWeight={400} fontSize={16}>
+          {contents}
+        </Text>
       </Box>
     </Box>
   </Flex>
