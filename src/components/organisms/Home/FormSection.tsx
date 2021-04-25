@@ -17,7 +17,7 @@ const FormSection = () => (
       </Label>
       <Label>
         Q2. 연락처를 기입하면 가장 먼저 테스트를 받아보실수 있습니다.
-        <EmailDropdown mt={9} emails={['gmail.com', 'naver.com', 'daum.net', 'yahoo.com']} />
+        <EmailDropdown mt={9} domains={['gmail.com', 'naver.com', 'daum.net', 'yahoo.com']} />
       </Label>
       <Button variant="dark" type="submit" mt={30} mb={10} width={200} height={55} fontWeight="bold" fontSize={16}>
         테스트 신청완료
