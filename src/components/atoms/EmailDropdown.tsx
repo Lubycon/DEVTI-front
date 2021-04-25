@@ -3,10 +3,10 @@ import React from 'react';
 import { Box, Flex, FlexProps } from 'rebass';
 
 interface EmailDropdownProps {
-  emails: string[];
+  domains: string[];
 }
 
-const EmailDropdown = ({ emails, ...props }: FlexProps & EmailDropdownProps) => (
+const EmailDropdown = ({ domains, ...props }: FlexProps & EmailDropdownProps) => (
   <Flex {...props}>
     <Input />
     <Box
@@ -16,9 +16,9 @@ const EmailDropdown = ({ emails, ...props }: FlexProps & EmailDropdownProps) => 
       }}
     >
       <Select name="email" defaultValue="gmail.com" variant="email_dropdown">
-        {emails.map((email) => (
-          <option value="gmail.com" key={email}>
-            @{email}
+        {domains.map((domain) => (
+          <option value="gmail.com" key={domain}>
+            @{domain}
           </option>
         ))}
       </Select>
