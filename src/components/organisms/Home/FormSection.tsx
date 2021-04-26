@@ -8,12 +8,14 @@ import Section from '../../templates/Section';
 const FormSection = () => {
   const { mutateBetaSignUp } = useBetaSignUp();
 
-  const { handleSubmit, register, setValue } = useForm<SignUp>();
+  const { handleSubmit, register, reset } = useForm<SignUp>();
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
-    await mutateBetaSignUp(item);
-    setValue('comment', '');
-    setValue('email', '');
+    await mutateBetaSignUp(item, {
+      onSuccess: () => {
+        reset();
+      },
+    });
   });
 
   return (
