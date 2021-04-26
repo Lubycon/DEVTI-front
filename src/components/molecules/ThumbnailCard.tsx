@@ -17,6 +17,7 @@ const ThumbnailCard = ({ imageUrl, contents }: ThumbnailCardProps) => (
         top: '78px',
       }}
     >
+      {/* FIXME */}
       <Profile imageUrl={imageUrl ?? PROFILE} nickname="dev****" />
     </Box>
     <Box
