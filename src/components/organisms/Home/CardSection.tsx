@@ -13,11 +13,11 @@ const ThumbnailCardSection = () => {
         mb={130}
         sx={{
           display: 'gird',
-          gridTemplateColumns: 'repeat(auto-fit)',
-          gridGap: 3,
+          gridTemplateColumns: '1fr auto',
+          gridGap: 4,
         }}
       >
-        {Array.from({ length: 3 }, (_, i) => (
+        {Array.from({ length: 4 }, (_, i) => (
           <ThumbnailCard key={new Date().getTime() + i} contents={lorem + lorem} />
         ))}
       </Flex>

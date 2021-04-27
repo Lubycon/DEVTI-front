@@ -19,6 +19,12 @@ const forms = {
     flexDirection: 'column',
     cursor: 'pointer',
   },
+  email_dropdown: {
+    variant: 'forms.default',
+    right: '11px',
+    width: '200px',
+    borderColor: 'gray.1',
+  },
 };
 
 export default forms;
