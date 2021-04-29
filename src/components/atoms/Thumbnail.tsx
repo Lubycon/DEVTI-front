@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'rebass';
 
-interface ThumbnailProps {
+export interface ThumbnailProps {
   imageUrl: string;
 }
 
