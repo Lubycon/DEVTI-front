@@ -12,5 +12,5 @@ jobs:
         uses: Lubycon/github-reviewer-slack-noti-action@v1.1.2
         with:
           slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
-          github-token: ${{ secrets.LUBYCON_GITHUB_TOKEN }}
+          github-token: ${{ secrets.LUBYCON_SLACK_BOT_TOKEN }}
           channel-id: C01SSJ6HGTH
