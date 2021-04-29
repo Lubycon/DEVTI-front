@@ -1,5 +1,5 @@
 name: Slack
-on: [pull_request, push]
+on: [pull_request]
 
 jobs:
   create-pr:
@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Fire Notification
-        uses: Lubycon/github-reviewer-slack-noti-action@v1.0.8
+        uses: Lubycon/github-reviewer-slack-noti-action@v1.0.9
         with:
           slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
           github-token: ${{ secrets.LUBYCON_GITHUB_TOKEN }}
