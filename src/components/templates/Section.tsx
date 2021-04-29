@@ -1,9 +1,9 @@
-import { isValidElement, PropsWithChildren, ReactNode } from 'react';
+import { cloneElement, isValidElement, PropsWithChildren, ReactNode } from 'react';
 import { Flex, Text } from 'rebass';
 
 interface SectionProps {
   title: ReactNode;
-  description?: string | string[];
+  description?: ReactNode;
   backgroundTheme?: 'gray' | 'white';
 }
 
@@ -11,9 +11,13 @@ const Section = ({ title, description, backgroundTheme = 'white', children }: Pr
   <Flex variant={backgroundTheme !== 'gray' ? 'screen' : 'grayScreen'} as="section" pt={120}>
     <Flex flexDirection="column" alignItems="center">
       {isValidElement(title) ? title : <Text variant="title">{title}</Text>}
-      <Text variant="description" mt={12}>
-        {description}
-      </Text>
+      {isValidElement(description) ? (
+        cloneElement(description, { mt: 12 })
+      ) : (
+        <Text variant="description" mt={12}>
+          {description}
+        </Text>
+      )}
     </Flex>
     {children}
   </Flex>

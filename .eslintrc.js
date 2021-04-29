@@ -20,6 +20,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'no-alert':0,
     'react/prop-types': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-throw-literal': 0,
@@ -61,6 +62,6 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ["*rc.js"],
+  ignorePatterns: ["*.js"],
 }
 

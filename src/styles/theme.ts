@@ -13,6 +13,9 @@ const theme = {
       5: '#666666',
       6: '#333333',
     },
+    blue: {
+      0: '#2F80ED',
+    },
   },
   variants: {
     screen: {
@@ -21,6 +24,15 @@ const theme = {
       height: '100vh',
       alignItems: 'center',
       justifyContent: 'space-between',
+    },
+    navigation: {
+      position: 'absolute',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      px: 140,
+      height: 80,
+      width: '100%',
     },
     thumbnail: {
       borderRadius: '50%',

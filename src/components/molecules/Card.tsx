@@ -7,7 +7,7 @@ interface CardProps {
 }
 
 const Card = ({ imageUrl, description, alt }: CardProps) => (
-  <Flex flexDirection="column" mx={45}>
+  <Flex flexDirection="column" mx={45} alignItems="center">
     <Image src={imageUrl} alt={alt} width={247} />
     <Text mt={40} fontSize={20}>
       {description}
