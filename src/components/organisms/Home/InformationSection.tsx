@@ -1,18 +1,34 @@
 import { Flex } from 'rebass';
 
-import Card from '../../molecules/Card';
-import Section from '../../templates/Section';
+import TextCard from '../../molecules/TextCard';
+import Section, { SectionTheme } from '../../templates/Section';
 
-const ELLIPSE_ONE = 'https://user-images.githubusercontent.com/39829378/115979951-e985d500-a5c3-11eb-81cd-dd3ceea0ff29.png';
-const ELLIPSE_TWO = 'https://user-images.githubusercontent.com/39829378/115980016-51d4b680-a5c4-11eb-98cb-0fd94099e300.png';
-const ELLIPSE_THREE = 'https://user-images.githubusercontent.com/39829378/115980028-631dc300-a5c4-11eb-9656-3e0d278e90cc.png';
+const contents = [
+  {
+    emphasize: '현직 개발자',
+    sentence: '"스타트업? 대기업? 어디가 나랑 맞을까?',
+  },
+  {
+    emphasize: '초등학생 아이를 둔 부모',
+    sentence: '"우리 아이의 코딩 잠재능력은 어느정도 될까?',
+  },
+  {
+    emphasize: '취준생',
+    sentence: '"프론트엔드? 백엔드? 어느 직군이 나랑 맞을까?',
+  },
+];
 
 const InformationSection = () => (
-  <Section title={'분석적인 결과를 통해\n안정적인 커리어를 쌓아보세요'}>
-    <Flex mb={267}>
-      <Card imageUrl={ELLIPSE_ONE} description="개발 사전 지식이 필요없어요" alt="고양이" />
-      <Card imageUrl={ELLIPSE_TWO} description="자신이 어떤 기업과 더 적합한지 알려줘요" alt="고양이" />
-      <Card imageUrl={ELLIPSE_THREE} description="결과를 토대로 로드맵을 확인해보세요" alt="고양이" />
+  <Section
+    title={'이런 분들이\nDEVTI를 사용하면 좋아요!'}
+    description="프론트앤드, 백앤드 어떤 직군이 나에게 적합할지 궁금하다면"
+    backgroundTheme={SectionTheme.White}
+    justifyContent="flex-start"
+  >
+    <Flex width={780} flexDirection="column" mt={92}>
+      {contents.map(({ emphasize, sentence }) => (
+        <TextCard key={emphasize} emphasize={emphasize} sentence={sentence} mb={20} />
+      ))}
     </Flex>
   </Section>
 );

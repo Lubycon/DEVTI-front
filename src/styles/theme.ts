@@ -14,7 +14,8 @@ const theme = {
       6: '#333333',
     },
     blue: {
-      0: '#2F80ED',
+      0: '#1e5ffe',
+      1: '#EEF3FD',
     },
   },
   variants: {
@@ -25,6 +26,18 @@ const theme = {
       alignItems: 'center',
       justifyContent: 'space-between',
     },
+    whiteScreen: {
+      variant: 'variants.screen',
+      bg: 'white',
+    },
+    grayScreen: {
+      variant: 'variants.screen',
+      bg: '#f4f8fB',
+    },
+    blueScreen: {
+      variant: 'variants.screen',
+      bg: 'blue.0',
+    },
     navigation: {
       position: 'absolute',
       display: 'flex',
@@ -33,13 +46,13 @@ const theme = {
       px: 140,
       height: 80,
       width: '100%',
+      '@media screen and (max-width: 64em)': {
+        px: 28,
+      },
     },
+
     thumbnail: {
       borderRadius: '50%',
-    },
-    grayScreen: {
-      variant: 'variants.screen',
-      bg: '#f4f8fB',
     },
   },
   buttons,
