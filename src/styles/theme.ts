@@ -25,6 +25,17 @@ const theme = {
       height: '100vh',
       alignItems: 'center',
       justifyContent: 'space-between',
+      '> :is(div, form):nth-child(2)': {
+        width: 780,
+      },
+      '@media screen and (max-width: 64em)': {
+        px: 3,
+        pt: 116,
+        overflowX: 'hidden',
+        '> :is(div, form):nth-child(2)': {
+          width: '100%',
+        },
+      },
     },
     whiteScreen: {
       variant: 'variants.screen',
@@ -50,9 +61,24 @@ const theme = {
         px: 28,
       },
     },
-
     thumbnail: {
       borderRadius: '50%',
+    },
+    textCard: {
+      justifyContent: 'center',
+      fontSize: 22,
+      bg: 'blue.1',
+      width: '100%',
+      '@media screen and (max-width: 64em)': {
+        flexDirection: 'column',
+        textAlign: 'center',
+        height: 130,
+        px: 40,
+        fontSize: 18,
+        '> *:nth-child(1)': {
+          mb: 10,
+        },
+      },
     },
   },
   buttons,

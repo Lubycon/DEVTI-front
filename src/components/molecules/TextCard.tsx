@@ -6,7 +6,7 @@ interface TextCardProps extends FlexProps {
 }
 
 const TextCard = ({ emphasize, sentence, ...props }: TextCardProps) => (
-  <Flex justifyContent="center" fontSize={22} py={42} bg="blue.1" width="100%" {...props}>
+  <Flex variant="textCard" {...props}>
     <Text color="blue.0" fontWeight={700} mr={1}>
       {emphasize}
     </Text>

@@ -25,7 +25,7 @@ const InformationSection = () => (
     backgroundTheme={SectionTheme.White}
     justifyContent="flex-start"
   >
-    <Flex width={780} flexDirection="column" mt={92}>
+    <Flex flexDirection="column" mt={92}>
       {contents.map(({ emphasize, sentence }) => (
         <TextCard key={emphasize} emphasize={emphasize} sentence={sentence} mb={20} />
       ))}

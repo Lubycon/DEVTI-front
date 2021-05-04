@@ -19,6 +19,7 @@ const text = {
     textAlign: 'center',
     '@media screen and (max-width: 64em)': {
       fontSize: 18,
+      whiteSpace: 'normal',
     },
   },
 };

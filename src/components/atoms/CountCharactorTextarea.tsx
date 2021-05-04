@@ -1,12 +1,12 @@
 import { Textarea, TextareaProps } from '@rebass/forms';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, forwardRef, Ref, useState } from 'react';
 import { Box, BoxProps, Text } from 'rebass';
 
 interface CountCharactorTextareaProps extends TextareaProps {
   boxProps?: BoxProps;
 }
 
-const CountCharactorTextarea = ({ boxProps, ...props }: CountCharactorTextareaProps) => {
+const CountCharactorTextarea = ({ boxProps, ...props }: CountCharactorTextareaProps, ref: Ref<HTMLTextAreaElement>) => {
   const [countCharactor, setCountCharactor] = useState(0);
 
   const handleCountCharactor = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -18,7 +18,7 @@ const CountCharactorTextarea = ({ boxProps, ...props }: CountCharactorTextareaPr
 
   return (
     <Box textAlign="right" {...boxProps}>
-      <Textarea {...props} onChange={handleCountCharactor} />
+      <Textarea ref={ref} {...props} onChange={handleCountCharactor} />
       <Text
         sx={{
           position: 'relative',
@@ -34,4 +34,4 @@ const CountCharactorTextarea = ({ boxProps, ...props }: CountCharactorTextareaPr
   );
 };
 
-export default CountCharactorTextarea;
+export default forwardRef<HTMLTextAreaElement, CountCharactorTextareaProps>(CountCharactorTextarea);
