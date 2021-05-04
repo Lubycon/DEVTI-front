@@ -1,4 +1,5 @@
-import { Label } from '@rebass/forms';
+import { Input, Label } from '@rebass/forms';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Flex, Text } from 'rebass';
 
@@ -10,6 +11,8 @@ import HorizontalBorderLineBox from '../../molecules/HorizontalBorderLineBox';
 import Section, { SectionTheme } from '../../templates/Section';
 
 const FormSection = () => {
+  const [isEmailInput, setIsEmailInput] = useState(false);
+
   const { mutateBetaSignUp } = useBetaSignUp();
 
   const { handleSubmit, register, reset } = useForm<SignUp & { domain: string }>();
@@ -30,6 +33,10 @@ const FormSection = () => {
     });
   });
 
+  const handaleIsEmailInputToggle = () => {
+    setIsEmailInput(!isEmailInput);
+  };
+
   return (
     <Section
       title={
@@ -39,23 +46,37 @@ const FormSection = () => {
       justifyContent="flex-start"
     >
       <Flex
-        flex={1}
         as="form"
         flexDirection="column"
-        mb={163}
+        mt={isMobile ? 60 : 80}
         onSubmit={handleBetaSignUpSubmit}
         justifyContent="center"
         alignItems="center"
       >
         <Label mb={35}>
           Q1. 연락처를 기입하면 가장 먼저 테스트를 받아보실수 있습니다.
-          <EmailDropdownInput mt={9} domains={['123.com', '345.com']} register={register} />
+          {isEmailInput ? (
+            <EmailDropdownInput mt={9} domains={['123.com', '345.com']} register={register} />
+          ) : (
+            <Input mt={9} fontSize={14} mr={1} mb="2px" placeholder="휴대폰 번호 입력 해주세요" />
+          )}
+          <Text
+            sx={{ textDecorationLine: 'underline', cursor: 'pointer' }}
+            fontSize={14}
+            fontWeight={400}
+            textAlign={isMobile ? 'center' : 'right'}
+            mt={2}
+            color="gray.6"
+            onClick={handaleIsEmailInputToggle}
+          >
+            {isEmailInput ? '이메일 대신 휴대폰 번호 적기' : '휴대폰 번호 대신 이메일 적기'}
+          </Text>
         </Label>
         <Label>
           Q2. 개발자 성향 검사를 통해 무엇을 알고싶습니까?
           <CountCharactorTextarea mt={9} height={116} {...register('comment')} />
         </Label>
-        <Button variant="blue" type="submit" mt={30} width={200} height={55} fontWeight={700}>
+        <Button variant="blue" type="submit" mt={isMobile ? 20 : 30} width={200} height={55} fontWeight={700}>
           테스트 신청하기
         </Button>
         <HorizontalBorderLineBox mt={50}>
