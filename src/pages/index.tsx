@@ -4,11 +4,11 @@ import { dehydrate } from 'react-query/hydration';
 import { Flex } from 'rebass';
 
 import Navigation from '../components/molecules/Navigation';
-import CardSection from '../components/organisms/Home/CardSection';
 import FormSection from '../components/organisms/Home/FormSection';
 import InformationSection from '../components/organisms/Home/InformationSection';
 import MainSection from '../components/organisms/Home/MainSection';
 import PreviewSection from '../components/organisms/Home/PreviewSection';
+import ShareSection from '../components/organisms/Home/ShareSection';
 import { fetchCats } from '../hooks/api/useGetDummyApi';
 
 const KEY = 'dummy';
@@ -19,8 +19,8 @@ const Index = () => (
     <MainSection />
     <InformationSection />
     <PreviewSection />
-    <CardSection />
     <FormSection />
+    <ShareSection />
   </Flex>
 );
 

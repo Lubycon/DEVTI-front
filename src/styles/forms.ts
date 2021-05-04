@@ -13,6 +13,8 @@ const forms = {
     variant: 'forms.default',
     border: '1px solid',
     borderColor: 'gray.1',
+    py: 2,
+    px: 3,
   },
   label: {
     display: 'flex',
@@ -21,8 +23,6 @@ const forms = {
   },
   email_dropdown: {
     variant: 'forms.default',
-    right: '11px',
-    width: '200px',
     borderColor: 'gray.1',
   },
 };

@@ -14,7 +14,8 @@ const theme = {
       6: '#333333',
     },
     blue: {
-      0: '#2F80ED',
+      0: '#1e5ffe',
+      1: '#EEF3FD',
     },
   },
   variants: {
@@ -24,6 +25,29 @@ const theme = {
       height: '100vh',
       alignItems: 'center',
       justifyContent: 'space-between',
+      '> :is(div, form):nth-of-type(2)': {
+        width: 780,
+      },
+      '@media screen and (max-width: 64em)': {
+        px: 3,
+        pt: 116,
+        overflowX: 'hidden',
+        '> :is(div, form):nth-of-type(2)': {
+          width: '100%',
+        },
+      },
+    },
+    whiteScreen: {
+      variant: 'variants.screen',
+      bg: 'white',
+    },
+    grayScreen: {
+      variant: 'variants.screen',
+      bg: '#f4f8fB',
+    },
+    blueScreen: {
+      variant: 'variants.screen',
+      bg: 'blue.0',
     },
     navigation: {
       position: 'absolute',
@@ -33,13 +57,28 @@ const theme = {
       px: 140,
       height: 80,
       width: '100%',
+      '@media screen and (max-width: 64em)': {
+        px: 28,
+      },
     },
     thumbnail: {
       borderRadius: '50%',
     },
-    grayScreen: {
-      variant: 'variants.screen',
-      bg: '#f4f8fB',
+    textCard: {
+      justifyContent: 'center',
+      fontSize: 22,
+      bg: 'blue.1',
+      width: '100%',
+      '@media screen and (max-width: 64em)': {
+        flexDirection: 'column',
+        textAlign: 'center',
+        height: 130,
+        px: 40,
+        fontSize: 18,
+        '> *:nth-of-type(1)': {
+          mb: 10,
+        },
+      },
     },
   },
   buttons,

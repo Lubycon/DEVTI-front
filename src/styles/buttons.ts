@@ -15,6 +15,18 @@ const buttons = {
       bg: 'gray.6',
     },
   },
+  blue: {
+    variant: 'buttons.default',
+    bg: 'blue.0',
+    ':hover, :focus': {
+      bg: 'blue.0',
+    },
+  },
+  white: {
+    variant: 'buttons.default',
+    bg: 'white',
+    color: 'blue.0',
+  },
 };
 
 export default buttons;

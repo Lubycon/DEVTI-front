@@ -9,7 +9,7 @@ const GlobalStyle = () => (
       html,
       body {
         line-height: 1.1;
-        font-family: 'Circular Std', 'apple SD gothic Neo', monospace;
+        font-family: 'Spoqa Han Sans Neo', 'sans-serif', 'apple SD gothic Neo', monospace;
         *:focus {
           outline: none;
         }
