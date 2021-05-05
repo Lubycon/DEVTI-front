@@ -7,7 +7,8 @@
     "start": "NODE_ENV=production next start -p 9000",
     "husky": "yarn lint && tsc --noEmit",
     "lint": "eslint \"./**/*.{ts,tsx}\" --max-warnings=0",
-    "lint:fix": "eslint --fix \"./**/*.{ts,tsx}\" --max-warnings=0"
+    "lint:fix": "eslint --fix \"./**/*.{ts,tsx}\" --max-warnings=0",
+    "export": "next export"  
   },
   "dependencies": {
     "@emotion/react": "^11.1.5",
