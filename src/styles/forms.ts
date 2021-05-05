@@ -21,7 +21,7 @@ const forms = {
     flexDirection: 'column',
     cursor: 'pointer',
   },
-  email_dropdown: {
+  emailDropdown: {
     variant: 'forms.default',
     borderColor: 'gray.1',
   },
