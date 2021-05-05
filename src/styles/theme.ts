@@ -66,7 +66,9 @@ const theme = {
     },
     textCard: {
       justifyContent: 'center',
+      alignItems: 'center',
       fontSize: 22,
+      height: 110,
       bg: 'blue.1',
       width: '100%',
       '@media screen and (max-width: 64em)': {
