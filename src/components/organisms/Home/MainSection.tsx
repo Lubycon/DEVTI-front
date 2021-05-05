@@ -1,25 +1,28 @@
+import { useQuery } from 'react-query';
 import { Button, Image, Text } from 'rebass';
 
 import { person } from '../../../assets/icons';
-import useDeviceDetect from '../../../hooks/useDeviceDetect';
+import useScrollTo from '../../../hooks/useScrollTo';
 import Section, { SectionTheme } from '../../templates/Section';
 
 const MainSection = () => {
-  const { isMobile } = useDeviceDetect();
+  const { handleExecuteScroll } = useScrollTo('test');
+
+  const { data: isMobile } = useQuery<boolean>('isMobile');
+
+  const handleClick = () => {
+    handleExecuteScroll();
+  };
 
   return (
     <Section
-      title={
-        <Text variant="title" fontWeight={700} fontSize={65}>
-          {'나에게 딱 맞는\n개발자 직군을 찾아보세요'}
-        </Text>
-      }
+      title={'나에게 딱 맞는\n개발자 직군을 찾아보세요'}
       description={
         <>
-          <Text variant="description" fontSize={24} fontWeight={400} color="gray.6" my={20}>
+          <Text variant="description" fontSize={24} color="gray.6" my={14}>
             어느 직군에 더 적합한지 테스트 해보세요!
           </Text>
-          <Button variant="blue" width={200} height={55} fontWeight="bold" fontSize={16}>
+          <Button variant="blue" width={200} height={55} fontWeight="bold" fontSize={16} onClick={handleClick}>
             무료로 검사 받기
           </Button>
         </>

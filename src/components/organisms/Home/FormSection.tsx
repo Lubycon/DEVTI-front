@@ -1,23 +1,26 @@
 import { Input, Label } from '@rebass/forms';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
 import useBetaSignUp, { SignUp } from '../../../hooks/api/useBetaTestApi';
-import useDeviceDetect from '../../../hooks/useDeviceDetect';
+import useScrollTo from '../../../hooks/useScrollTo';
 import CountCharactorTextarea from '../../atoms/CountCharactorTextarea';
 import EmailDropdownInput from '../../atoms/EmailDropdownInput';
 import HorizontalBorderLineBox from '../../molecules/HorizontalBorderLineBox';
 import Section, { SectionTheme } from '../../templates/Section';
 
 const FormSection = () => {
-  const [isEmailInput, setIsEmailInput] = useState(false);
+  const [isEmailInput, setIsEmailInput] = useState(true);
 
   const { mutateBetaSignUp } = useBetaSignUp();
 
   const { handleSubmit, register, reset } = useForm<SignUp & { domain: string }>();
 
-  const { isMobile } = useDeviceDetect();
+  const { data: isMobile } = useQuery<boolean>('isMobile');
+
+  const { ref } = useScrollTo('test');
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
     const { comment, domain, email: id } = item;
@@ -40,19 +43,16 @@ const FormSection = () => {
   return (
     <Section
       title={
-        isMobile ? '테스트를 통해\n어떤 결과를 원하는지\n작성해 주세요.' : '테스트를 통해\n어떤 결과를 원하는지 작성해 주세요.'
+        <Text ref={ref} variant="title">
+          {isMobile
+            ? '테스트를 통해\n어떤 결과를 원하는지\n작성해 주세요.'
+            : '테스트를 통해\n어떤 결과를 원하는지 작성해 주세요.'}
+        </Text>
       }
       backgroundTheme={SectionTheme.Gray}
       justifyContent="flex-start"
     >
-      <Flex
-        as="form"
-        flexDirection="column"
-        mt={isMobile ? 60 : 80}
-        onSubmit={handleBetaSignUpSubmit}
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Flex as="form" variant="verticalCentralCenter" mt={isMobile ? 60 : 80} onSubmit={handleBetaSignUpSubmit}>
         <Label mb={35}>
           Q1. 연락처를 기입하면 가장 먼저 테스트를 받아보실수 있습니다.
           {isEmailInput ? (
@@ -60,15 +60,7 @@ const FormSection = () => {
           ) : (
             <Input mt={9} fontSize={14} mr={1} mb="2px" placeholder="휴대폰 번호 입력 해주세요" />
           )}
-          <Text
-            sx={{ textDecorationLine: 'underline', cursor: 'pointer' }}
-            fontSize={14}
-            fontWeight={400}
-            textAlign={isMobile ? 'center' : 'right'}
-            mt={2}
-            color="gray.6"
-            onClick={handaleIsEmailInputToggle}
-          >
+          <Text variant="underline" textAlign={isMobile ? 'center' : 'right'} mt={2} onClick={handaleIsEmailInputToggle}>
             {isEmailInput ? '이메일 대신 휴대폰 번호 적기' : '휴대폰 번호 대신 이메일 적기'}
           </Text>
         </Label>
