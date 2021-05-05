@@ -1,6 +1,7 @@
 import buttons from './buttons';
 import forms from './forms';
 import text from './text';
+import variants from './variants';
 
 const theme = {
   colors: {
@@ -18,71 +19,7 @@ const theme = {
       1: '#EEF3FD',
     },
   },
-  variants: {
-    screen: {
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      '> :is(div, form):nth-of-type(2)': {
-        width: 780,
-      },
-      '@media screen and (max-width: 64em)': {
-        px: 3,
-        pt: 116,
-        overflowX: 'hidden',
-        '> :is(div, form):nth-of-type(2)': {
-          width: '100%',
-        },
-      },
-    },
-    whiteScreen: {
-      variant: 'variants.screen',
-      bg: 'white',
-    },
-    grayScreen: {
-      variant: 'variants.screen',
-      bg: '#f4f8fB',
-    },
-    blueScreen: {
-      variant: 'variants.screen',
-      bg: 'blue.0',
-    },
-    navigation: {
-      position: 'absolute',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      px: 140,
-      height: 80,
-      width: '100%',
-      '@media screen and (max-width: 64em)': {
-        px: 28,
-      },
-    },
-    thumbnail: {
-      borderRadius: '50%',
-    },
-    textCard: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: 22,
-      height: 110,
-      bg: 'blue.1',
-      width: '100%',
-      '@media screen and (max-width: 64em)': {
-        flexDirection: 'column',
-        textAlign: 'center',
-        height: 130,
-        px: 40,
-        fontSize: 18,
-        '> *:nth-of-type(1)': {
-          mb: 10,
-        },
-      },
-    },
-  },
+  variants,
   buttons,
   text,
   forms,
