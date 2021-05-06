@@ -23,12 +23,14 @@ const FormSection = () => {
   const { ref } = useScrollTo('test');
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
-    const { comment, domain, email: id } = item;
+    const { comment, domain, email: id, phone } = item;
     const fetchData = {
       comment,
+      phone,
       email: `${id}@${domain}`,
+      surveyType: 'DEVTI',
+      testType: 'TYPE_COMMON_1',
     };
-
     await mutateBetaSignUp(fetchData, {
       onSuccess: () => {
         reset();
@@ -58,7 +60,7 @@ const FormSection = () => {
           {isEmailInput ? (
             <EmailDropdownInput mt={9} domains={['123.com', '345.com']} register={register} />
           ) : (
-            <Input mt={9} fontSize={14} mr={1} mb="2px" placeholder="휴대폰 번호 입력 해주세요" />
+            <Input {...register('phone')} mt={9} fontSize={14} mr={1} mb="2px" placeholder="휴대폰 번호 입력 해주세요" />
           )}
           <Text variant="underline" textAlign={isMobile ? 'center' : 'right'} mt={2} onClick={handaleIsEmailInputToggle}>
             {isEmailInput ? '이메일 대신 휴대폰 번호 적기' : '휴대폰 번호 대신 이메일 적기'}
@@ -68,7 +70,7 @@ const FormSection = () => {
           Q2. 개발자 성향 검사를 통해 무엇을 알고싶습니까?
           <CountCharactorTextarea mt={9} height={116} {...register('comment')} />
         </Label>
-        <Button variant="blue" type="submit" mt={isMobile ? 20 : 30} width={200} height={55} fontWeight={700}>
+        <Button variant="primary" type="submit" mt={isMobile ? 20 : 30} width={200} height={55} fontWeight={700}>
           테스트 신청하기
         </Button>
         <HorizontalBorderLineBox mt={50}>

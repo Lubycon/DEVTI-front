@@ -1,22 +1,20 @@
-import axios from 'axios';
 import { useMutation } from 'react-query';
+
+import { RequestData } from '../../@types';
+import callApi from '../../libs/callApi';
 
 export interface SignUp {
   comment: string;
   email: string;
+  phone: string;
+  surveyType: string;
+  testType: string;
 }
 
 const useBetaSignUp = () => {
-  const request = async (signUp: SignUp) => {
-    const URL = '/api/survey';
-    const { data } = await axios.post(URL, {
-      ...signUp,
-      surveyType: 'DEVTI',
-    });
-    return data;
-  };
+  const submit = (data: RequestData<SignUp>) => callApi({ key: 'betaSignUp', data });
 
-  const { mutateAsync: mutateBetaSignUp } = useMutation(request, {
+  const { mutateAsync: mutateBetaSignUp } = useMutation(submit, {
     onSuccess: () => {
       alert('신청했습니다. 좀만 기다려주쇼~');
     },
