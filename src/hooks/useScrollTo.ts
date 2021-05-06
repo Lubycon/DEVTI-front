@@ -1,6 +1,7 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 import { useQueryClient } from 'react-query';
 
+// NOTE
 const appendKeyPrefix = (key: string) => `${key}-scroll`;
 
 const useScrollTo = (key: string) => {
