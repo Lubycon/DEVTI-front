@@ -10,7 +10,7 @@ const Navigation = () => {
       <Text fontWeight={800} fontSize="30px" flex={2} color="blue.0">
         DEVTI
       </Text>
-      <Button variant="blue" fontWeight={700} onClick={handleExecuteScroll}>
+      <Button variant="primary" fontWeight={700} onClick={handleExecuteScroll}>
         검사하기
       </Button>
     </Flex>

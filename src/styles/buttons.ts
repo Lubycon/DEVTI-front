@@ -15,7 +15,7 @@ const buttons = {
       bg: 'gray.6',
     },
   },
-  blue: {
+  primary: {
     variant: 'buttons.default',
     bg: 'blue.0',
     ':hover, :focus': {

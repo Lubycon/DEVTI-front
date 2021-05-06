@@ -22,7 +22,7 @@ const MainSection = () => {
           <Text variant="description" fontSize={24} color="gray.6" my={14}>
             어느 직군에 더 적합한지 테스트 해보세요!
           </Text>
-          <Button variant="blue" width={200} height={55} fontWeight="bold" fontSize={16} onClick={handleClick}>
+          <Button variant="primary" width={200} height={55} fontWeight="bold" fontSize={16} onClick={handleClick}>
             무료로 검사 받기
           </Button>
         </>
