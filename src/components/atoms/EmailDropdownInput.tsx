@@ -15,7 +15,7 @@ const EmailDropdownInput = ({ domains, placeholder, register, ...props }: EmailD
   <Flex {...props}>
     <Input mr={1} width="100%" placeholder={placeholder ?? '아이디를 입력해주세요'} fontSize={14} {...register('email')} />
     <Box width="100%">
-      <Select {...register('domain')} defaultValue={domains[0]} variant="email_dropdown">
+      <Select {...register('domain')} defaultValue={domains[0]} variant="emailDropdown">
         {domains.map((domain) => (
           <option value={domain} key={domain}>
             @{domain}
