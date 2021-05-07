@@ -86,5 +86,27 @@ const variants = {
     borderColor: 'gray.2',
     py: 3,
   },
+  dimmer: {
+    backgroundColor: 'black',
+    opacity: 0.2,
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 999,
+  },
+  modal: {
+    position: 'fixed',
+    width: 320,
+    height: 214,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    overflow: 'hidden',
+    zIndex: 1000,
+  },
 };
 export default variants;
