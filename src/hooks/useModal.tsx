@@ -9,29 +9,29 @@ interface UseModal {
 }
 
 const useModal = ({ handleClosedCallback, handleOpendCallback, children }: UseModal) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleModalOpen = useCallback(() => {
+  const handleOpen = useCallback(() => {
     setIsOpen(true);
   }, []);
 
-  const handleModalClose = useCallback(() => {
+  const handleClose = useCallback(() => {
     setIsOpen(false);
   }, []);
 
   const renderModal = () => (
-    <Modal isOpen={isOpen} onOpened={handleClosedCallback} onClosed={handleOpendCallback} onClose={handleModalClose}>
+    <Modal isOpen={isOpen} onOpened={handleClosedCallback} onClosed={handleOpendCallback} onClose={handleClose}>
       {isValidElement(children)
         ? cloneElement(children, {
-            onModalClose: handleModalClose,
+            onClose: handleClose,
           })
         : children}
     </Modal>
   );
 
   return {
-    handleModalOpen,
-    handleModalClose,
+    handleOpen,
+    handleClose,
     renderModal,
   };
 };

@@ -5,11 +5,11 @@ const URL = 'http://13.125.156.78:8090';
 
 const urlMap = {
   betaSignUp: {
-    url: `${URL}/survey`,
+    url: `${PROXY}/survey`,
     method: 'POST',
   },
   getBucketTest: {
-    url: `${URL}/bucket-test-type/:entryPoint`,
+    url: `${PROXY}/bucket-test-type/:entryPoint`,
     method: 'GET',
   },
 };

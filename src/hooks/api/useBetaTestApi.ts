@@ -15,9 +15,6 @@ const useBetaSignUp = () => {
   const submit = (data: RequestData<SignUp>) => callApi({ key: 'betaSignUp', data });
 
   const { mutateAsync: mutateBetaSignUp } = useMutation(submit, {
-    onSuccess: () => {
-      alert('신청했습니다. 좀만 기다려주쇼~');
-    },
     onError: () => {
       alert('잠시 후 다시 시도해 주세요.');
     },

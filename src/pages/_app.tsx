@@ -36,7 +36,7 @@ App.getInitialProps = async ({ ctx: { req } }: Context) => {
   const isMobile = isMobileDetect(req);
   const queryCache = new QueryClient();
   const param = new URLSearchParams(req?.url).get('/?source');
-  const entryPoint = param ?? '';
+  const entryPoint = param ?? 'COMMON_ENTRY_POINT';
 
   await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
 
