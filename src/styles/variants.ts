@@ -33,13 +33,15 @@ const variants = {
     bg: 'blue.0',
   },
   navigation: {
-    position: 'absolute',
+    position: 'fixed',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     px: 140,
     height: 80,
     width: '100%',
+    transition: '0.5s',
+    zIndex: 999,
     '@media screen and (max-width: 64em)': {
       px: 28,
       '> button': {
@@ -85,6 +87,28 @@ const variants = {
     borderBottom: '1px solid',
     borderColor: 'gray.2',
     py: 3,
+  },
+  dimmer: {
+    backgroundColor: 'black',
+    opacity: 0.2,
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 999,
+  },
+  modal: {
+    position: 'fixed',
+    width: 320,
+    height: 214,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    overflow: 'hidden',
+    zIndex: 1000,
   },
 };
 export default variants;

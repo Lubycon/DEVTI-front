@@ -3,12 +3,14 @@ import { Button, Image, Text } from 'rebass';
 
 import { person } from '../../../assets/icons';
 import useScrollTo from '../../../hooks/useScrollTo';
+import parseNewlineCharactor from '../../../libs/replaceNewlineCharactor';
 import Section, { SectionTheme } from '../../templates/Section';
 
 const MainSection = () => {
   const { handleExecuteScroll } = useScrollTo('test');
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
+  const { data } = useQuery<{ phrases: string }>('source');
 
   const handleClick = () => {
     handleExecuteScroll();
@@ -16,7 +18,7 @@ const MainSection = () => {
 
   return (
     <Section
-      title={'나에게 딱 맞는\n개발자 직군을 찾아보세요'}
+      title={parseNewlineCharactor(data?.phrases) ?? '나에게 딱 맞는\n개발자 직군을 찾아보세요'}
       description={
         <>
           <Text variant="description" fontSize={24} color="gray.6" my={14}>
