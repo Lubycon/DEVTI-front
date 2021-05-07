@@ -4,11 +4,11 @@ import Modal from '../components/molecules/Modal';
 
 interface UseModal {
   children: ReactNode;
-  handleAfterOpenCallback?: VoidFunction;
-  handleAfterCloseCallback?: VoidFunction;
+  handleOpendCallback?: VoidFunction;
+  handleClosedCallback?: VoidFunction;
 }
 
-const useModal = ({ handleAfterCloseCallback, handleAfterOpenCallback, children }: UseModal) => {
+const useModal = ({ handleClosedCallback, handleOpendCallback, children }: UseModal) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleModalOpen = () => {
@@ -20,12 +20,7 @@ const useModal = ({ handleAfterCloseCallback, handleAfterOpenCallback, children 
   };
 
   const renderModal = () => (
-    <Modal
-      isOpen={isOpen}
-      onAfterOpen={handleAfterCloseCallback}
-      onAfterClose={handleAfterOpenCallback}
-      onModalClose={handleModalClose}
-    >
+    <Modal isOpen={isOpen} onOpened={handleClosedCallback} onClosed={handleOpendCallback} onClose={handleModalClose}>
       {isValidElement(children)
         ? cloneElement(children, {
             onModalClose: handleModalClose,

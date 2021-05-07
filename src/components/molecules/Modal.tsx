@@ -3,12 +3,12 @@ import { Flex } from 'rebass';
 
 interface ModalProps {
   isOpen: boolean;
-  onModalClose: VoidFunction;
-  onAfterOpen?: VoidFunction;
-  onAfterClose?: VoidFunction;
+  onClose: VoidFunction;
+  onOpened?: VoidFunction;
+  onClosed?: VoidFunction;
 }
 
-const Modal = ({ isOpen, onModalClose, onAfterOpen, onAfterClose, children }: PropsWithChildren<ModalProps>) => {
+const Modal = ({ isOpen, onClose, onOpened, onClosed, children }: PropsWithChildren<ModalProps>) => {
   const [defaultScrollStyle] = useState({
     x: document.body.style.overflowX,
     y: document.body.style.overflowY,
@@ -25,17 +25,17 @@ const Modal = ({ isOpen, onModalClose, onAfterOpen, onAfterClose, children }: Pr
 
   useEffect(() => {
     if (isOpen) {
-      onAfterOpen?.();
+      onOpened?.();
       lockScroll();
       return;
     }
-    onAfterClose?.();
+    onClosed?.();
     unlockScroll();
   }, [isOpen]);
 
   return isOpen ? (
     <Flex>
-      <Flex variant="dimmer" onClick={onModalClose} />
+      <Flex variant="dimmer" onClick={onClose} />
       <Flex variant="modal">{children}</Flex>
     </Flex>
   ) : (
