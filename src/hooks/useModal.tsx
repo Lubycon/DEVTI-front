@@ -1,4 +1,4 @@
-import React, { cloneElement, isValidElement, ReactNode, useState } from 'react';
+import React, { cloneElement, isValidElement, ReactNode, useCallback, useState } from 'react';
 
 import Modal from '../components/molecules/Modal';
 
@@ -19,14 +19,17 @@ const useModal = ({ handleClosedCallback, handleOpendCallback, children }: UseMo
     setIsOpen(false);
   };
 
-  const renderModal = () => (
-    <Modal isOpen={isOpen} onOpened={handleClosedCallback} onClosed={handleOpendCallback} onClose={handleModalClose}>
-      {isValidElement(children)
-        ? cloneElement(children, {
-            onModalClose: handleModalClose,
-          })
-        : children}
-    </Modal>
+  const renderModal = useCallback(
+    () => (
+      <Modal isOpen={isOpen} onOpened={handleClosedCallback} onClosed={handleOpendCallback} onClose={handleModalClose}>
+        {isValidElement(children)
+          ? cloneElement(children, {
+              onModalClose: handleModalClose,
+            })
+          : children}
+      </Modal>
+    ),
+    []
   );
 
   return {
