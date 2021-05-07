@@ -33,13 +33,15 @@ const variants = {
     bg: 'blue.0',
   },
   navigation: {
-    position: 'absolute',
+    position: 'fixed',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     px: 140,
     height: 80,
     width: '100%',
+    transition: '0.5s',
+    zIndex: 999,
     '@media screen and (max-width: 64em)': {
       px: 28,
       '> button': {

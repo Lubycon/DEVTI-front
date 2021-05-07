@@ -9,9 +9,9 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, onClose, onOpened, onClosed, children }: PropsWithChildren<ModalProps>) => {
-  const [defaultScrollStyle] = useState({
-    x: document.body.style.overflowX,
-    y: document.body.style.overflowY,
+  const [defaultScrollStyle, setDefaultScrollStyle] = useState({
+    x: '',
+    y: '',
   });
 
   const lockScroll = () => {
@@ -22,6 +22,13 @@ const Modal = ({ isOpen, onClose, onOpened, onClosed, children }: PropsWithChild
     document.body.style.overflowX = defaultScrollStyle.x;
     document.body.style.overflowY = defaultScrollStyle.y;
   };
+
+  useEffect(() => {
+    setDefaultScrollStyle({
+      x: document.body.style.overflowX,
+      y: document.body.style.overflowY,
+    });
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
