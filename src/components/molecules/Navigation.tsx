@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
 import useScrollTo from '../../hooks/useScrollTo';
@@ -8,6 +9,8 @@ const Navigation = () => {
 
   const { handleExecuteScroll } = useScrollTo('test');
 
+  const { data: isMobile } = useQuery<boolean>('isMobile');
+
   const handleScroll = () => {
     let lastScrollTop = 0;
     const checkScrolLDirection = () => {
@@ -16,10 +19,10 @@ const Navigation = () => {
       if (nav) {
         if (st > lastScrollTop) {
           nav.style.backgroundColor = 'white';
-          nav.style.padding = '0 40px';
+          if (!isMobile) nav.style.padding = '0 40px';
         } else {
-          nav.style.padding = '0 140px';
           nav.style.backgroundColor = 'inherit';
+          if (!isMobile) nav.style.padding = '0 140px';
         }
       }
       lastScrollTop = st <= 0 ? 0 : st;
