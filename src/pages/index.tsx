@@ -12,8 +12,8 @@ const Index = () => (
   <Flex flexDirection="column">
     <Navigation />
     <MainSection />
-    <InformationSection />
     <PreviewSection />
+    <InformationSection />
     <FormSection />
     <ShareSection />
   </Flex>
