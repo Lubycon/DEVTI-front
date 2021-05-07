@@ -20,16 +20,19 @@ const FormSection = () => {
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
 
+  const { data } = useQuery<{ testType: string }>('source');
+
   const { ref } = useScrollTo('test');
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
     const { comment, domain, email: id, phone } = item;
+
     const fetchData = {
       comment,
       phone,
       email: `${id}@${domain}`,
       surveyType: 'DEVTI',
-      testType: 'TYPE_COMMON_1',
+      testType: data?.testType ?? '',
     };
     await mutateBetaSignUp(fetchData, {
       onSuccess: () => {
