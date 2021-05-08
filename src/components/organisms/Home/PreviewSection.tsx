@@ -20,7 +20,7 @@ const PreviewSection = () => {
       }
       backgroundTheme={SectionTheme.Blue}
     >
-      <Image src={device} width={isMobile ? 736 : 829} maxWidth="none" />
+      <Image src={device} alt="preview" width={isMobile ? 736 : 829} maxWidth="none" />
     </Section>
   );
 };

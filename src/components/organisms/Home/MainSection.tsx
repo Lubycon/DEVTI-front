@@ -34,7 +34,7 @@ const MainSection = () => {
       }
       backgroundTheme={SectionTheme.Gray}
     >
-      <Image src={person} width={isMobile ? 500 : 838} mb={100} maxWidth="none" />
+      <Image src={person} alt="person" width={isMobile ? 500 : 838} mb={100} maxWidth="none" />
     </Section>
   );
 };
