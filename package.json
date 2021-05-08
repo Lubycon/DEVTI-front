@@ -8,12 +8,14 @@
     "husky": "yarn lint && tsc --noEmit",
     "lint": "eslint \"./**/*.{ts,tsx}\" --max-warnings=0",
     "lint:fix": "eslint --fix \"./**/*.{ts,tsx}\" --max-warnings=0",
-    "export": "next export"  
+    "export": "next export"
   },
   "dependencies": {
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
     "@rebass/forms": "^4.0.6",
+    "@types/amplitude-js": "^7.0.1",
+    "amplitude-js": "^8.2.1",
     "axios": "^0.21.1",
     "emotion-reset": "^3.0.0",
     "emotion-theming": "^10.0.27",

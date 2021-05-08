@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'emotion-theming';
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { dehydrate, Hydrate } from 'react-query/hydration';
@@ -10,11 +11,13 @@ import callApi from '../libs/callApi';
 import isMobileDetect from '../libs/server/isMobileDetect';
 import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
+import { initAmplitude } from '../utils/amplitude';
 
 interface Context {
   Component: NextComponentType<NextPageContext>;
   ctx: NextPageContext;
 }
+initAmplitude();
 
 const App = ({ Component, pageProps }: AppProps) => {
   queryClient.setQueryData('isMobile', pageProps.isMobile);

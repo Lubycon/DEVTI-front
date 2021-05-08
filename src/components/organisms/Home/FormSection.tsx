@@ -7,6 +7,7 @@ import { Button, Flex, Text } from 'rebass';
 import useBetaSignUp, { SignUp } from '../../../hooks/api/useBetaTestApi';
 import useModal from '../../../hooks/useModal';
 import useScrollTo from '../../../hooks/useScrollTo';
+import { sendAmplitudeData } from '../../../utils/amplitude';
 import CountCharactorTextarea from '../../atoms/CountCharactorTextarea';
 import EmailDropdownInput from '../../atoms/EmailDropdownInput';
 import ConfirmModal from '../../molecules/ConfirmModal';
@@ -29,6 +30,7 @@ const FormSection = () => {
   const { handleOpen, renderModal } = useModal({ children: <ConfirmModal>테스트 신청이 완료 되었습니다.</ConfirmModal> });
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
+    sendAmplitudeData('버튼클릭', { label: '테스트 신청하기', position: '폼 섹션' });
     const { comment, domain, email: id, phone } = item;
 
     const fetchData = {
