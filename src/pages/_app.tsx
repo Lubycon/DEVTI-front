@@ -1,7 +1,6 @@
 import { ThemeProvider } from 'emotion-theming';
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
-import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { dehydrate, Hydrate } from 'react-query/hydration';
