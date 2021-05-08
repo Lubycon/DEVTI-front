@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
 import useScrollTo from '../../hooks/useScrollTo';
+import { sendAmplitudeData } from '../../utils/amplitude';
 
 const Navigation = () => {
   const ref = useRef<HTMLElement>();
@@ -43,7 +44,14 @@ const Navigation = () => {
       <Text fontWeight={800} fontSize="30px" flex={2} color="blue.0">
         DEVTI
       </Text>
-      <Button variant="primary" fontWeight={700} onClick={handleExecuteScroll}>
+      <Button
+        variant="primary"
+        fontWeight={700}
+        onClick={() => {
+          sendAmplitudeData('버튼클릭', { label: '검사하기', position: '네비게이션' });
+          handleExecuteScroll();
+        }}
+      >
         검사하기
       </Button>
     </Flex>

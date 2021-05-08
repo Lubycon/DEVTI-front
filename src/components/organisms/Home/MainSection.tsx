@@ -4,6 +4,7 @@ import { Button, Image, Text } from 'rebass';
 import { person } from '../../../assets/icons';
 import useScrollTo from '../../../hooks/useScrollTo';
 import parseNewlineCharactor from '../../../libs/replaceNewlineCharactor';
+import { sendAmplitudeData } from '../../../utils/amplitude';
 import Section, { SectionTheme } from '../../templates/Section';
 
 const MainSection = () => {
@@ -13,6 +14,8 @@ const MainSection = () => {
   const { data } = useQuery<{ phrases: string }>('source');
 
   const handleClick = () => {
+    sendAmplitudeData('버튼클릭', { label: '무료로 검사 받기', position: '메인 섹션' });
+
     handleExecuteScroll();
   };
 
