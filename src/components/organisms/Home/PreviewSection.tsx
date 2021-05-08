@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { Image, Text } from 'rebass';
 
-import { device } from '../../../assets/icons';
+import { device } from '../../../public/assets/icons';
 import Section, { SectionTheme } from '../../templates/Section';
 
 const PreviewSection = () => {

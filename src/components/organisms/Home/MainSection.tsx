@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
 import { Button, Image, Text } from 'rebass';
 
-import { person } from '../../../assets/icons';
 import useScrollTo from '../../../hooks/useScrollTo';
 import parseNewlineCharactor from '../../../libs/replaceNewlineCharactor';
+import { person } from '../../../public/assets/icons';
 import { sendAmplitudeData } from '../../../utils/amplitude';
 import Section, { SectionTheme } from '../../templates/Section';
 
