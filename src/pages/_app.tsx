@@ -1,12 +1,11 @@
 import { ThemeProvider } from 'emotion-theming';
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { dehydrate, Hydrate } from 'react-query/hydration';
+import { Hydrate } from 'react-query/hydration';
 
 import { queryClient } from '../config/reactQuery';
-import callApi from '../libs/callApi';
 import isMobileDetect from '../libs/server/isMobileDetect';
 import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
@@ -36,13 +35,8 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 App.getInitialProps = async ({ ctx: { req } }: Context) => {
   const isMobile = isMobileDetect(req);
-  const queryCache = new QueryClient();
-  const param = new URLSearchParams(req?.url).get('/?source');
-  const entryPoint = param ?? 'COMMON_ENTRY_POINT';
 
-  await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
-
-  return { pageProps: { isMobile, dehydratedState: dehydrate(queryCache) } };
+  return { pageProps: { isMobile } };
 };
 
 export default App;

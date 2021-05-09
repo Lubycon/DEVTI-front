@@ -11,11 +11,11 @@ const MainSection = () => {
   const { handleExecuteScroll } = useScrollTo('test');
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
-  const { data } = useQuery<{ phrases: string }>('source');
+  const { data } = useQuery<{ phrases: string; testType: string }>('source');
+  const { data: community } = useQuery('community');
 
   const handleClick = () => {
-    sendAmplitudeData('버튼클릭', { label: '무료로 검사 받기', position: '메인 섹션' });
-
+    sendAmplitudeData('버튼클릭', { label: '무료로 검사 받기', position: '메인 섹션', source: data?.testType, community });
     handleExecuteScroll();
   };
 
@@ -38,4 +38,5 @@ const MainSection = () => {
     </Section>
   );
 };
+
 export default MainSection;
