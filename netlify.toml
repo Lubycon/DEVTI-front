@@ -4,6 +4,6 @@
 
 [[redirects]]
   from = "https://devti.kr/*"
-  to = "https://www.devti.kr/:splat"
+  to = "http://www.devti.kr/:splat"
   status = 301
   force = true
