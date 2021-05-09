@@ -1,6 +1,6 @@
 export type UrlMapKey = keyof typeof urlMap;
 
-const URL = 'http://13.125.156.78:8090';
+const URL = 'https://13.125.156.78:8090';
 
 const urlMap = {
   betaSignUp: {
