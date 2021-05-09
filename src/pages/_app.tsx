@@ -40,6 +40,7 @@ App.getInitialProps = async ({ ctx: { req } }: Context) => {
   const param = new URLSearchParams(req?.url).get('/?source');
   const entryPoint = param ?? 'COMMON_ENTRY_POINT';
 
+  await queryCache.prefetchQuery('sharedCount', () => callApi({ key: 'getSharedCount', data: { entryPoint } }));
   await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
 
   return { pageProps: { isMobile, dehydratedState: dehydrate(queryCache) } };
