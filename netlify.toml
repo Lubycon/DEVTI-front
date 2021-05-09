@@ -1,3 +1,9 @@
 [build]
   command = "yarn build && yarn export"
   publish = "out"
+
+[[redirects]]
+  from = "https://devti.kr/*"
+  to = "https://www.devti.kr/:splat"
+  status = 301
+  force = true
