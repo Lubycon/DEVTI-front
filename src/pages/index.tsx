@@ -11,6 +11,7 @@ import MainSection from '../components/organisms/Home/MainSection';
 import PreviewSection from '../components/organisms/Home/PreviewSection';
 import ShareSection from '../components/organisms/Home/ShareSection';
 import callApi from '../libs/callApi';
+import isMobileDetect from '../libs/server/isMobileDetect';
 
 const Index = () => (
   <Flex flexDirection="column">
@@ -23,22 +24,24 @@ const Index = () => (
   </Flex>
 );
 
-export async function getServerSideProps(context: NextPageContext) {
+Index.getInitialProps = async (context: NextPageContext) => {
   const {
+    req,
     query: { source, community: communityType },
   } = context;
 
+  const isMobile = isMobileDetect(req);
   const entryPoint = (source as string) ?? 'COMMON_ENTRY_POINT';
   const community = (communityType as string) ?? '';
 
   const queryCache = new QueryClient();
-
   await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
   queryCache.setQueryData('community', community);
+  queryCache.setQueryData('isMobile', isMobile);
 
   return {
-    props: { dehydratedState: dehydrate(queryCache) }, // will be passed to the page component as props
+    dehydratedState: dehydrate(queryCache),
   };
-}
+};
 
 export default Index;

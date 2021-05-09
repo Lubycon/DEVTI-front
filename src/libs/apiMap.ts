@@ -1,6 +1,7 @@
 export type UrlMapKey = keyof typeof urlMap;
 
-const URL = 'https://api.devti.kr';
+// const URL = 'https://api.devti.kr';
+const URL = 'http://13.125.156.78:8090';
 
 const urlMap = {
   betaSignUp: {
@@ -9,6 +10,10 @@ const urlMap = {
   },
   getBucketTest: {
     url: `${URL}/bucket-test-type/:entryPoint`,
+    method: 'GET',
+  },
+  getSharedCount: {
+    url: `${URL}/event-log/:eventType`,
     method: 'GET',
   },
 };
