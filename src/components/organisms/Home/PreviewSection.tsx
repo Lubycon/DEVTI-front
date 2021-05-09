@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { Image, Text } from 'rebass';
 
-import { device } from '../../../assets/icons';
+import { device } from '../../../public/assets/icons';
 import Section, { SectionTheme } from '../../templates/Section';
 
 const PreviewSection = () => {
@@ -20,7 +20,7 @@ const PreviewSection = () => {
       }
       backgroundTheme={SectionTheme.Blue}
     >
-      <Image src={device} width={isMobile ? 736 : 829} maxWidth="none" />
+      <Image src={device} alt="preview" width={isMobile ? 736 : 829} maxWidth="none" />
     </Section>
   );
 };

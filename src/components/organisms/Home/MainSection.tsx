@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
 import { Button, Image, Text } from 'rebass';
 
-import { person } from '../../../assets/icons';
 import useScrollTo from '../../../hooks/useScrollTo';
 import parseNewlineCharactor from '../../../libs/replaceNewlineCharactor';
+import { person } from '../../../public/assets/icons';
 import { sendAmplitudeData } from '../../../utils/amplitude';
 import Section, { SectionTheme } from '../../templates/Section';
 
@@ -34,7 +34,7 @@ const MainSection = () => {
       }
       backgroundTheme={SectionTheme.Gray}
     >
-      <Image src={person} width={isMobile ? 500 : 838} mb={100} maxWidth="none" />
+      <Image src={person} alt="person" width={isMobile ? 500 : 838} mb={100} maxWidth="none" />
     </Section>
   );
 };
