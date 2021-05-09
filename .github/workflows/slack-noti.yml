@@ -1,5 +1,7 @@
 name: Slack
-on: [pull_request]
+on:
+  pull_request:
+    branches: [stage]
 
 jobs:
   create-pr:
