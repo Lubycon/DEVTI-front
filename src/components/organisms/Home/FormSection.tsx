@@ -7,6 +7,8 @@ import { Button, Flex, Text } from 'rebass';
 import useBetaSignUp, { SignUp } from '../../../hooks/api/useBetaTestApi';
 import useModal from '../../../hooks/useModal';
 import useScrollTo from '../../../hooks/useScrollTo';
+import { sendAmplitudeData } from '../../../utils/amplitude';
+import domains from '../../../utils/store/domains';
 import CountCharactorTextarea from '../../atoms/CountCharactorTextarea';
 import EmailDropdownInput from '../../atoms/EmailDropdownInput';
 import ConfirmModal from '../../molecules/ConfirmModal';
@@ -29,6 +31,7 @@ const FormSection = () => {
   const { handleOpen, renderModal } = useModal({ children: <ConfirmModal>테스트 신청이 완료 되었습니다.</ConfirmModal> });
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
+    sendAmplitudeData('버튼클릭', { label: '테스트 신청하기', position: '폼 섹션' });
     const { comment, domain, email: id, phone } = item;
 
     const fetchData = {
@@ -67,9 +70,9 @@ const FormSection = () => {
         <Label mb={35}>
           Q1. 연락처를 기입하면 가장 먼저 테스트를 받아보실수 있습니다.
           {isEmailInput ? (
-            <EmailDropdownInput mt={9} domains={['123.com', '345.com']} register={register} />
+            <EmailDropdownInput mt={9} domains={domains} register={register} />
           ) : (
-            <Input {...register('phone')} mt={9} fontSize={14} mr={1} mb="2px" placeholder="휴대폰 번호 입력 해주세요" />
+            <Input {...register('phone')} type="tel" mt={9} fontSize={14} mb="2px" placeholder="휴대폰 번호 입력 해주세요" />
           )}
           <Text variant="underline" textAlign={isMobile ? 'center' : 'right'} mt={2} onClick={handleIsEmailInputToggle}>
             {isEmailInput ? '이메일 대신 휴대폰 번호 적기' : '휴대폰 번호 대신 이메일 적기'}
