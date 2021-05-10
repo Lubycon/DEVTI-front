@@ -1,6 +1,6 @@
 import { NextPageContext } from 'next';
 import React from 'react';
-import { QueryClient } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import { Flex } from 'rebass';
 
@@ -12,17 +12,29 @@ import PreviewSection from '../components/organisms/Home/PreviewSection';
 import ShareSection from '../components/organisms/Home/ShareSection';
 import callApi from '../libs/callApi';
 import isMobileDetect from '../libs/server/isMobileDetect';
+import { sendAmplitudeData, useInitAmplitude } from '../utils/amplitude';
 
-const Index = () => (
-  <Flex flexDirection="column">
-    <Navigation />
-    <MainSection />
-    <PreviewSection />
-    <InformationSection />
-    <FormSection />
-    <ShareSection />
-  </Flex>
-);
+const Index = () => {
+  const { data: community } = useQuery('community');
+  const { data } = useQuery<{ phrases: string; testType: string }>('source');
+  useInitAmplitude({
+    onInit: () => {
+      const { referrer } = document;
+      sendAmplitudeData('랜딩페이지진입', { source: data?.testType, community, referrer });
+    },
+  });
+
+  return (
+    <Flex flexDirection="column">
+      <Navigation />
+      <MainSection />
+      <PreviewSection />
+      <InformationSection />
+      <FormSection />
+      <ShareSection />
+    </Flex>
+  );
+};
 
 Index.getInitialProps = async (context: NextPageContext) => {
   const {
