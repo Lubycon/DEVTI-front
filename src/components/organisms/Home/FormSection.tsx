@@ -32,9 +32,26 @@ const FormSection = () => {
 
   const { handleOpen, renderModal } = useModal({ children: <ConfirmModal>테스트 신청이 완료 되었습니다.</ConfirmModal> });
 
+  const { handleOpen: handleValidateOpen, renderModal: renderValidateModal } = useModal({
+    children: <ConfirmModal>입력 값을 확인 해주세요</ConfirmModal>,
+  });
+
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
     sendAmplitudeData('버튼클릭_테스트신청하기__폼', { source: data?.testType, utmSource });
     const { comment, domain, email: id, phone } = item;
+
+    if (isEmailInput) {
+      if (domain.length < 1 || id.length < 1) {
+        handleValidateOpen();
+        return;
+      }
+    }
+    if (!isEmailInput) {
+      if (phone.length < 1) {
+        handleValidateOpen();
+        return;
+      }
+    }
 
     const fetchData = {
       comment,
@@ -43,10 +60,11 @@ const FormSection = () => {
       surveyType: 'DEVTI',
       testType: data?.testType ?? '',
     };
+
+    handleOpen();
     await mutateBetaSignUp(fetchData, {
       onSuccess: () => {
         reset();
-        handleOpen();
       },
     });
   });
@@ -68,6 +86,7 @@ const FormSection = () => {
       justifyContent="flex-start"
     >
       {renderModal()}
+      {renderValidateModal()}
       <Flex as="form" variant="verticalCentralCenter" mt={isMobile ? 60 : 80} onSubmit={handleBetaSignUpSubmit}>
         <Label mb={35}>
           Q1. 연락처를 기입하면 가장 먼저 테스트를 받아보실수 있습니다.

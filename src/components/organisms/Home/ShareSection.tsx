@@ -18,7 +18,7 @@ const ShareSection = () => {
   const handleClick = () => {
     mutateEventLog('CLICK_SHARE_BUTTON');
     sendAmplitudeData('버튼클릭', { label: '공유하기', position: '폼 섹션', source: data?.testType, utmSource });
-    doCopy('https://www.devti.kr/', handleOpen);
+    doCopy(`https://www.devti.kr/?utm_source/${utmSource}`, handleOpen);
   };
 
   return (
