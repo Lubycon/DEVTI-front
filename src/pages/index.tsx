@@ -19,7 +19,8 @@ const Index = () => {
   const { data } = useQuery<{ phrases: string; testType: string }>('source');
   useInitAmplitude({
     onInit: () => {
-      sendAmplitudeData('랜딩페이지진입', { source: data?.testType, community });
+      const { referrer } = document;
+      sendAmplitudeData('랜딩페이지진입', { source: data?.testType, community, referrer });
     },
   });
 
