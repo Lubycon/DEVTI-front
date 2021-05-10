@@ -15,7 +15,8 @@ interface EmailDropdownInputProps extends FlexProps {
 const EmailDropdownInput = ({ domains, placeholder, register, setValue, ...props }: EmailDropdownInputProps) => {
   const [toggleDomainInput, setToggleDomainInput] = useState(false);
 
-  const element = useRef<HTMLSelectElement>();
+  const selectEl = useRef<HTMLSelectElement>();
+  const inputEl = useRef<HTMLInputElement>();
 
   const { ref, ...rest } = register('domain');
 
@@ -25,13 +26,14 @@ const EmailDropdownInput = ({ domains, placeholder, register, setValue, ...props
     } = e;
 
     if (value === '직접 입력') {
+      inputEl.current?.focus();
       setToggleDomainInput(true);
       setValue('domain', '');
     }
   };
 
   useEffect(() => {
-    if (element.current?.value === '') {
+    if (selectEl.current?.value === '') {
       setToggleDomainInput(true);
     }
   }, []);
@@ -41,13 +43,20 @@ const EmailDropdownInput = ({ domains, placeholder, register, setValue, ...props
       <Input mr={3} width="100%" placeholder={placeholder ?? '아이디를 입력해주세요'} fontSize={14} {...register('email')} />@
       <Box width="100%" ml={1}>
         {toggleDomainInput ? (
-          <Input {...register('domain')} placeholder="이메일 입력" />
+          <Input
+            {...rest}
+            ref={(e) => {
+              ref(e);
+              inputEl.current = e;
+            }}
+            placeholder="이메일 입력"
+          />
         ) : (
           <Select
             {...rest}
             ref={(e) => {
               ref(e);
-              element.current = e;
+              selectEl.current = e;
             }}
             defaultValue={domains[1]}
             variant="emailDropdown"
