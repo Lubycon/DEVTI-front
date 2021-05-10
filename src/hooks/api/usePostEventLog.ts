@@ -8,9 +8,8 @@ interface EventLog {
   testType: string;
 }
 
+export const postEventLog = (data: RequestData<EventLog>) => callApi({ key: 'postEventLog', data });
 const usePostEventLog = () => {
-  const postEventLog = (data: RequestData<EventLog>) => callApi({ key: 'postEventLog', data });
-
   const { data } = useQuery<{ testType: string }>('source');
 
   const testType = data?.testType ?? '';
