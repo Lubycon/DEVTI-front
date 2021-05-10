@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'emotion-theming';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
+import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate } from 'react-query/hydration';
@@ -13,15 +14,20 @@ const App = ({ Component, pageProps }: AppProps) => {
   queryCache.setQueryData('isMobile', pageProps.isMobile);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </Hydrate>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <>
+      <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </Hydrate>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </>
   );
 };
 
