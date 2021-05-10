@@ -39,7 +39,7 @@ const Navigation = () => {
   };
 
   const handleClick = () => {
-    sendAmplitudeData('버튼클릭', { label: '검사하기', position: '네비게이션', source: data?.testType, community });
+    sendAmplitudeData('버튼클릭_검사하기__네비게이션', { source: data?.testType, community });
     handleExecuteScroll();
     mutateEventLog('CLICK_CTA_BUTTON');
   };

@@ -17,7 +17,7 @@ const MainSection = () => {
   const { data: community } = useQuery('community');
 
   const handleClick = () => {
-    sendAmplitudeData('버튼클릭', { label: '무료로 검사 받기', position: '메인 섹션', source: data?.testType, community });
+    sendAmplitudeData('버튼클릭_무료로검사받기__메인섹션', { source: data?.testType, community });
     handleExecuteScroll();
     mutateEventLog('CLICK_CTA_BUTTON');
   };

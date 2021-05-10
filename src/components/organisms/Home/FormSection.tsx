@@ -33,7 +33,7 @@ const FormSection = () => {
   const { handleOpen, renderModal } = useModal({ children: <ConfirmModal>테스트 신청이 완료 되었습니다.</ConfirmModal> });
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
-    sendAmplitudeData('버튼클릭', { label: '테스트 신청하기', position: '폼 섹션', source: data?.testType, community });
+    sendAmplitudeData('버튼클릭_테스트신청하기__폼', { source: data?.testType, community });
     const { comment, domain, email: id, phone } = item;
 
     const fetchData = {

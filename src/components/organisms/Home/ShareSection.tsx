@@ -31,7 +31,7 @@ const ShareSection = () => {
         height={55}
         fontWeight={700}
         onClick={() => {
-          sendAmplitudeData('버튼클릭', { label: '공유하기', position: '폼 섹션', source: data?.testType, community });
+          sendAmplitudeData('버튼클릭_공유하기__폼섹션', { source: data?.testType, community });
         }}
       >
         공유하기
