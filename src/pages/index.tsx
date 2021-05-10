@@ -10,6 +10,7 @@ import InformationSection from '../components/organisms/Home/InformationSection'
 import MainSection from '../components/organisms/Home/MainSection';
 import PreviewSection from '../components/organisms/Home/PreviewSection';
 import ShareSection from '../components/organisms/Home/ShareSection';
+import { getSharedCount } from '../hooks/api/useGetSharedCount';
 import callApi from '../libs/callApi';
 import isMobileDetect from '../libs/server/isMobileDetect';
 import { sendAmplitudeData, useInitAmplitude } from '../utils/amplitude';
@@ -49,7 +50,7 @@ Index.getInitialProps = async (context: NextPageContext) => {
 
   const queryCache = new QueryClient();
   await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
-  await queryCache.prefetchQuery('sharedCount', () => callApi({ key: 'getSharedCount', data: { eventType } }));
+  await queryCache.prefetchQuery('sharedCount', () => getSharedCount({ eventType }));
   queryCache.setQueryData('community', community);
   queryCache.setQueryData('isMobile', isMobile);
 
