@@ -16,12 +16,12 @@ import isMobileDetect from '../libs/server/isMobileDetect';
 import { sendAmplitudeData, useInitAmplitude } from '../utils/amplitude';
 
 const Index = () => {
-  const { data: community } = useQuery('community');
+  const { data: utmSource } = useQuery('utmSource');
   const { data } = useQuery<{ phrases: string; testType: string }>('source');
   useInitAmplitude({
     onInit: () => {
       const { referrer } = document;
-      sendAmplitudeData('랜딩페이지진입', { source: data?.testType, community, referrer });
+      sendAmplitudeData('랜딩페이지진입', { source: data?.testType, utmSource, referrer });
     },
   });
 
@@ -37,26 +37,26 @@ const Index = () => {
   );
 };
 
-Index.getInitialProps = async (context: NextPageContext) => {
+export async function getServerSideProps(context: NextPageContext) {
   const {
     req,
-    query: { source, community: communityType },
+    query: { source, utm_source: utmSourceType },
   } = context;
 
   const isMobile = isMobileDetect(req);
   const entryPoint = (source as string) ?? 'COMMON_ENTRY_POINT';
-  const community = (communityType as string) ?? '';
+  const utmSource = (utmSourceType as string) ?? '';
   const eventType = 'CLICK_SHARE_BUTTON';
 
   const queryCache = new QueryClient();
   await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
   await queryCache.prefetchQuery('sharedCount', () => getSharedCount({ eventType }));
-  queryCache.setQueryData('community', community);
+  queryCache.setQueryData('utmSource', utmSource);
   queryCache.setQueryData('isMobile', isMobile);
 
   return {
-    dehydratedState: dehydrate(queryCache),
+    props: { dehydratedState: dehydrate(queryCache) },
   };
-};
+}
 
 export default Index;

@@ -14,10 +14,10 @@ const MainSection = () => {
   const { data: isMobile } = useQuery<boolean>('isMobile');
   const { mutateEventLog } = usePostEventLog();
   const { data } = useQuery<{ phrases: string; testType: string }>('source');
-  const { data: community } = useQuery('community');
+  const { data: utmSource } = useQuery('utmSource');
 
   const handleClick = () => {
-    sendAmplitudeData('버튼클릭_무료로검사받기__메인섹션', { source: data?.testType, community });
+    sendAmplitudeData('버튼클릭_무료로검사받기__메인섹션', { source: data?.testType, utmSource });
     handleExecuteScroll();
     mutateEventLog('CLICK_CTA_BUTTON');
   };
