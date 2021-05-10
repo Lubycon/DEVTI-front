@@ -16,8 +16,15 @@ const useScrollTo = (key: string) => {
   }, [ref]);
 
   const handleExecuteScroll = () => {
-    const node = queryClient.getQueryData<MutableRefObject<HTMLElement>>(queryKey);
-    node?.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const node = queryClient.getQueryData<MutableRefObject<HTMLUListElement>>(queryKey);
+    const offset = 100;
+    const position = node?.current.getBoundingClientRect().top ?? 0;
+    const offsetPosition = position - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
   };
 
   return {

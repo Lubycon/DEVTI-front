@@ -26,12 +26,14 @@ const FormSection = () => {
 
   const { data } = useQuery<{ testType: string }>('source');
 
+  const { data: community } = useQuery('community');
+
   const { ref } = useScrollTo('test');
 
   const { handleOpen, renderModal } = useModal({ children: <ConfirmModal>테스트 신청이 완료 되었습니다.</ConfirmModal> });
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
-    sendAmplitudeData('버튼클릭', { label: '테스트 신청하기', position: '폼 섹션' });
+    sendAmplitudeData('버튼클릭', { label: '테스트 신청하기', position: '폼 섹션', source: data?.testType, community });
     const { comment, domain, email: id, phone } = item;
 
     const fetchData = {
