@@ -1,4 +1,8 @@
 const doCopy = (text: string, callBack?: VoidFunction) => {
+  if (!document.queryCommandSupported('copy')) {
+    alert('복사하기를 지원하지 않는 브라우저입니다.');
+  }
+
   const textarea = <HTMLTextAreaElement>document.createElement('textarea');
   textarea.value = text;
   textarea.style.top = '0';

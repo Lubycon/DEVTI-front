@@ -13,7 +13,7 @@ const ShareSection = () => {
   const { data: community } = useQuery('community');
   const { data: sharedCount } = useQuery<number>('sharedCount');
   const { mutateSharedCount } = useGetSharedCount();
-  const { renderModal, handleOpen } = useModal({ children: <ConfirmModal>링크가 복사 되었습니다.</ConfirmModal> });
+  const { renderModal, handleOpen } = useModal({ children: <ConfirmModal>링크를 복사 했습니다</ConfirmModal> });
 
   const handleClick = () => {
     mutateSharedCount({ eventType: 'CLICK_SHARE_BUTTON' });
