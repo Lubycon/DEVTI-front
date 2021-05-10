@@ -14,9 +14,9 @@ const usePostEventLog = () => {
 
   const testType = data?.testType ?? '';
 
-  const { mutateAsync: mutateEventLog } = useMutation(() =>
+  const { mutateAsync: mutateEventLog } = useMutation((eventType: string) =>
     postEventLog({
-      eventType: 'CLICK_CTA_BUTTON',
+      eventType,
       testType,
     })
   );

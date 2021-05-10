@@ -41,7 +41,7 @@ const Navigation = () => {
   const handleClick = () => {
     sendAmplitudeData('버튼클릭', { label: '검사하기', position: '네비게이션', source: data?.testType, community });
     handleExecuteScroll();
-    mutateEventLog();
+    mutateEventLog('CLICK_CTA_BUTTON');
   };
 
   useEffect(() => {

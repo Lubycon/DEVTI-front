@@ -19,7 +19,7 @@ const MainSection = () => {
   const handleClick = () => {
     sendAmplitudeData('버튼클릭', { label: '무료로 검사 받기', position: '메인 섹션', source: data?.testType, community });
     handleExecuteScroll();
-    mutateEventLog();
+    mutateEventLog('CLICK_CTA_BUTTON');
   };
 
   return (
