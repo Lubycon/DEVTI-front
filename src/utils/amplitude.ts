@@ -1,17 +1,20 @@
 import { AmplitudeClient } from 'amplitude-js';
+import { useEffect } from 'react';
 
 let amplitudeInstance: AmplitudeClient | null = null;
 
-export const initAmplitude = () => {
-  if (typeof window !== undefined) {
-    import('amplitude-js')
-      .then((ampPackage) => {
-        amplitudeInstance = ampPackage.getInstance();
-        return amplitudeInstance.init(process.env.NEXT_PUBLIC_AMPLITUDE_KEY as string);
-      })
-      .catch(() => null);
-  }
-  return null;
+export const useInitAmplitude = ({ onInit }: { onInit(): void }) => {
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      import('amplitude-js')
+        .then((ampPackage) => {
+          amplitudeInstance = ampPackage.getInstance();
+          amplitudeInstance.init(process.env.NEXT_PUBLIC_AMPLITUDE_KEY as string);
+          onInit();
+        })
+        .catch(() => null);
+    }
+  }, []);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
