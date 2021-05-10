@@ -15,6 +15,10 @@ const urlMap = {
     url: `${URL}/event-log/:eventType`,
     method: 'GET',
   },
+  postEventLog: {
+    url: `${URL}/event-log`,
+    method: 'POST',
+  },
 };
 
 const apiMap = (key: UrlMapKey) => urlMap[key];

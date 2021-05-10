@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import { Button, Image, Text } from 'rebass';
 
+import usePostEventLog from '../../../hooks/api/usePostEventLog';
 import useScrollTo from '../../../hooks/useScrollTo';
 import parseNewlineCharactor from '../../../libs/replaceNewlineCharactor';
 import { person } from '../../../public/assets/icons';
@@ -11,12 +12,14 @@ const MainSection = () => {
   const { handleExecuteScroll } = useScrollTo('test');
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
+  const { mutateEventLog } = usePostEventLog();
   const { data } = useQuery<{ phrases: string; testType: string }>('source');
   const { data: community } = useQuery('community');
 
   const handleClick = () => {
     sendAmplitudeData('버튼클릭', { label: '무료로 검사 받기', position: '메인 섹션', source: data?.testType, community });
     handleExecuteScroll();
+    mutateEventLog('CLICK_CTA_BUTTON');
   };
 
   return (

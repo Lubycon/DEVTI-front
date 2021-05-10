@@ -33,9 +33,11 @@ Index.getInitialProps = async (context: NextPageContext) => {
   const isMobile = isMobileDetect(req);
   const entryPoint = (source as string) ?? 'COMMON_ENTRY_POINT';
   const community = (communityType as string) ?? '';
+  const eventType = 'CLICK_SHARE_BUTTON';
 
   const queryCache = new QueryClient();
   await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
+  await queryCache.prefetchQuery('sharedCount', () => callApi({ key: 'getSharedCount', data: { eventType } }));
   queryCache.setQueryData('community', community);
   queryCache.setQueryData('isMobile', isMobile);
 

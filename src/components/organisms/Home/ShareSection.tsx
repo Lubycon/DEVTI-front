@@ -7,6 +7,7 @@ import Section, { SectionTheme } from '../../templates/Section';
 const ShareSection = () => {
   const { data } = useQuery<{ testType: string }>('source');
   const { data: community } = useQuery('community');
+  const { data: sharedCount } = useQuery<number>('sharedCount');
 
   return (
     <Section
@@ -18,7 +19,7 @@ const ShareSection = () => {
       }
       description={
         <Text variant="description" color="white">
-          현재 <b style={{ fontWeight: 700 }}>123,450명</b>이 공유 했어요!
+          현재 <b style={{ fontWeight: 700 }}>{sharedCount ?? 0}명</b>이 공유 했어요!
         </Text>
       }
       maxHeight={350}

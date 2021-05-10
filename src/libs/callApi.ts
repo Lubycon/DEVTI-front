@@ -9,6 +9,7 @@ const callApi = async (config: Config) => {
     ...apiOption,
   });
 
+  // NOTE: error handling
   return data;
 };
 

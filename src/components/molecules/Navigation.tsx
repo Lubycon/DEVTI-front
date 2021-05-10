@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
+import usePostEventLog from '../../hooks/api/usePostEventLog';
 import useScrollTo from '../../hooks/useScrollTo';
 import { sendAmplitudeData } from '../../utils/amplitude';
 
@@ -11,6 +12,8 @@ const Navigation = () => {
   const { handleExecuteScroll } = useScrollTo('test');
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
+
+  const { mutateEventLog } = usePostEventLog();
 
   const { data } = useQuery<{ testType: string }>('source');
 
@@ -35,6 +38,12 @@ const Navigation = () => {
     checkScrolLDirection();
   };
 
+  const handleClick = () => {
+    sendAmplitudeData('버튼클릭', { label: '검사하기', position: '네비게이션', source: data?.testType, community });
+    handleExecuteScroll();
+    mutateEventLog('CLICK_CTA_BUTTON');
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
 
@@ -48,14 +57,7 @@ const Navigation = () => {
       <Text fontWeight={800} fontSize="30px" flex={2} color="blue.0">
         DEVTI
       </Text>
-      <Button
-        variant="primary"
-        fontWeight={700}
-        onClick={() => {
-          sendAmplitudeData('버튼클릭', { label: '검사하기', position: '네비게이션', source: data?.testType, community });
-          handleExecuteScroll();
-        }}
-      >
+      <Button variant="primary" fontWeight={700} onClick={handleClick}>
         검사하기
       </Button>
     </Flex>
