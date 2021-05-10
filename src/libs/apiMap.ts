@@ -11,6 +11,10 @@ const urlMap = {
     url: `${URL}/bucket-test-type/:entryPoint`,
     method: 'GET',
   },
+  getSharedCount: {
+    url: `${URL}/event-log/:eventType`,
+    method: 'GET',
+  },
 };
 
 const apiMap = (key: UrlMapKey) => urlMap[key];

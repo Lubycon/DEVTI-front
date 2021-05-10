@@ -12,6 +12,10 @@ const Navigation = () => {
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
 
+  const { data } = useQuery<{ testType: string }>('source');
+
+  const { data: community } = useQuery('community');
+
   const handleScroll = () => {
     let lastScrollTop = 0;
     const checkScrolLDirection = () => {
@@ -48,7 +52,7 @@ const Navigation = () => {
         variant="primary"
         fontWeight={700}
         onClick={() => {
-          sendAmplitudeData('버튼클릭', { label: '검사하기', position: '네비게이션' });
+          sendAmplitudeData('버튼클릭', { label: '검사하기', position: '네비게이션', source: data?.testType, community });
           handleExecuteScroll();
         }}
       >
