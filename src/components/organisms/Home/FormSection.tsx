@@ -20,7 +20,7 @@ const FormSection = () => {
 
   const { mutateBetaSignUp } = useBetaSignUp();
 
-  const { handleSubmit, register, reset } = useForm<SignUp & { domain: string }>();
+  const { handleSubmit, register, reset, setValue } = useForm<SignUp & { domain: string }>();
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
 
@@ -33,7 +33,7 @@ const FormSection = () => {
   const { handleOpen, renderModal } = useModal({ children: <ConfirmModal>테스트 신청이 완료 되었습니다.</ConfirmModal> });
 
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
-    sendAmplitudeData('버튼클릭', { label: '테스트 신청하기', position: '폼 섹션', source: data?.testType, community });
+    sendAmplitudeData('버튼클릭_테스트신청하기__폼', { source: data?.testType, community });
     const { comment, domain, email: id, phone } = item;
 
     const fetchData = {
@@ -72,7 +72,7 @@ const FormSection = () => {
         <Label mb={35}>
           Q1. 연락처를 기입하면 가장 먼저 테스트를 받아보실수 있습니다.
           {isEmailInput ? (
-            <EmailDropdownInput mt={9} domains={domains} register={register} />
+            <EmailDropdownInput mt={9} domains={domains} register={register} setValue={setValue} />
           ) : (
             <Input {...register('phone')} type="tel" mt={9} fontSize={14} mb="2px" placeholder="휴대폰 번호 입력 해주세요" />
           )}

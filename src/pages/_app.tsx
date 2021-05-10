@@ -7,10 +7,8 @@ import { Hydrate } from 'react-query/hydration';
 import { queryClient } from '../config/reactQuery';
 import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
-import { initAmplitude } from '../utils/amplitude';
 
 const App = ({ Component, pageProps }: AppProps) => {
-  initAmplitude();
   const queryCache = new QueryClient();
   queryCache.setQueryData('isMobile', pageProps.isMobile);
 
