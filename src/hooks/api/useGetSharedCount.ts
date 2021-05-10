@@ -8,7 +8,7 @@ interface EventLog {
 }
 
 export const getSharedCount = (data: RequestData<EventLog>) => callApi({ key: 'getSharedCount', data });
-const usePostEventLog = () => {
+const useSharedCount = () => {
   const { mutateAsync: mutateSharedCount } = useMutation(getSharedCount);
 
   return {
@@ -16,4 +16,4 @@ const usePostEventLog = () => {
   };
 };
 
-export default usePostEventLog;
+export default useSharedCount;

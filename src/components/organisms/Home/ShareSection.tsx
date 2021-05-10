@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { Button, Text } from 'rebass';
 
-import useGetSharedCount from '../../../hooks/api/useGetSharedCount';
+import usePostEventLog from '../../../hooks/api/usePostEventLog';
 import useModal from '../../../hooks/useModal';
 import doCopy from '../../../libs/doCopy';
 import { sendAmplitudeData } from '../../../utils/amplitude';
@@ -10,14 +10,14 @@ import Section, { SectionTheme } from '../../templates/Section';
 
 const ShareSection = () => {
   const { data } = useQuery<{ testType: string }>('source');
-  const { data: community } = useQuery('community');
+  const { data: utmSource } = useQuery('utmSource');
   const { data: sharedCount } = useQuery<number>('sharedCount');
-  const { mutateSharedCount } = useGetSharedCount();
+  const { mutateEventLog } = usePostEventLog();
   const { renderModal, handleOpen } = useModal({ children: <ConfirmModal>링크를 복사 했습니다</ConfirmModal> });
 
   const handleClick = () => {
-    mutateSharedCount({ eventType: 'CLICK_SHARE_BUTTON' });
-    sendAmplitudeData('버튼클릭', { label: '공유하기', position: '폼 섹션', source: data?.testType, community });
+    mutateEventLog('CLICK_SHARE_BUTTON');
+    sendAmplitudeData('버튼클릭', { label: '공유하기', position: '폼 섹션', source: data?.testType, utmSource });
     doCopy('https://www.devti.kr/', handleOpen);
   };
 

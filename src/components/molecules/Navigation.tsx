@@ -17,7 +17,7 @@ const Navigation = () => {
 
   const { data } = useQuery<{ testType: string }>('source');
 
-  const { data: community } = useQuery('community');
+  const { data: utmSource } = useQuery('utmSource');
 
   const handleScroll = () => {
     let lastScrollTop = 0;
@@ -39,7 +39,7 @@ const Navigation = () => {
   };
 
   const handleClick = () => {
-    sendAmplitudeData('버튼클릭_검사하기__네비게이션', { source: data?.testType, community });
+    sendAmplitudeData('버튼클릭_검사하기__네비게이션', { source: data?.testType, utmSource });
     handleExecuteScroll();
     mutateEventLog('CLICK_CTA_BUTTON');
   };
