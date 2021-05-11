@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
-import useBetaSignUp, { SignUp } from '../../../hooks/api/useBetaTestApi';
+import useBetaSignUp from '../../../hooks/api/useBetaTestApi';
 import useModal from '../../../hooks/useModal';
 import useScrollTo from '../../../hooks/useScrollTo';
+import { SignUpForm } from '../../../models/SignUp';
 import { sendAmplitudeData } from '../../../utils/amplitude';
 import domains from '../../../utils/store/domains';
 import CountCharactorTextarea from '../../atoms/CountCharactorTextarea';
@@ -20,7 +21,7 @@ const FormSection = () => {
 
   const { mutateBetaSignUp } = useBetaSignUp();
 
-  const { handleSubmit, register, reset, setValue } = useForm<SignUp & { domain: string }>();
+  const { handleSubmit, register, reset, setValue } = useForm<SignUpForm>();
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
 
@@ -39,27 +40,16 @@ const FormSection = () => {
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
     sendAmplitudeData('버튼클릭_테스트신청하기__폼', { source: data?.testType, utmSource });
     const { comment, domain, email: id, phone } = item;
-
-    const fieldsToFill = isEmailInput ? [domain, id] : [phone];
-    const notFilled = fieldsToFill.some((field) => field.length === 0);
-
-    if (notFilled) {
-      handleValidateOpen();
-      return;
-    }
-
-    const fetchData = {
+    const commonData = {
       comment,
-      phone,
-      email: `${id}@${domain}`,
       surveyType: 'DEVTI',
       testType: data?.testType ?? '',
     };
 
-    handleOpen();
-    await mutateBetaSignUp(fetchData, {
+    await mutateBetaSignUp(isEmailInput ? { ...commonData, email: `${id}@${domain}` } : { ...commonData, phone }, {
       onSuccess: () => {
         reset();
+        handleOpen();
       },
     });
   });

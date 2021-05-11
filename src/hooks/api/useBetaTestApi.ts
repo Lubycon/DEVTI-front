@@ -3,13 +3,19 @@ import { useMutation } from 'react-query';
 import { RequestData } from '../../@types';
 import callApi from '../../libs/callApi';
 
-export interface SignUp {
+interface SignUpCommon {
   comment: string;
-  email: string;
-  phone: string;
   surveyType: string;
   testType: string;
 }
+interface SignUpWithPhone extends SignUpCommon {
+  phone: string;
+}
+interface SignUpWithEmail extends SignUpCommon {
+  email: string;
+}
+
+export type SignUp = SignUpWithPhone | SignUpWithEmail;
 
 const useBetaSignUp = () => {
   const submit = (data: RequestData<SignUp>) => callApi({ key: 'betaSignUp', data });
