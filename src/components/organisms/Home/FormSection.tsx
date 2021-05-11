@@ -39,7 +39,7 @@ const FormSection = () => {
     const fetchData = {
       comment,
       phone,
-      email: `${id}@${domain}`,
+      email: isEmailInput ? `${id}@${domain}` : '',
       surveyType: 'DEVTI',
       testType: data?.testType ?? '',
     };
