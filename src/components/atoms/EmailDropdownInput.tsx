@@ -3,13 +3,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { Box, Flex, FlexProps } from 'rebass';
 
-import { SignUp } from '../../hooks/api/useBetaTestApi';
+import { SignUpForm } from '../../models/SignUp';
 
 interface EmailDropdownInputProps extends FlexProps {
   domains: string[];
   placeholder?: string;
-  register: UseFormRegister<SignUp & { domain: string }>;
-  setValue: UseFormSetValue<SignUp & { domain: string }>;
+  register: UseFormRegister<SignUpForm>;
+  setValue: UseFormSetValue<SignUpForm>;
 }
 
 const EmailDropdownInput = ({ domains, placeholder, register, setValue, ...props }: EmailDropdownInputProps) => {
