@@ -45,7 +45,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
   const isMobile = isMobileDetect(req);
   const entryPoint = (source as string) ?? 'COMMON_ENTRY_POINT';
-  const utmSource = (utmSourceType as string) ?? '';
+  const utmSource = (utmSourceType as string) ?? 'empty';
   const eventType = 'CLICK_SHARE_BUTTON';
 
   const queryCache = new QueryClient();
