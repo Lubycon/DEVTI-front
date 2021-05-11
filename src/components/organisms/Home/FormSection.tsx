@@ -4,13 +4,13 @@ import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
-import useBetaSignUp, { SignUp } from '../../../hooks/api/useBetaTestApi';
+import useBetaSignUp from '../../../hooks/api/useBetaTestApi';
 import useModal from '../../../hooks/useModal';
 import useScrollTo from '../../../hooks/useScrollTo';
+import { SignUpForm } from '../../../models/SignUp';
 import { sendAmplitudeData } from '../../../utils/amplitude';
 import domains from '../../../utils/store/domains';
 import CountCharactorTextarea from '../../atoms/CountCharactorTextarea';
-import EmailDropdownInput from '../../atoms/EmailDropdownInput';
 import ConfirmModal from '../../molecules/ConfirmModal';
 import HorizontalBorderLineBox from '../../molecules/HorizontalBorderLineBox';
 import Section, { SectionTheme } from '../../templates/Section';
@@ -20,7 +20,7 @@ const FormSection = () => {
 
   const { mutateBetaSignUp } = useBetaSignUp();
 
-  const { handleSubmit, register, reset, setValue } = useForm<SignUp & { domain: string }>();
+  const { handleSubmit, register, reset, setValue } = useForm<SignUpForm>();
 
   const { data: isMobile } = useQuery<boolean>('isMobile');
 
@@ -35,15 +35,13 @@ const FormSection = () => {
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
     sendAmplitudeData('버튼클릭_테스트신청하기__폼', { source: data?.testType, utmSource });
     const { comment, domain, email: id, phone } = item;
-
-    const fetchData = {
+    const commonData = {
       comment,
-      phone,
-      email: isEmailInput ? `${id}@${domain}` : '',
       surveyType: 'DEVTI',
       testType: data?.testType ?? '',
     };
-    await mutateBetaSignUp(fetchData, {
+
+    await mutateBetaSignUp(isEmailInput ? { ...commonData, email: `${id}@${domain}` } : { ...commonData, phone }, {
       onSuccess: () => {
         reset();
         handleOpen();
