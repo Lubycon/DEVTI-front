@@ -11,6 +11,7 @@ import { SignUpForm } from '../../../models/SignUp';
 import { sendAmplitudeData } from '../../../utils/amplitude';
 import domains from '../../../utils/store/domains';
 import CountCharactorTextarea from '../../atoms/CountCharactorTextarea';
+import EmailDropdownInput from '../../atoms/EmailDropdownInput';
 import ConfirmModal from '../../molecules/ConfirmModal';
 import HorizontalBorderLineBox from '../../molecules/HorizontalBorderLineBox';
 import Section, { SectionTheme } from '../../templates/Section';
