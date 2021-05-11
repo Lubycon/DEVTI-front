@@ -40,6 +40,15 @@ const FormSection = () => {
   const handleBetaSignUpSubmit = handleSubmit(async (item) => {
     sendAmplitudeData('버튼클릭_테스트신청하기__폼', { source: data?.testType, utmSource });
     const { comment, domain, email: id, phone } = item;
+
+    const fieldsToFill = isEmailInput ? [domain, id] : [phone];
+    const notFilled = fieldsToFill.some((field) => field.length === 0);
+
+    if (notFilled) {
+      handleValidateOpen();
+      return;
+    }
+
     const commonData = {
       comment,
       surveyType: 'DEVTI',
