@@ -40,17 +40,12 @@ const FormSection = () => {
     sendAmplitudeData('버튼클릭_테스트신청하기__폼', { source: data?.testType, utmSource });
     const { comment, domain, email: id, phone } = item;
 
-    if (isEmailInput) {
-      if (domain.length < 1 || id.length < 1) {
-        handleValidateOpen();
-        return;
-      }
-    }
-    if (!isEmailInput) {
-      if (phone.length < 1) {
-        handleValidateOpen();
-        return;
-      }
+    const fieldsToFill = isEmailInput ? [domain, id] : [phone];
+    const notFilled = fieldsToFill.some((field) => field.length === 0);
+
+    if (notFilled) {
+      handleValidateOpen();
+      return;
     }
 
     const fetchData = {
