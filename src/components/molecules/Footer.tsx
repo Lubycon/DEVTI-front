@@ -1,6 +1,6 @@
 import { Flex, Image, Text } from 'rebass';
 
-import { lubycon } from '../../public/assets/icons';
+import { lubycon } from '~public/assets/icons';
 
 const Footer = () => (
   <Flex

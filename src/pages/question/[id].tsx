@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import useQueryParam from '../../hooks/useQueryParam';
+import useQueryParam from '~hooks/useQueryParam';
 
 const Question = () => {
   const {
