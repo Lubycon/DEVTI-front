@@ -1,7 +1,7 @@
 import { Flex } from 'rebass';
 
-import ThumbnailCard from '../../molecules/ThumbnailCard';
-import Section from '../../templates/Section';
+import ThumbnailCard from '~molecules/ThumbnailCard';
+import Section from '~templates/Section';
 
 const ThumbnailCardSection = () => {
   const lorem =

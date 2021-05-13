@@ -1,19 +1,20 @@
+/* eslint-disable import/extensions */
 import { NextPageContext } from 'next';
 import React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import { Flex } from 'rebass';
 
-import Navigation from '../components/molecules/Navigation';
-import FormSection from '../components/organisms/Home/FormSection';
-import InformationSection from '../components/organisms/Home/InformationSection';
-import MainSection from '../components/organisms/Home/MainSection';
-import PreviewSection from '../components/organisms/Home/PreviewSection';
-import ShareSection from '../components/organisms/Home/ShareSection';
-import { getSharedCount } from '../hooks/api/useGetSharedCount';
-import callApi from '../libs/callApi';
-import isMobileDetect from '../libs/server/isMobileDetect';
-import { sendAmplitudeData, useInitAmplitude } from '../utils/amplitude';
+import { getSharedCount } from '~hooks/api/useGetSharedCount';
+import callApi from '~libs/callApi';
+import isMobileDetect from '~libs/server/isMobileDetect';
+import Navigation from '~molecules/Navigation';
+import FormSection from '~organisms/Home/FormSection';
+import InformationSection from '~organisms/Home/InformationSection';
+import MainSection from '~organisms/Home/MainSection';
+import PreviewSection from '~organisms/Home/PreviewSection';
+import ShareSection from '~organisms/Home/ShareSection';
+import { sendAmplitudeData, useInitAmplitude } from '~utils/amplitude';
 
 const Index = () => {
   const { data: utmSource } = useQuery('utmSource');

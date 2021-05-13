@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { Box, Flex, FlexProps } from 'rebass';
 
-import { SignUpForm } from '../../models/SignUp';
+import { SignUpForm } from '~models/SignUp';
 
 interface EmailDropdownInputProps extends FlexProps {
   domains: string[];

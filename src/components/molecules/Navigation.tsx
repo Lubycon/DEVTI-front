@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
-import usePostEventLog from '../../hooks/api/usePostEventLog';
-import useScrollTo from '../../hooks/useScrollTo';
-import { sendAmplitudeData } from '../../utils/amplitude';
+import usePostEventLog from '~hooks/api/usePostEventLog';
+import useScrollTo from '~hooks/useScrollTo';
+import { sendAmplitudeData } from '~utils/amplitude';
 
 const Navigation = () => {
   const ref = useRef<HTMLElement>();

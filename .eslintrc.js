@@ -28,6 +28,7 @@ module.exports = {
     'react/react-in-jsx-scope':0,
     'jsx-a11y/anchor-is-valid':0,
     "react/jsx-props-no-spreading":0,
+    "import/extensions": "off",
     'import/order': [
       'error',
       {

@@ -1,12 +1,12 @@
 import { useQuery } from 'react-query';
 import { Button, Image, Text } from 'rebass';
 
-import usePostEventLog from '../../../hooks/api/usePostEventLog';
-import useScrollTo from '../../../hooks/useScrollTo';
-import parseNewlineCharactor from '../../../libs/replaceNewlineCharactor';
-import { person } from '../../../public/assets/icons';
-import { sendAmplitudeData } from '../../../utils/amplitude';
-import Section, { SectionTheme } from '../../templates/Section';
+import usePostEventLog from '~hooks/api/usePostEventLog';
+import useScrollTo from '~hooks/useScrollTo';
+import parseNewlineCharactor from '~libs/replaceNewlineCharactor';
+import { person } from '~public/assets/icons';
+import Section, { SectionTheme } from '~templates/Section';
+import { sendAmplitudeData } from '~utils/amplitude';
 
 const MainSection = () => {
   const { handleExecuteScroll } = useScrollTo('test');

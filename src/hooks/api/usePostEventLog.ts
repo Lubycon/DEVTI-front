@@ -1,7 +1,7 @@
+import { RequestData } from '@types';
 import { useMutation, useQuery } from 'react-query';
 
-import { RequestData } from '../../@types';
-import callApi from '../../libs/callApi';
+import callApi from '~libs/callApi';
 
 interface EventLog {
   eventType: string;
