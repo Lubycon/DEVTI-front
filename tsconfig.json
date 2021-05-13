@@ -16,7 +16,40 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "baseUrl": "./src",
+    "paths": {
+      "~atoms/*": [
+        "components/atoms/*"
+      ],
+      "~molecules/*": [
+        "components/molecules/*"
+      ],
+      "~organisms/*": [
+        "components/organisms/*"
+      ],
+      "~templates/*": [
+        "components/templates/*"
+      ],
+      "~public/*": [
+        "public/*"
+      ],
+      "~libs/*": [
+        "libs/*"
+      ],
+      "~utils/*": [
+        "utils/*"
+      ],
+      "~hooks/*": [
+        "hooks/*"
+      ],
+      "~config/*": [
+        "config/*"
+      ],
+      "~models/*": [
+        "models/*"
+      ],
+    }
   },
   "exclude": ["node_modules"],
   "include": [
