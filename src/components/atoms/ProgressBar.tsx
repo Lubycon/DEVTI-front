@@ -6,14 +6,14 @@ import convertDecimalToPercent from '~libs/convertDecimalToPercent';
 export interface ProgressBarProps extends FlexProps {
   totalCount: number;
   currentCount?: number;
-  defaultCount?: number;
+  minCount?: number;
   fillColor?: string;
   barColor?: string;
 }
 
-const ProgressBar = ({ totalCount, currentCount = 0, defaultCount = 0, fillColor, barColor, ...props }: ProgressBarProps) => {
+const ProgressBar = ({ totalCount, currentCount = 0, minCount = 0, fillColor, barColor, ...props }: ProgressBarProps) => {
   const count = useMemo(() => {
-    const biggerCount = Math.max(currentCount, defaultCount);
+    const biggerCount = Math.max(currentCount, minCount);
     return biggerCount > totalCount ? totalCount : biggerCount;
   }, [currentCount, totalCount]);
 
