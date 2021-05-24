@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Box, Flex, FlexProps } from 'rebass';
 
-import convertDecimalToPersent from '~libs/convertDecimalToPersent';
+import convertDecimalToPercent from '~libs/convertDecimalToPercent';
 
 export interface ProgressBarProps extends FlexProps {
   totalCount: number;
@@ -17,7 +17,7 @@ const ProgressBar = ({ totalCount, currentCount = 0, defaultCount = 0, fillColor
     return biggerCount > totalCount ? totalCount : biggerCount;
   }, [currentCount, totalCount]);
 
-  const fillWidth = convertDecimalToPersent(count / totalCount);
+  const fillWidth = convertDecimalToPercent(count / totalCount);
 
   return (
     <Flex variant="bar" {...props}>
