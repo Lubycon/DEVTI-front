@@ -1,11 +1,12 @@
 /* eslint-disable import/extensions */
 import { NextPageContext } from 'next';
-import React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { Flex } from 'rebass';
+import { Button, Flex, Text } from 'rebass';
 
 import { getSharedCount } from '~hooks/api/useGetSharedCount';
+import usePostEventLog from '~hooks/api/usePostEventLog';
+import useScrollTo from '~hooks/useScrollTo';
 import callApi from '~libs/callApi';
 import isMobileDetect from '~libs/server/isMobileDetect';
 import Navigation from '~molecules/Navigation';
@@ -18,7 +19,9 @@ import { sendAmplitudeData, useInitAmplitude } from '~utils/amplitude';
 
 const Index = () => {
   const { data: utmSource } = useQuery('utmSource');
+
   const { data } = useQuery<{ phrases: string; testType: string }>('source');
+
   useInitAmplitude({
     onInit: () => {
       const { referrer } = document;
@@ -26,9 +29,28 @@ const Index = () => {
     },
   });
 
+  const { handleExecuteScroll } = useScrollTo('test');
+
+  const { mutateEventLog } = usePostEventLog();
+
+  const handleClick = () => {
+    sendAmplitudeData('버튼클릭_검사하기__네비게이션', { source: data?.testType, utmSource });
+    handleExecuteScroll();
+    mutateEventLog('CLICK_CTA_BUTTON');
+  };
+
   return (
     <Flex flexDirection="column">
-      <Navigation />
+      <Navigation>
+        <>
+          <Text fontWeight={800} fontSize="30px" flex={2} color="primary">
+            DEVTI
+          </Text>
+          <Button variant="primary" fontWeight={700} onClick={handleClick}>
+            검사하기
+          </Button>
+        </>
+      </Navigation>
       <MainSection />
       <PreviewSection />
       <InformationSection />
