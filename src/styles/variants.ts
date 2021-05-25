@@ -115,6 +115,7 @@ const variants = {
     minHeight: '8px',
     borderRadius: '30px',
     overflow: 'hidden',
+    width: '100%',
   },
   gageBar: {
     position: 'absolute',
@@ -123,10 +124,16 @@ const variants = {
   },
   gage: {
     position: 'absolute',
-    width: '100px',
     height: '100%',
     backgroundColor: 'primary',
     transition: '0.5s',
+  },
+  question: {
+    variant: 'variants.verticalCentralCenter',
+    height: '100vh',
+    textAlign: 'center',
+    wordBreak: 'keep-all',
+    mx: 3,
   },
 };
 export default variants;
