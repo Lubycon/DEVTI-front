@@ -110,5 +110,23 @@ const variants = {
     overflow: 'hidden',
     zIndex: 1000,
   },
+  bar: {
+    position: 'relative',
+    minHeight: '8px',
+    borderRadius: '30px',
+    overflow: 'hidden',
+  },
+  gageBar: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
+  gage: {
+    position: 'absolute',
+    width: '100px',
+    height: '100%',
+    backgroundColor: 'blue.0',
+    transition: '0.5s',
+  },
 };
 export default variants;
