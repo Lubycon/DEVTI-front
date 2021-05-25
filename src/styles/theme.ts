@@ -7,16 +7,16 @@ const theme = {
   colors: {
     white: '#ffffff',
     gray: {
-      0: '#f5f5f5',
-      1: '#e0e0e0',
-      2: '#dddddd',
-      3: '#828282',
-      5: '#666666',
+      1: '#f8f8f8',
+      2: '#efefef',
+      3: '#d1d1d1',
+      5: '#9d9d9d',
       6: '#333333',
     },
+    primary: '#1e5ffe',
     blue: {
-      0: '#1e5ffe',
-      1: '#EEF3FD',
+      0: '#dee7fc',
+      1: '#f4f8fb',
     },
   },
   variants,

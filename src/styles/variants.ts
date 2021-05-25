@@ -30,7 +30,7 @@ const variants = {
   },
   blueScreen: {
     variant: 'variants.screen',
-    bg: 'blue.0',
+    bg: 'primary',
   },
   navigation: {
     position: 'fixed',
@@ -125,7 +125,7 @@ const variants = {
     position: 'absolute',
     width: '100px',
     height: '100%',
-    backgroundColor: 'blue.0',
+    backgroundColor: 'primary',
     transition: '0.5s',
   },
 };

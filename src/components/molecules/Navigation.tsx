@@ -54,7 +54,7 @@ const Navigation = () => {
 
   return (
     <Flex ref={ref} as="nav" variant="navigation">
-      <Text fontWeight={800} fontSize="30px" flex={2} color="blue.0">
+      <Text fontWeight={800} fontSize="30px" flex={2} color="primary">
         DEVTI
       </Text>
       <Button variant="primary" fontWeight={700} onClick={handleClick}>
