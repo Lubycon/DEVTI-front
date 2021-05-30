@@ -42,8 +42,9 @@ const variants = {
     width: '100%',
     transition: '0.5s',
     zIndex: 999,
+    bg: 'white',
     '@media screen and (max-width: 64em)': {
-      px: 28,
+      px: 3,
       '> button': {
         display: 'none',
       },
@@ -121,6 +122,7 @@ const variants = {
     position: 'absolute',
     width: '100%',
     height: '100%',
+    backgroundColor: 'gray.2',
   },
   gage: {
     position: 'absolute',
@@ -134,6 +136,14 @@ const variants = {
     textAlign: 'center',
     wordBreak: 'keep-all',
     mx: 3,
+  },
+  circle: {
+    width: '32px',
+    height: '32px',
+    border: '2px solid',
+    borderColor: 'primary',
+    borderRadius: '50%',
+    backgroundColor: 'blue.0',
   },
 };
 export default variants;

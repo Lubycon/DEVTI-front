@@ -42,14 +42,12 @@ const Index = () => {
   return (
     <Flex flexDirection="column">
       <Navigation>
-        <>
-          <Text fontWeight={800} fontSize="30px" flex={2} color="primary">
-            DEVTI
-          </Text>
-          <Button variant="primary" fontWeight={700} onClick={handleClick}>
-            검사하기
-          </Button>
-        </>
+        <Text fontWeight={800} fontSize="30px" flex={2} color="primary">
+          DEVTI
+        </Text>
+        <Button variant="primary" fontWeight={700} onClick={handleClick}>
+          검사하기
+        </Button>
       </Navigation>
       <MainSection />
       <PreviewSection />
