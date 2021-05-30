@@ -7,7 +7,7 @@ interface CircleWithTextProps extends CircleProps {
   text: ReactNode;
 }
 
-const CircleWithText = ({ text, isActivation, onClick, ...props }: CircleWithTextProps) => (
+const CircleWithText = ({ text, isActive, onClick, ...props }: CircleWithTextProps) => (
   <Flex variant="verticalCentralCenter" sx={{ position: 'relative' }}>
     {isValidElement(text) ? (
       text
@@ -16,7 +16,7 @@ const CircleWithText = ({ text, isActivation, onClick, ...props }: CircleWithTex
         {text}
       </Text>
     )}
-    <Circle isActivation={isActivation} onClick={onClick} {...props} />
+    <Circle isActive={isActive} onClick={onClick} {...props} />
   </Flex>
 );
 

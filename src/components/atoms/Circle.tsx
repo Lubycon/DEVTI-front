@@ -5,11 +5,11 @@ type ExcludeBoxProps = Omit<BoxProps, 'width' | 'height'>;
 
 export interface CircleProps extends ExcludeBoxProps {
   width?: number | string;
-  isActivation: boolean;
+  isActive: boolean;
 }
 
-const Circle = ({ onClick, width, isActivation, ...props }: Partial<CircleProps>) => {
-  const sx = !isActivation
+const Circle = ({ onClick, width, isActive, ...props }: Partial<CircleProps>) => {
+  const sx = !isActive
     ? {
         border: '1px solid',
         borderColor: 'gray.3',
