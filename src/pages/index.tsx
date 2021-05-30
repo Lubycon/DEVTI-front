@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import { NextPageContext } from 'next';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
@@ -43,9 +42,14 @@ const Index = () => {
     <Flex flexDirection="column">
       <Navigation>
         <>
-          <Text fontWeight={800} fontSize="30px" flex={2} color="primary">
-            DEVTI
-          </Text>
+          <Flex flexDirection="row" alignItems="flex-end">
+            <Text fontWeight={800} fontSize="30px" flex={2} color="blue.0">
+              DEVTI
+            </Text>
+            <Text fontWeight={800} fontSize={11} color="#789FFE">
+              by EP4
+            </Text>
+          </Flex>
           <Button variant="primary" fontWeight={700} onClick={handleClick}>
             검사하기
           </Button>
