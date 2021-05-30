@@ -4,17 +4,17 @@ import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
-import useBetaSignUp from '../../../hooks/api/useBetaTestApi';
-import useModal from '../../../hooks/useModal';
-import useScrollTo from '../../../hooks/useScrollTo';
-import { SignUpForm } from '../../../models/SignUp';
-import { sendAmplitudeData } from '../../../utils/amplitude';
-import domains from '../../../utils/store/domains';
-import CountCharactorTextarea from '../../atoms/CountCharactorTextarea';
-import EmailDropdownInput from '../../atoms/EmailDropdownInput';
-import ConfirmModal from '../../molecules/ConfirmModal';
-import HorizontalBorderLineBox from '../../molecules/HorizontalBorderLineBox';
-import Section, { SectionTheme } from '../../templates/Section';
+import CountCharactorTextarea from '~atoms/CountCharactorTextarea';
+import EmailDropdownInput from '~atoms/EmailDropdownInput';
+import useBetaSignUp from '~hooks/api/useBetaTestApi';
+import useModal from '~hooks/useModal';
+import useScrollTo from '~hooks/useScrollTo';
+import { SignUpForm } from '~models/SignUp';
+import ConfirmModal from '~molecules/ConfirmModal';
+import HorizontalBorderLineBox from '~molecules/HorizontalBorderLineBox';
+import Section, { SectionTheme } from '~templates/Section';
+import { sendAmplitudeData } from '~utils/amplitude';
+import domains from '~utils/store/domains';
 
 const FormSection = () => {
   const [isEmailInput, setIsEmailInput] = useState(true);

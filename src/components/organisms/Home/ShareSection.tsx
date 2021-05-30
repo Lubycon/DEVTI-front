@@ -1,12 +1,12 @@
 import { useQuery } from 'react-query';
 import { Button, Text } from 'rebass';
 
-import usePostEventLog from '../../../hooks/api/usePostEventLog';
-import useModal from '../../../hooks/useModal';
-import doCopy from '../../../libs/doCopy';
-import { sendAmplitudeData } from '../../../utils/amplitude';
-import ConfirmModal from '../../molecules/ConfirmModal';
-import Section, { SectionTheme } from '../../templates/Section';
+import usePostEventLog from '~hooks/api/usePostEventLog';
+import useModal from '~hooks/useModal';
+import doCopy from '~libs/doCopy';
+import ConfirmModal from '~molecules/ConfirmModal';
+import Section, { SectionTheme } from '~templates/Section';
+import { sendAmplitudeData } from '~utils/amplitude';
 
 const ShareSection = () => {
   const { data } = useQuery<{ testType: string }>('source');

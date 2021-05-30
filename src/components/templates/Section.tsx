@@ -1,7 +1,6 @@
+import { Merge } from '@types';
 import { cloneElement, isValidElement, PropsWithChildren, ReactNode } from 'react';
 import { Flex, FlexProps, Text } from 'rebass';
-
-import { Merge } from '../../@types';
 
 export enum SectionTheme {
   White = 'whiteScreen',

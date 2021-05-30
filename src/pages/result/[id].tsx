@@ -1,4 +1,4 @@
-import useQueryParam from '../../hooks/useQueryParam';
+import useQueryParam from '~hooks/useQueryParam';
 
 const Result = () => {
   const {

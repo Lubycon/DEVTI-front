@@ -1,7 +1,7 @@
+import { RequestData } from '@types';
 import { useMutation } from 'react-query';
 
-import { RequestData } from '../../@types';
-import callApi from '../../libs/callApi';
+import callApi from '~libs/callApi';
 
 interface SignUpCommon {
   comment: string;

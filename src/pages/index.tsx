@@ -1,23 +1,26 @@
 import { NextPageContext } from 'next';
-import React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { Flex } from 'rebass';
+import { Button, Flex, Text } from 'rebass';
 
-import Navigation from '../components/molecules/Navigation';
-import FormSection from '../components/organisms/Home/FormSection';
-import InformationSection from '../components/organisms/Home/InformationSection';
-import MainSection from '../components/organisms/Home/MainSection';
-import PreviewSection from '../components/organisms/Home/PreviewSection';
-import ShareSection from '../components/organisms/Home/ShareSection';
-import { getSharedCount } from '../hooks/api/useGetSharedCount';
-import callApi from '../libs/callApi';
-import isMobileDetect from '../libs/server/isMobileDetect';
-import { sendAmplitudeData, useInitAmplitude } from '../utils/amplitude';
+import { getSharedCount } from '~hooks/api/useGetSharedCount';
+import usePostEventLog from '~hooks/api/usePostEventLog';
+import useScrollTo from '~hooks/useScrollTo';
+import callApi from '~libs/callApi';
+import isMobileDetect from '~libs/server/isMobileDetect';
+import Navigation from '~molecules/Navigation';
+import FormSection from '~organisms/Home/FormSection';
+import InformationSection from '~organisms/Home/InformationSection';
+import MainSection from '~organisms/Home/MainSection';
+import PreviewSection from '~organisms/Home/PreviewSection';
+import ShareSection from '~organisms/Home/ShareSection';
+import { sendAmplitudeData, useInitAmplitude } from '~utils/amplitude';
 
 const Index = () => {
   const { data: utmSource } = useQuery('utmSource');
+
   const { data } = useQuery<{ phrases: string; testType: string }>('source');
+
   useInitAmplitude({
     onInit: () => {
       const { referrer } = document;
@@ -25,9 +28,33 @@ const Index = () => {
     },
   });
 
+  const { handleExecuteScroll } = useScrollTo('test');
+
+  const { mutateEventLog } = usePostEventLog();
+
+  const handleClick = () => {
+    sendAmplitudeData('버튼클릭_검사하기__네비게이션', { source: data?.testType, utmSource });
+    handleExecuteScroll();
+    mutateEventLog('CLICK_CTA_BUTTON');
+  };
+
   return (
     <Flex flexDirection="column">
-      <Navigation />
+      <Navigation>
+        <>
+          <Flex flexDirection="row" alignItems="flex-end">
+            <Text fontWeight={800} fontSize="30px" flex={2} color="blue.0">
+              DEVTI
+            </Text>
+            <Text fontWeight={800} fontSize={11} color="#789FFE">
+              by EP4
+            </Text>
+          </Flex>
+          <Button variant="primary" fontWeight={700} onClick={handleClick}>
+            검사하기
+          </Button>
+        </>
+      </Navigation>
       <MainSection />
       <PreviewSection />
       <InformationSection />

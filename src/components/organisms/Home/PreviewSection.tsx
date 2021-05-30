@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
 import { Image, Text } from 'rebass';
 
-import { device } from '../../../public/assets/icons';
-import Section, { SectionTheme } from '../../templates/Section';
+import { device } from '~public/assets/icons';
+import Section, { SectionTheme } from '~templates/Section';
 
 const PreviewSection = () => {
   const { data: isMobile } = useQuery<boolean>('isMobile');

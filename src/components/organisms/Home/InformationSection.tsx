@@ -1,7 +1,7 @@
 import { Flex } from 'rebass';
 
-import TextCard from '../../molecules/TextCard';
-import Section, { SectionTheme } from '../../templates/Section';
+import TextCard from '~molecules/TextCard';
+import Section, { SectionTheme } from '~templates/Section';
 
 const contents = [
   {
