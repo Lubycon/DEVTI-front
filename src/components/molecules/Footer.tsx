@@ -18,7 +18,12 @@ const Footer = () => (
     }}
   >
     <Flex flex={1} justifyContent="space-between" alignItems="center">
-      <Text>© 2021 DEVTI</Text>
+      <Flex flexDirection="column">
+        <Flex mb={9} flexDirection="row">
+          상호명 EP4<Text mx={2}>|</Text>대표 김상혁<Text mx={2}>|</Text>이메일 devti.official@gmail.com
+        </Flex>
+        <Text>COPYRIGHT (c) devti.kr ALL RIGHTS RESERVED. </Text>
+      </Flex>
       <Image src={lubycon} width={80} height={25} alt="lubycon" />
     </Flex>
   </Flex>
