@@ -8,7 +8,7 @@ export interface CircleProps extends ExcludeBoxProps {
   isActive: boolean;
 }
 
-const Circle = ({ onClick, width, isActive, ...props }: Partial<CircleProps>) => {
+const Circle = ({ width, isActive, ...props }: Partial<CircleProps>) => {
   const sx = !isActive
     ? {
         border: '1px solid',
@@ -16,6 +16,6 @@ const Circle = ({ onClick, width, isActive, ...props }: Partial<CircleProps>) =>
         bg: 'white',
       }
     : undefined;
-  return <Box variant="circle" {...props} onClick={onClick} width={width} height={width} sx={sx} />;
+  return <Box variant="circle" {...props} width={width} height={width} sx={sx} />;
 };
 export default Circle;
