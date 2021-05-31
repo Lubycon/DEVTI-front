@@ -30,7 +30,7 @@ const variants = {
   },
   blueScreen: {
     variant: 'variants.screen',
-    bg: 'blue.0',
+    bg: 'primary',
   },
   navigation: {
     position: 'fixed',
@@ -42,8 +42,9 @@ const variants = {
     width: '100%',
     transition: '0.5s',
     zIndex: 999,
+    bg: 'white',
     '@media screen and (max-width: 64em)': {
-      px: 28,
+      px: 3,
       '> button': {
         display: 'none',
       },
@@ -115,18 +116,34 @@ const variants = {
     minHeight: '8px',
     borderRadius: '30px',
     overflow: 'hidden',
+    width: '100%',
   },
   gageBar: {
     position: 'absolute',
     width: '100%',
     height: '100%',
+    backgroundColor: 'gray.2',
   },
   gage: {
     position: 'absolute',
-    width: '100px',
     height: '100%',
-    backgroundColor: 'blue.0',
+    backgroundColor: 'primary',
     transition: '0.5s',
+  },
+  question: {
+    variant: 'variants.verticalCentralCenter',
+    height: '100vh',
+    textAlign: 'center',
+    wordBreak: 'keep-all',
+    mx: 3,
+  },
+  circle: {
+    width: '32px',
+    height: '32px',
+    border: '2px solid',
+    borderColor: 'primary',
+    borderRadius: '50%',
+    backgroundColor: 'blue.0',
   },
 };
 export default variants;

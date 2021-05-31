@@ -29,7 +29,7 @@ const ThumbnailCard = ({ imageUrl, contents }: ThumbnailCardProps) => (
       sx={{ borderRadius: 10, boxShadow: '5px 5px 20px rgba(0, 0, 0, 0.1)' }}
     >
       <Box height={188} overflowY="scroll">
-        <Text font-size={16} color="blue.0" fontWeight="bold" mb={2}>
+        <Text font-size={16} color="primary" fontWeight="bold" mb={2}>
           취준생 / front-end
         </Text>
         <Text as="p" color="gray.3" fontWeight={400} fontSize={16}>

@@ -17,15 +17,15 @@ const buttons = {
   },
   primary: {
     variant: 'buttons.default',
-    bg: 'blue.0',
+    bg: 'primary',
     ':hover, :focus': {
-      bg: 'blue.0',
+      bg: 'primary',
     },
   },
   white: {
     variant: 'buttons.default',
     bg: 'white',
-    color: 'blue.0',
+    color: 'primary',
   },
 };
 

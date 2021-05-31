@@ -41,19 +41,17 @@ const Index = () => {
   return (
     <Flex flexDirection="column">
       <Navigation>
-        <>
-          <Flex flexDirection="row" alignItems="flex-end">
-            <Text fontWeight={800} fontSize="30px" flex={2} color="blue.0">
-              DEVTI
-            </Text>
-            <Text fontWeight={800} fontSize={11} color="#789FFE">
-              by EP4
-            </Text>
-          </Flex>
-          <Button variant="primary" fontWeight={700} onClick={handleClick}>
-            검사하기
-          </Button>
-        </>
+        <Flex flexDirection="row" alignItems="flex-end">
+          <Text fontWeight={800} fontSize="30px" flex={2} color="primary">
+            DEVTI
+          </Text>
+          <Text fontWeight={800} fontSize={11} color="#789FFE">
+            by EP4
+          </Text>
+        </Flex>
+        <Button variant="primary" fontWeight={700} onClick={handleClick}>
+          검사하기
+        </Button>
       </Navigation>
       <MainSection />
       <PreviewSection />
