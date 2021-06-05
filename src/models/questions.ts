@@ -1,12 +1,17 @@
-export interface QuestionModel {
+export interface PresetModel {
+  key: number;
+  label: string;
+  isChecked: boolean;
+}
+
+interface QuestionModel {
   id: number;
   title: string;
   answerType: string;
-  presets?: {
-    key: number;
-    label: string;
-  }[];
+  presets: PresetModel[] | null;
 }
+
+export type CustomQuestion = QuestionModel & { checkedNumber: number };
 
 export default [
   {
@@ -310,8 +315,63 @@ export default [
     ],
   },
   {
+    id: 20,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+  {
     id: 21,
     title: '게이지 질문',
     answerType: 'gage',
+    presets: null,
   },
-];
+  {
+    id: 22,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+  {
+    id: 23,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+  {
+    id: 24,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+  {
+    id: 25,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+  {
+    id: 26,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+  {
+    id: 27,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+  {
+    id: 28,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+  {
+    id: 29,
+    title: '게이지 질문',
+    answerType: 'gage',
+    presets: null,
+  },
+] as QuestionModel[];

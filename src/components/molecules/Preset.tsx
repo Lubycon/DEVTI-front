@@ -1,16 +1,17 @@
-import { Button } from 'rebass';
+import { Button, Flex, Image } from 'rebass';
+
+import Circle from '~atoms/Circle';
+import { PresetModel } from '~models/questions';
+import { check } from '~public/assets/icons';
 
 interface PresetProps {
-  presets: {
-    label: string;
-    key: number;
-  }[];
-  onAnswerClick: (value: number, type: string) => void;
+  presets: PresetModel[];
+  onAnswerClick: (value: number, answerType: string) => void;
 }
 
 const Preset = ({ presets, onAnswerClick }: PresetProps) => (
   <>
-    {presets.map(({ label, key }, index) => (
+    {presets.map(({ label, key, isChecked }, index) => (
       <Button
         key={key}
         onClick={() => {
@@ -28,7 +29,12 @@ const Preset = ({ presets, onAnswerClick }: PresetProps) => (
           textAlign: 'left',
         }}
       >
-        {label}
+        <Flex variant="horizontalCentralCenter" justifyContent="space-between">
+          {label}
+          <Circle bg={isChecked ? 'primary' : 'gray.3'} width="24px">
+            <Image src={check} width="12px" />
+          </Circle>
+        </Flex>
       </Button>
     ))}
   </>
