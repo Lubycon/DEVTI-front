@@ -136,14 +136,23 @@ const variants = {
     textAlign: 'center',
     wordBreak: 'keep-all',
     mx: 3,
+    scrollSnapAlign: 'start',
+    position: 'relative',
   },
   circle: {
+    variant: 'variants.verticalCentralCenter',
     width: '32px',
     height: '32px',
     border: '2px solid',
     borderColor: 'primary',
     borderRadius: '50%',
     backgroundColor: 'blue.0',
+  },
+  snapScroll: {
+    overflow: 'scroll',
+    height: '100vh',
+    scrollSnapPointsY: 'repeat(100vh)',
+    scrollSnapType: 'y mandatory',
   },
 };
 export default variants;
