@@ -5,7 +5,7 @@ type ExcludeBoxProps = Omit<BoxProps, 'width' | 'height'>;
 
 export interface CircleProps extends ExcludeBoxProps {
   width?: number | string;
-  isActive: boolean;
+  isActive?: boolean;
 }
 
 const Circle = ({ width, isActive, ...props }: Partial<CircleProps>) => {

@@ -6,7 +6,7 @@ import CircleWithText from './CircleWithText';
 import Circle from '~atoms/Circle';
 
 interface MultipleProps extends FlexProps {
-  onAnswerClick: (value: number, type: string) => void;
+  onAnswerClick: (value: number, answerType: string) => void;
 }
 
 const Multiple = ({ onAnswerClick, ...props }: MultipleProps) => {
