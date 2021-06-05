@@ -1,7 +1,5 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
-import Footer from '../components/molecules/Footer';
-
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -23,7 +21,7 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <Footer />
+          {/* <Footer /> */}
         </body>
       </Html>
     );

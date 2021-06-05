@@ -130,6 +130,7 @@ const variants = {
     backgroundColor: 'primary',
     transition: '0.5s',
   },
+
   question: {
     variant: 'variants.verticalCentralCenter',
     height: '100vh',

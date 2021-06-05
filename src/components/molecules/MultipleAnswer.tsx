@@ -4,16 +4,19 @@ import { Flex, FlexProps } from 'rebass';
 import CircleWithText from './CircleWithText';
 
 import Circle from '~atoms/Circle';
+import { OmitAnswerInId, PresetModel } from '~models/questions';
 
 interface MultipleProps extends FlexProps {
-  onAnswerClick: (value: number, answerType: string) => void;
+  presets: PresetModel[];
+  onAnswerClick: (omitAnswerInId: OmitAnswerInId) => void;
 }
 
-const Multiple = ({ onAnswerClick, ...props }: MultipleProps) => {
+const Multiple = ({ onAnswerClick, presets, ...props }: MultipleProps) => {
   const [isActives, setIsActives] = useState([false, false, false, false, false]);
 
   const handleClick = (value: number) => () => {
-    onAnswerClick(value, 'gage');
+    const { label, ...preset } = presets[value];
+    onAnswerClick({ answerType: 'GAGE', ...preset });
     setIsActives([...isActives.map((_, i) => value === i)]);
   };
 
