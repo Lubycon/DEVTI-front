@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import { Box, Flex, Heading, Text } from 'rebass';
 
+import { fetchAllQuestion, fetchQuestionKey } from '~hooks/api/useFetchQuestion';
 import useProgressBar from '~hooks/useProgressBar';
 import useScrollTo from '~hooks/useScrollTo';
 import Navigation from '~molecules/Navigation';
@@ -17,7 +20,7 @@ const Question = () => {
 
   const [step, setStep] = useState({
     unit: 1,
-    number: 1,
+    number: 0,
   });
 
   const handleScrollTo = () => {
@@ -32,11 +35,11 @@ const Question = () => {
   };
 
   const finishedStep = () => {
-    if (TOTAL_STEP < step.number) {
+    if (TOTAL_STEP === step.number) {
       resetGage();
       setStep({
         unit: step.unit + 1,
-        number: 1,
+        number: 0,
       });
     }
   };
@@ -72,5 +75,14 @@ const Question = () => {
     </Box>
   );
 };
+
+export async function getStaticProps() {
+  const queryCache = new QueryClient();
+  await queryCache.prefetchQuery(fetchQuestionKey, fetchAllQuestion);
+
+  return {
+    props: { dehydratedState: dehydrate(queryCache) },
+  };
+}
 
 export default Question;
