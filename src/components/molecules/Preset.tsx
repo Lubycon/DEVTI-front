@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, Flex, Image } from 'rebass';
 
 import Circle from '~atoms/Circle';
-import { OmitAnswerInId, PresetModel } from '~models/questions';
+import { AnswerType, OmitAnswerInId, PresetModel } from '~models/Question';
 import { check } from '~public/assets/icons';
 
 interface PresetProps {
@@ -23,7 +23,7 @@ const Preset = ({ presets, onAnswerClick }: PresetProps) => {
         <Button
           key={sequence}
           onClick={() => {
-            onAnswerClick({ answerType: 'PRESET', sequence, ...preset });
+            onAnswerClick({ answerType: AnswerType.Preset, sequence, ...preset });
             handleClick(i);
           }}
           variant="default"

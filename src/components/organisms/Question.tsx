@@ -2,7 +2,9 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Flex, Text } from 'rebass';
 
-import questions, { AnswerModel, OmitAnswerInId } from '~models/questions';
+import useFetchAllQuestion from '~hooks/api/useFetchQuestion';
+import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
+import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
 import Multiple from '~molecules/MultipleAnswer';
 import Preset from '~molecules/Preset';
 
@@ -17,7 +19,10 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
 
   const { push } = useRouter();
 
-  const handleAnswerClick = (id: number) => (omitAnswerInId: OmitAnswerInId) => {
+  const { data: questions } = useFetchAllQuestion();
+  const { mutateQuestionResult } = usePostQuestionResult();
+
+  const handleAnswerClick = (id: number) => ({ ...omitAnswerInId }: OmitAnswerInId) => {
     handleScrollTo();
     handleProceedStep();
     handleIncreaseGage();
@@ -33,11 +38,13 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
       },
       [newAnswer]
     );
+    mutateQuestionResult(updateAnswers);
     setAnswers(updateAnswers);
   };
 
   useEffect(() => {
     if (answers.length === questions?.length) {
+      mutateQuestionResult(answers);
       push('/result/entp');
     }
   }, [answers]);
@@ -53,11 +60,9 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
             {title}
           </Text>
           <Flex width="100%" flexDirection="column">
-            {answerType === 'preset'.toUpperCase() ? (
-              <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />
-            ) : (
-              <Multiple presets={presets} onAnswerClick={handleAnswerClick(id)} mt={4} />
-            )}
+            {answerType === AnswerType.Preset && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
+            {answerType === AnswerType.Gage && <Multiple presets={presets} onAnswerClick={handleAnswerClick(id)} mt={4} />}
+            {answerType === AnswerType.Job && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
           </Flex>
         </Flex>
       ))}
