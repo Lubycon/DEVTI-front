@@ -45,7 +45,7 @@ const Question = () => {
   };
 
   useEffect(() => {
-    setInnerHeight(window.innerHeight);
+    setInnerHeight(document.body.scrollHeight);
   }, []);
 
   useEffect(() => {

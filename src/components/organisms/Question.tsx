@@ -23,17 +23,19 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
   const { mutateQuestionResult } = usePostQuestionResult();
 
   const handleAnswerClick = (id: number) => ({ ...omitAnswerInId }: OmitAnswerInId) => {
-    handleScrollTo();
-    handleProceedStep();
-    handleIncreaseGage();
-
     const newAnswer = { id, ...omitAnswerInId };
     const hasAnswer = answers.find(({ id: prevId }) => prevId === id);
+    if (!hasAnswer) {
+      handleIncreaseGage();
+      handleProceedStep();
+    }
+
     const updateAnswers = answers.reduce<AnswerModel[]>(
       (acc, cur) => {
         if (hasAnswer) {
           return answers.map(({ id: prevId, ...answer }) => (prevId === id ? newAnswer : { id: prevId, ...answer }));
         }
+
         return [...acc, cur];
       },
       [newAnswer]
@@ -46,26 +48,30 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
     if (answers.length === questions?.length) {
       mutateQuestionResult(answers);
       push('/result/entp');
+      return;
     }
+    handleScrollTo();
   }, [answers]);
 
   return (
     <>
-      {questions?.map(({ title, id, presets, answerType }, i) => (
-        <Flex variant="question" key={id}>
-          <Text fontSize={12} color="gray.5" mb={1}>
-            Q{i + 1}
-          </Text>
-          <Text fontSize={16} color="gray.6" lineHeight="22px" mb={40}>
-            {title}
-          </Text>
-          <Flex width="100%" flexDirection="column">
-            {answerType === AnswerType.Preset && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
-            {answerType === AnswerType.Gage && <Multiple presets={presets} onAnswerClick={handleAnswerClick(id)} mt={4} />}
-            {answerType === AnswerType.Job && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
+      {questions
+        ?.filter((_, i) => i < answers.length + 1)
+        .map(({ title, id, presets, answerType }, i) => (
+          <Flex variant="question" key={id}>
+            <Text fontSize={12} color="gray.5" mb={1}>
+              Q{i + 1}
+            </Text>
+            <Text fontSize={16} color="gray.6" lineHeight="22px" mb={40}>
+              {title}
+            </Text>
+            <Flex width="100%" flexDirection="column">
+              {answerType === AnswerType.Preset && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
+              {answerType === AnswerType.Gage && <Multiple presets={presets} onAnswerClick={handleAnswerClick(id)} mt={4} />}
+              {answerType === AnswerType.Job && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
+            </Flex>
           </Flex>
-        </Flex>
-      ))}
+        ))}
     </>
   );
 };
