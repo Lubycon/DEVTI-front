@@ -101,8 +101,6 @@ const variants = {
   },
   modal: {
     position: 'fixed',
-    width: 320,
-    height: 214,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',

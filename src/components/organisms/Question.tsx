@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Flex, Text } from 'rebass';
 
 import useFetchAllQuestion from '~hooks/api/useFetchQuestion';
 import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
+import useModal from '~hooks/useModal';
 import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
+import ConfirmModal from '~molecules/ConfirmModal';
 import Multiple from '~molecules/MultipleAnswer';
 import Preset from '~molecules/Preset';
 
@@ -19,8 +21,18 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
 
   const { push } = useRouter();
 
-  const { data: questions } = useFetchAllQuestion();
+  const { data: questions, isError } = useFetchAllQuestion();
+
   const { mutateQuestionResult } = usePostQuestionResult();
+  const { handleOpen, renderModal } = useModal({
+    children: (
+      <ConfirmModal confirmText="확인">
+        <Text variant="primary" textAlign="center" p={3}>
+          {'문제를 가져오는데\n실패 하였습니다.'}
+        </Text>
+      </ConfirmModal>
+    ),
+  });
 
   const handleAnswerClick = (id: number) => ({ ...omitAnswerInId }: OmitAnswerInId) => {
     const newAnswer = { id, ...omitAnswerInId };
@@ -35,26 +47,29 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
         if (hasAnswer) {
           return answers.map(({ id: prevId, ...answer }) => (prevId === id ? newAnswer : { id: prevId, ...answer }));
         }
-
         return [...acc, cur];
       },
       [newAnswer]
     );
-    mutateQuestionResult(updateAnswers);
     setAnswers(updateAnswers);
   };
 
   useEffect(() => {
     if (answers.length === questions?.length) {
       mutateQuestionResult(answers);
-      push('/result/entp');
+      push('/result/fcpw');
       return;
     }
     handleScrollTo();
   }, [answers]);
 
+  useEffect(() => {
+    if (isError) handleOpen();
+  }, [isError]);
+
   return (
     <>
+      {renderModal()}
       {questions
         ?.filter((_, i) => i < answers.length + 1)
         .map(({ title, id, presets, answerType }, i) => (
@@ -68,7 +83,7 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
             <Flex width="100%" flexDirection="column">
               {answerType === AnswerType.Preset && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
               {answerType === AnswerType.Gage && <Multiple presets={presets} onAnswerClick={handleAnswerClick(id)} mt={4} />}
-              {answerType === AnswerType.Job && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
+              {answerType === AnswerType.Info && <Preset presets={presets} onAnswerClick={handleAnswerClick(id)} />}
             </Flex>
           </Flex>
         ))}

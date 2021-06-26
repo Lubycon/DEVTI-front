@@ -20,15 +20,15 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
-    'no-alert':0,
+    'no-alert': 0,
     'react/prop-types': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-throw-literal': 0,
     'react/require-default-props': 0,
-    'react/react-in-jsx-scope':0,
-    'jsx-a11y/anchor-is-valid':0,
-    "react/jsx-props-no-spreading":0,
-    "import/extensions": "off",
+    'react/react-in-jsx-scope': 0,
+    'jsx-a11y/anchor-is-valid': 0,
+    'react/jsx-props-no-spreading': 0,
+    'import/extensions': 'off',
     'import/order': [
       'error',
       {
@@ -63,6 +63,5 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ["*.js"],
-}
-
+  ignorePatterns: ['*.js'],
+};

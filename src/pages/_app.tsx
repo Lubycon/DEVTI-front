@@ -2,7 +2,6 @@ import { ThemeProvider } from 'emotion-theming';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate } from 'react-query/hydration';
 
 import { queryClient } from '../config/reactQuery';
@@ -26,7 +25,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <Component {...pageProps} />
           </ThemeProvider>
         </Hydrate>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </>
   );

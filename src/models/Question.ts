@@ -7,9 +7,8 @@ export interface Question {
 
 export enum AnswerType {
   Gage = 'GAGE',
-  Job = 'JOB',
+  Info = 'INFO',
   Preset = 'PRESET',
-  Years = 'YEARS',
 }
 
 export interface Preset {

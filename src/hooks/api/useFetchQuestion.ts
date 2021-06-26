@@ -8,10 +8,11 @@ export const fetchQuestionKey = 'questions';
 export const fetchAllQuestion = () => callApi<Question[]>({ key: 'getAllQuestion', data: {} });
 
 const useFetchAllQuestion = () => {
-  const { data } = useQuery<Question[]>(fetchQuestionKey, fetchAllQuestion);
+  const { data, isError } = useQuery<Question[]>(fetchQuestionKey, fetchAllQuestion);
 
   return {
     data,
+    isError,
   };
 };
 
