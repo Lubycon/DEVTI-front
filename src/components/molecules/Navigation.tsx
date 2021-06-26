@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { useQuery } from 'react-query';
 import { Flex } from 'rebass';
 
 interface NavigationProps {
@@ -9,8 +8,6 @@ interface NavigationProps {
 const Navigation = ({ children }: NavigationProps) => {
   const ref = useRef<HTMLElement>();
 
-  const { data: isMobile } = useQuery<boolean>('isMobile');
-
   const handleScroll = () => {
     let lastScrollTop = 0;
     const checkScrolLDirection = () => {
@@ -19,10 +16,8 @@ const Navigation = ({ children }: NavigationProps) => {
       if (nav) {
         if (st > lastScrollTop) {
           nav.style.backgroundColor = 'white';
-          if (!isMobile) nav.style.padding = '0 40px';
         } else {
           nav.style.backgroundColor = 'inherit';
-          if (!isMobile) nav.style.padding = '0 140px';
         }
       }
       lastScrollTop = st <= 0 ? 0 : st;

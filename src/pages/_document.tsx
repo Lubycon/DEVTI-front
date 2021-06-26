@@ -1,7 +1,5 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
-import Footer from '../components/molecules/Footer';
-
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -19,11 +17,12 @@ class MyDocument extends Document {
             property="og:image"
             content="https://user-images.githubusercontent.com/39829378/117588913-879ba280-b161-11eb-81f1-d120b79d2f78.png"
           />
+          <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js" />
         </Head>
         <body>
           <Main />
           <NextScript />
-          <Footer />
+          {/* <Footer /> */}
         </body>
       </Html>
     );

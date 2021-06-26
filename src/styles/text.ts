@@ -3,6 +3,9 @@ const text = {
     fontWeight: 'normal',
     whiteSpace: 'pre-wrap',
   },
+  primary: {
+    variant: 'text.default',
+  },
   title: {
     variant: 'text.default',
     color: 'gray.6',
