@@ -17,14 +17,7 @@ const ConfirmModal = ({ children, onClose, confirmText, ...props }: PropsWithChi
         </Text>
       )}
     </Flex>
-    <Button
-      color="primary"
-      onClick={onClose}
-      height={48}
-      fontWeight={600}
-      fontSize={16}
-      sx={{ borderRadius: 0, overflow: 'inherit' }}
-    >
+    <Button onClick={onClose} height={32} fontWeight={600} fontSize={16} sx={{ borderRadius: 0, overflow: 'inherit' }}>
       {confirmText ?? '확인'}
     </Button>
   </Flex>

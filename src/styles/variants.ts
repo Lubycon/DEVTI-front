@@ -101,8 +101,6 @@ const variants = {
   },
   modal: {
     position: 'fixed',
-    width: 320,
-    height: 214,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -130,20 +128,30 @@ const variants = {
     backgroundColor: 'primary',
     transition: '0.5s',
   },
+
   question: {
     variant: 'variants.verticalCentralCenter',
     height: '100vh',
     textAlign: 'center',
     wordBreak: 'keep-all',
     mx: 3,
+    scrollSnapAlign: 'start',
+    position: 'relative',
   },
   circle: {
+    variant: 'variants.verticalCentralCenter',
     width: '32px',
     height: '32px',
     border: '2px solid',
     borderColor: 'primary',
     borderRadius: '50%',
     backgroundColor: 'blue.0',
+  },
+  snapScroll: {
+    overflowY: 'scroll',
+    height: 'var(--app-height)',
+    scrollSnapPointsY: 'repeat(100vh)',
+    scrollSnapType: 'y mandatory',
   },
 };
 export default variants;

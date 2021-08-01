@@ -1,10 +1,9 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 import { useQueryClient } from 'react-query';
 
-// NOTE
-const appendKeyPrefix = (key: string) => `${key}-scroll`;
+const appendKeyPrefix = (key?: string) => `${key}-scroll`;
 
-const useScrollTo = (key: string) => {
+const useScrollTo = (key?: string, scrolloptions?: ScrollToOptions) => {
   const ref = useRef<HTMLElement>();
 
   const queryKey = appendKeyPrefix(key);
@@ -16,14 +15,15 @@ const useScrollTo = (key: string) => {
   }, [ref]);
 
   const handleExecuteScroll = () => {
-    const node = queryClient.getQueryData<MutableRefObject<HTMLUListElement>>(queryKey);
+    const node = key ? queryClient.getQueryData<MutableRefObject<HTMLUListElement>>(queryKey) : ref;
     const offset = 100;
-    const position = node?.current.getBoundingClientRect().top ?? 0;
+    const position = node?.current?.getBoundingClientRect().top ?? 0;
     const offsetPosition = position - offset;
 
-    window.scrollTo({
+    node?.current?.scrollBy({
       top: offsetPosition,
       behavior: 'smooth',
+      ...scrolloptions,
     });
   };
 
