@@ -2,7 +2,8 @@ import { Method } from 'axios';
 
 import apiMap, { UrlMapKey } from './apiMap';
 
-type Data = { [key: string]: string };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Data = { [key: string]: any };
 
 export interface Config {
   key: UrlMapKey;
@@ -16,7 +17,7 @@ const getUrlParams = (url?: string) => {
   return params && params.length > 0 ? params.map((match) => match.replace(':', '')) : [];
 };
 
-const makeRequestUrl = (url: string, params: string[], body: Data) => {
+const makeRequestUrl = (url: string, params: string[], body: { [key: string]: string }) => {
   let requestUrl = url;
 
   params.forEach((param) => {

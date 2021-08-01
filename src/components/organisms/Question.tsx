@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Flex, Text } from 'rebass';
 
 import useFetchAllQuestion from '~hooks/api/useFetchQuestion';
-import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
+import usePostQuestionSummary from '~hooks/api/usePostQuestionSummary';
 import useModal from '~hooks/useModal';
 import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
 import ConfirmModal from '~molecules/ConfirmModal';
@@ -23,7 +23,8 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
 
   const { data: questions, isError } = useFetchAllQuestion();
 
-  const { mutateQuestionResult } = usePostQuestionResult();
+  const { mutateQuestionResult } = usePostQuestionSummary();
+
   const { handleOpen, renderModal } = useModal({
     children: (
       <ConfirmModal confirmText="확인">
@@ -57,7 +58,9 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
   useEffect(() => {
     if (answers.length === questions?.length) {
       mutateQuestionResult(answers);
-      push('/result/fcpw');
+      setTimeout(() => {
+        push('/result/fcpw');
+      }, 500);
       return;
     }
     handleScrollTo();
@@ -73,7 +76,7 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
       {questions
         ?.filter((_, i) => i < answers.length + 1)
         .map(({ title, id, presets, answerType }, i) => (
-          <Flex variant="question" key={id}>
+          <Flex variant="question" key={id} pb={5}>
             <Text fontSize={12} color="gray.5" mb={1}>
               Q{i + 1}
             </Text>

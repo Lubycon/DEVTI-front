@@ -23,8 +23,12 @@ const urlMap = {
     url: `${BASE_URL}/question/all`,
     method: 'GET',
   },
-  postQuestionResult: {
+  postResultSummary: {
     url: `${BASE_URL}/devti`,
+    method: 'POST',
+  },
+  getQuestionResult: {
+    url: `${BASE_URL}/devti/result?A=:A&C=:C&job=:job&L=:L&P=:P&S=:S&T=:T&V=:V&W=:W`,
     method: 'POST',
   },
 };

@@ -22,6 +22,11 @@ export type DEVTISourceType = {
   [key in DEVTIType]: string;
 };
 
+export interface ResultSource {
+  job: string;
+  result: string;
+}
+
 export interface Result {
   id: number;
   devti: string;
