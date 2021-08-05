@@ -6,6 +6,9 @@ const GlobalStyle = () => (
   <Global
     styles={css`
       ${emotionReset}
+      :root {
+        --app-height: 100%;
+      }
       html,
       body {
         line-height: 1.1;
@@ -13,6 +16,9 @@ const GlobalStyle = () => (
         *:focus {
           outline: none;
         }
+      }
+      ::-webkit-scrollbar {
+        display: none;
       }
     `}
   />

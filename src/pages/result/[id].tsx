@@ -1,19 +1,28 @@
 import { NextPageContext } from 'next';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { Flex, Heading, Image, Text, Button } from 'rebass';
 
+import useFetchQuestionResult from '~hooks/api/useFetchQuestionResult';
 import doCopy from '~libs/doCopy';
-import { DEVTISourceType, DEVTIType } from '~models/DEVTI';
+import { DEVTISourceType, DEVTIType, ResultSource } from '~models/DEVTI';
 import Navigation from '~molecules/Navigation';
 import PillerGage from '~molecules/PillerGage';
 
 const Result = ({ metaImageUrl }: { metaImageUrl: string }) => {
-  // const result = useQuery('result');
+  const { data } = useQuery<ResultSource>('result');
+  const { mutateAsyncResult } = useFetchQuestionResult();
   const [href, setHref] = useState('');
 
   useEffect(() => {
+    const { job, result } = data || {};
     setHref(window.location.href);
+
+    if (job && result) {
+      const param = { job, result };
+      mutateAsyncResult(param);
+    }
   }, []);
 
   return (
@@ -52,7 +61,7 @@ const Result = ({ metaImageUrl }: { metaImageUrl: string }) => {
           mb={64}
           mt={2}
           leftNode={<Text>C 스타트업 21%</Text>}
-          rightNode={<Text>S 대기압 79%</Text>}
+          rightNode={<Text>S 대기업 79%</Text>}
           sx={{
             transform: 'rotate(180deg)',
           }}
@@ -63,7 +72,7 @@ const Result = ({ metaImageUrl }: { metaImageUrl: string }) => {
           mb={64}
           mt={2}
           leftNode={<Text>C 스타트업 21%</Text>}
-          rightNode={<Text>S 대기압 79%</Text>}
+          rightNode={<Text>S 대기업 79%</Text>}
           sx={{
             transform: 'rotate(180deg)',
           }}
@@ -85,7 +94,7 @@ const Result = ({ metaImageUrl }: { metaImageUrl: string }) => {
 또한 찐 개발자 성향보다 프로덕트 전체를 보며 추후 창업에 대한 욕구도 있어 보이는군요.`}
           </Text>
         </Flex>
-        <Flex flexDirection="column" width="375px" height="306px" alignItems="center" bg="#F8F8F8" mt={4}>
+        <Flex flexDirection="column" width="100%" height="306px" alignItems="center" bg="#F8F8F8" mt={4}>
           <Text fontSize="22px" fontWeight="bold" mt="60px">
             친구들과 공유해 보세요
           </Text>
@@ -120,6 +129,7 @@ const Result = ({ metaImageUrl }: { metaImageUrl: string }) => {
     </Flex>
   );
 };
+
 export async function getServerSideProps(context: NextPageContext) {
   const {
     query: { id },

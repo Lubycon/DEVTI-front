@@ -10,11 +10,14 @@ import Navigation from '~molecules/Navigation';
 import QuestionForm from '~organisms/Question';
 
 const TOTAL_STEP = 20;
+const LAST_STEP = 3;
 
 const Question = () => {
+  const [totalStep, setTotalStep] = useState(TOTAL_STEP);
+
   const [innerHeight, setInnerHeight] = useState(0);
 
-  const { renderProgressBar, handleIncreaseGage, resetGage } = useProgressBar({ totalCount: TOTAL_STEP, minCount: 0 });
+  const { renderProgressBar, handleIncreaseGage, resetGage } = useProgressBar({ totalCount: totalStep, minCount: 0 });
 
   const { ref, handleExecuteScroll } = useScrollTo(undefined, { top: innerHeight });
 
@@ -22,10 +25,6 @@ const Question = () => {
     unit: 1,
     number: 0,
   });
-
-  const handleScrollTo = () => {
-    handleExecuteScroll();
-  };
 
   const handleProceedStep = () => {
     setStep({
@@ -35,7 +34,10 @@ const Question = () => {
   };
 
   const finishedStep = () => {
-    if (TOTAL_STEP === step.number) {
+    if (step.unit === LAST_STEP) {
+      setTotalStep(2);
+    }
+    if (totalStep === step.number && step.unit !== LAST_STEP) {
       resetGage();
       setStep({
         unit: step.unit + 1,
@@ -52,6 +54,15 @@ const Question = () => {
     finishedStep();
   }, [step]);
 
+  useEffect(() => {
+    const appHeight = () => {
+      const doc = document.documentElement;
+      doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+    };
+    window.addEventListener('resize', appHeight);
+    appHeight();
+  }, []);
+
   return (
     <Box variant="snapScroll" ref={ref}>
       <Navigation>
@@ -61,14 +72,14 @@ const Question = () => {
               DEVTI
             </Heading>
             <Text fontSize={12} fontWeight={400}>
-              {`${step.number} / ${TOTAL_STEP}`}
+              {`${step.number} / ${totalStep}`}
             </Text>
           </Flex>
           {renderProgressBar()}
         </Flex>
       </Navigation>
       <QuestionForm
-        handleScrollTo={handleScrollTo}
+        handleScrollTo={handleExecuteScroll}
         handleProceedStep={handleProceedStep}
         handleIncreaseGage={handleIncreaseGage}
       />
