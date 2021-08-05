@@ -15,7 +15,6 @@ const Result = ({ metaImageUrl }: { metaImageUrl: string }) => {
   useEffect(() => {
     setHref(window.location.href);
   }, []);
-  console.log('metaImageUrl', metaImageUrl);
 
   return (
     <Flex>
