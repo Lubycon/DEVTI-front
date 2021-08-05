@@ -14,6 +14,6 @@ jobs:
         uses: Lubycon/github-reviewer-slack-noti-action@v1.6.0
         with:
           mattermost-webhook: ${{ secrets.MATTERMOST_HOOK }}
-          slack-bot-token: ${{ secrets.LUBYCON_SLACK_BOT_TOKEN }}
+          slack-bot-token: ${{ secrets.MATTERMOST_HOOK }}
           github-token: ${{ secrets.LUBYCON_GITHUB_TOKEN }}
           channel-id: C01SSJ6HGTH
