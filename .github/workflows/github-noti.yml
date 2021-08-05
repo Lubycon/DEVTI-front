@@ -13,5 +13,5 @@ jobs:
       - name: Fire Notification
         uses: Lubycon/github-reviewer-slack-noti-action@v2.0.1
         with:
-          mattermost-webhook: ${{ secrets.MATTERMOST_HOOK }}
+          mattermost-webhook: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
           github-token: ${{ secrets.LUBYCON_GITHUB_TOKEN }}
