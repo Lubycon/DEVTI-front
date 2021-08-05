@@ -1,3 +1,3 @@
-const convertDecimalToPersent = (decimal: number) => `${decimal * 100}%`;
+const convertDecimalToPercent = (decimal: number) => `${decimal * 100}%`;
 
-export default convertDecimalToPersent;
+export default convertDecimalToPercent;

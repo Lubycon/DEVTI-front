@@ -148,8 +148,8 @@ const variants = {
     backgroundColor: 'blue.0',
   },
   snapScroll: {
-    overflow: 'scroll',
-    height: '100vh',
+    overflowY: 'scroll',
+    height: 'var(--app-height)',
     scrollSnapPointsY: 'repeat(100vh)',
     scrollSnapType: 'y mandatory',
   },

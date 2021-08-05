@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
-import { Flex } from 'rebass';
+import { Flex, FlexProps } from 'rebass';
 
-interface NavigationProps {
+interface NavigationProps extends FlexProps {
   children: React.ReactNode;
 }
 
-const Navigation = ({ children }: NavigationProps) => {
+const Navigation = ({ children, ...props }: NavigationProps) => {
   const ref = useRef<HTMLElement>();
 
   const handleScroll = () => {
@@ -34,7 +34,7 @@ const Navigation = ({ children }: NavigationProps) => {
   }, []);
 
   return (
-    <Flex ref={ref} as="nav" variant="navigation">
+    <Flex ref={ref} as="nav" variant="navigation" {...props}>
       {children}
     </Flex>
   );
