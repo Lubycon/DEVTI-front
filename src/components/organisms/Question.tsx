@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Flex, Text } from 'rebass';
 
-import useFetchAllQuestion from '~hooks/api/useFetchQuestion';
+import useFetchQuestion from '~hooks/api/useFetchQuestion';
 import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
 import useModal from '~hooks/useModal';
 import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
@@ -21,7 +21,7 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
 
   const { push } = useRouter();
 
-  const { data: questions, isError } = useFetchAllQuestion();
+  const { data: questions, isError } = useFetchQuestion();
 
   const { mutateQuestionResult } = usePostQuestionResult();
   const { handleOpen, renderModal } = useModal({
@@ -54,8 +54,10 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
     setAnswers(updateAnswers);
   };
 
+  const isFinishedSummary = () => answers.length === questions?.length;
+
   useEffect(() => {
-    if (answers.length === questions?.length) {
+    if (isFinishedSummary()) {
       mutateQuestionResult(answers);
       push('/result/fcpw');
       return;
@@ -72,7 +74,7 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
       {renderModal()}
       {questions
         ?.filter((_, i) => i < answers.length + 1)
-        .map(({ title, id, presets, answerType }, i) => (
+        .map(({ title, id, presetList: presets, answerType }, i) => (
           <Flex variant="question" key={id}>
             <Text fontSize={12} color="gray.5" mb={1}>
               Q{i + 1}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Flex, Image } from 'rebass';
+import { Box, Button, Flex, Image, Text } from 'rebass';
 
 import Circle from '~atoms/Circle';
 import { AnswerType, OmitAnswerInId, PresetModel } from '~models/Question';
@@ -39,10 +39,12 @@ const Preset = ({ presets, onAnswerClick }: PresetProps) => {
           }}
         >
           <Flex variant="horizontalCentralCenter" justifyContent="space-between">
-            {label}
-            <Circle bg={isActives[i] ? 'primary' : 'gray.3'} width="24px">
-              <Image src={check} width="12px" />
-            </Circle>
+            <Text width="90%">{label}</Text>
+            <Box>
+              <Circle bg={isActives[i] ? 'primary' : 'gray.3'} width="24px">
+                <Image src={check} width="12px" />
+              </Circle>
+            </Box>
           </Flex>
         </Button>
       ))}

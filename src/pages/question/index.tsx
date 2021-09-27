@@ -1,9 +1,10 @@
+import questions from 'queryKeys/questions';
 import { useEffect, useState } from 'react';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import { Box, Flex, Heading, Text } from 'rebass';
 
-import { fetchAllQuestion, fetchQuestionKey } from '~hooks/api/useFetchQuestion';
+import { fetchQuestion } from '~hooks/api/useFetchQuestion';
 import useProgressBar from '~hooks/useProgressBar';
 import useScrollTo from '~hooks/useScrollTo';
 import Navigation from '~molecules/Navigation';
@@ -54,6 +55,7 @@ const Question = () => {
 
   return (
     <Box variant="snapScroll" ref={ref}>
+      {undefined}
       <Navigation>
         <Flex flex={1} flexDirection="column">
           <Flex flex={1} mb={3} justifyContent="space-between" alignItems="center">
@@ -78,7 +80,7 @@ const Question = () => {
 
 export async function getStaticProps() {
   const queryCache = new QueryClient();
-  await queryCache.prefetchQuery(fetchQuestionKey, fetchAllQuestion);
+  await queryCache.prefetchQuery(questions.all, fetchQuestion);
 
   return {
     props: { dehydratedState: dehydrate(queryCache) },

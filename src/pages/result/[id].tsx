@@ -1,5 +1,6 @@
 import { NextPageContext } from 'next';
 import Head from 'next/head';
+import results from 'queryKeys/results';
 import React, { useEffect, useState } from 'react';
 import { Flex, Heading, Image, Text, Button } from 'rebass';
 

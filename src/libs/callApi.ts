@@ -1,16 +1,22 @@
-import axios from 'axios';
+interface Request extends Omit<RequestInit, 'body'> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body?: any;
+}
 
-import makeUrlOptions, { Config } from './makeUrlOptions';
-
-const callApi = async <T>(config: Config) => {
-  const apiOption = makeUrlOptions(config);
-
-  const { data } = await axios.request<T>({
-    ...apiOption,
-  });
-
-  // NOTE: error handling
-  return data;
+const callApi = async (url: string, requestInit: Request) => {
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      ...requestInit,
+      ...(requestInit?.body && { body: JSON.stringify(requestInit.body) }),
+    });
+    const result = await response.json();
+    return result;
+  } catch {
+    throw 'API ERROR';
+  }
 };
 
 export default callApi;

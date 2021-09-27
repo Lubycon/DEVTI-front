@@ -62,26 +62,26 @@ const Index = () => {
   );
 };
 
-export async function getServerSideProps(context: NextPageContext) {
-  const {
-    req,
-    query: { source, utm_source: utmSourceType },
-  } = context;
+// export async function getServerSideProps(context: NextPageContext) {
+//   const {
+//     req,
+//     query: { source, utm_source: utmSourceType },
+//   } = context;
 
-  const isMobile = isMobileDetect(req);
-  const entryPoint = (source as string) ?? 'COMMON_ENTRY_POINT';
-  const utmSource = (utmSourceType as string) ?? 'empty';
-  const eventType = 'CLICK_SHARE_BUTTON';
+//   const isMobile = isMobileDetect(req);
+//   const entryPoint = (source as string) ?? 'COMMON_ENTRY_POINT';
+//   const utmSource = (utmSourceType as string) ?? 'empty';
+//   const eventType = 'CLICK_SHARE_BUTTON';
 
-  const queryCache = new QueryClient();
-  await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
-  await queryCache.prefetchQuery('sharedCount', () => getSharedCount({ eventType }));
-  queryCache.setQueryData('utmSource', utmSource);
-  queryCache.setQueryData('isMobile', isMobile);
+//   const queryCache = new QueryClient();
+//   await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
+//   await queryCache.prefetchQuery('sharedCount', () => getSharedCount({ eventType }));
+//   queryCache.setQueryData('utmSource', utmSource);
+//   queryCache.setQueryData('isMobile', isMobile);
 
-  return {
-    props: { dehydratedState: dehydrate(queryCache) },
-  };
-}
+//   return {
+//     props: { dehydratedState: dehydrate(queryCache) },
+//   };
+// }
 
 export default Index;

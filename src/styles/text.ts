@@ -1,7 +1,7 @@
 const text = {
   default: {
     fontWeight: 'normal',
-    whiteSpace: 'pre-wrap',
+    // whiteSpace: 'pre-wrap',
   },
   primary: {
     variant: 'text.default',

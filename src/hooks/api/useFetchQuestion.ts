@@ -1,19 +1,24 @@
+import questions from 'queryKeys/questions';
 import { useQuery } from 'react-query';
 
+import apiMap from '~libs/apiMap';
 import callApi from '~libs/callApi';
 import { Question } from '~models/Question';
 
-export const fetchQuestionKey = 'questions';
+export const fetchQuestion = async () => {
+  const {
+    fetchQuestion: { url, method },
+  } = apiMap;
 
-export const fetchAllQuestion = () => callApi<Question[]>({ key: 'getAllQuestion', data: {} });
+  return callApi(url, { method });
+};
 
-const useFetchAllQuestion = () => {
-  const { data, isError } = useQuery<Question[]>(fetchQuestionKey, fetchAllQuestion);
-
+const useFetchQuestion = () => {
+  const { data, isError } = useQuery<Question[]>(questions.all, fetchQuestion);
   return {
     data,
     isError,
   };
 };
 
-export default useFetchAllQuestion;
+export default useFetchQuestion;

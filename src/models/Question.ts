@@ -2,7 +2,7 @@ export interface Question {
   id: number;
   title: string;
   answerType: AnswerType;
-  presets: Preset[];
+  presetList: Preset[];
 }
 
 export enum AnswerType {
@@ -51,5 +51,5 @@ export interface QuestionModel {
   id: number;
   title: string;
   answerType: AnswerType;
-  presets: PresetModel[];
+  preset: PresetModel[];
 }
