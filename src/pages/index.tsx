@@ -1,13 +1,8 @@
-import { NextPageContext } from 'next';
-import { QueryClient, useQuery } from 'react-query';
-import { dehydrate } from 'react-query/hydration';
+import { useQuery } from 'react-query';
 import { Button, Flex, Text } from 'rebass';
 
-import { getSharedCount } from '~hooks/api/useGetSharedCount';
 import usePostEventLog from '~hooks/api/usePostEventLog';
 import useScrollTo from '~hooks/useScrollTo';
-import callApi from '~libs/callApi';
-import isMobileDetect from '~libs/server/isMobileDetect';
 import Navigation from '~molecules/Navigation';
 import FormSection from '~organisms/Home/FormSection';
 import InformationSection from '~organisms/Home/InformationSection';

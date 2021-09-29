@@ -1,14 +1,12 @@
 import { RequestData } from '@types';
 import { useMutation, useQuery } from 'react-query';
 
-import callApi from '~libs/callApi';
-
 interface EventLog {
   eventType: string;
   testType: string;
 }
 
-export const postEventLog = (data: RequestData<EventLog>) => callApi({ key: 'postEventLog', data });
+export const postEventLog = (data: RequestData<EventLog>) => new Promise((resolve) => resolve(data));
 const usePostEventLog = () => {
   const { data } = useQuery<{ testType: string }>('source');
 

@@ -1,6 +1,5 @@
 import { NextPageContext } from 'next';
 import Head from 'next/head';
-import results from 'queryKeys/results';
 import React, { useEffect, useState } from 'react';
 import { Flex, Heading, Image, Text, Button } from 'rebass';
 
@@ -10,13 +9,11 @@ import Navigation from '~molecules/Navigation';
 import PillerGage from '~molecules/PillerGage';
 
 const Result = ({ metaImageUrl }: { metaImageUrl: string }) => {
-  // const result = useQuery('result');
   const [href, setHref] = useState('');
 
   useEffect(() => {
     setHref(window.location.href);
   }, []);
-  console.log('metaImageUrl', metaImageUrl);
 
   return (
     <Flex>

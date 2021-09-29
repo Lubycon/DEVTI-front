@@ -1,8 +1,6 @@
 import { RequestData } from '@types';
 import { useMutation } from 'react-query';
 
-import callApi from '~libs/callApi';
-
 interface SignUpCommon {
   comment: string;
   surveyType: string;
@@ -18,7 +16,10 @@ interface SignUpWithEmail extends SignUpCommon {
 export type SignUp = SignUpWithPhone | SignUpWithEmail;
 
 const useBetaSignUp = () => {
-  const submit = (data: RequestData<SignUp>) => callApi({ key: 'betaSignUp', data });
+  const submit = (data: RequestData<SignUp>) =>
+    new Promise((resolve) => {
+      resolve(data);
+    });
 
   const { mutateAsync: mutateBetaSignUp } = useMutation(submit, {
     onError: () => {
