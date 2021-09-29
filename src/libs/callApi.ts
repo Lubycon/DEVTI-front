@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface Request extends Omit<RequestInit, 'body'> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   body?: any;
 }
 
-const callApi = async (url: string, requestInit: Request) => {
+const callApi = async <T = any>(url: string, requestInit: Request) => {
   try {
     const response = await fetch(url, {
       headers: {
@@ -13,9 +13,10 @@ const callApi = async (url: string, requestInit: Request) => {
       ...(requestInit?.body && { body: JSON.stringify(requestInit.body) }),
     });
     const result = await response.json();
-    return result;
+
+    return result as T;
   } catch {
-    throw 'API ERROR';
+    throw `API ERROR: ${url}`;
   }
 };
 
