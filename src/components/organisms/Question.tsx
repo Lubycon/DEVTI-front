@@ -57,11 +57,16 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
   const isFinishedSummary = () => answers.length === questions?.length;
 
   useEffect(() => {
-    if (isFinishedSummary()) {
-      mutateQuestionResult(answers);
-      push('/result/fcpw');
-      return;
-    }
+    const fetchResult = async () => {
+      const response = await mutateQuestionResult(answers);
+      const {
+        result: { A, C, L, P },
+      } = response;
+      push(`/results/fcpw?A=${A}&C=${C}&L=${L}&P=${P}`);
+    };
+
+    if (isFinishedSummary()) fetchResult();
+
     handleScrollTo();
   }, [answers]);
 

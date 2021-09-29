@@ -1,16 +1,22 @@
-import axios, { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-import { BASE_URL } from '~libs/apiMap';
-import { Result } from '~models/DEVTI';
-import { AnswerModel } from '~models/Question';
+import apiMap from '~libs/apiMap';
+import callApi from '~libs/callApi';
+import { AnswerModel, QuestionResult } from '~models/Question';
 
-export const postQuestionResult = (data: AnswerModel[]) => axios.post<AxiosResponse<Result>>(`${BASE_URL}/devti`, data);
+export const postQuestionResult = async (data: AnswerModel[]) => {
+  const { postQuestion } = apiMap;
+  const { url, method } = postQuestion;
+  return callApi<QuestionResult>(url, {
+    method,
+    body: data,
+  });
+};
 
 const usePostQuestionResult = () => {
   const queryClient = useQueryClient();
   const { mutateAsync: mutateQuestionResult } = useMutation((answers: AnswerModel[]) => postQuestionResult(answers), {
-    onSuccess: ({ data }) => {
+    onSuccess: (data) => {
       queryClient.setQueryData('result', data);
     },
   });

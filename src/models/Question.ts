@@ -53,3 +53,8 @@ export interface QuestionModel {
   answerType: AnswerType;
   preset: PresetModel[];
 }
+
+export interface QuestionResult {
+  job: string;
+  result: { [key: string]: string };
+}
