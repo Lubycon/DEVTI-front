@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import { Flex, Heading, Image, Text, Button } from 'rebass';
 
+import useQueryParam from '~hooks/useQueryParam';
 import doCopy from '~libs/doCopy';
 import { DEVTISourceType, DEVTIType } from '~models/DEVTI';
 import Navigation from '~molecules/Navigation';
@@ -11,7 +12,10 @@ import PillerGage from '~molecules/PillerGage';
 const Result = ({ metaImageUrl }: { metaImageUrl: string }) => {
   const [href, setHref] = useState('');
 
+  const { query } = useQueryParam();
   useEffect(() => {
+    console.log(query);
+
     setHref(window.location.href);
   }, []);
 

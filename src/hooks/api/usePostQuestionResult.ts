@@ -1,3 +1,4 @@
+import questionKeys from 'queryKeys/questions';
 import { useMutation, useQueryClient } from 'react-query';
 
 import apiMap from '~libs/apiMap';
@@ -17,7 +18,7 @@ const usePostQuestionResult = () => {
   const queryClient = useQueryClient();
   const { mutateAsync: mutateQuestionResult } = useMutation((answers: AnswerModel[]) => postQuestionResult(answers), {
     onSuccess: (data) => {
-      queryClient.setQueryData('result', data);
+      queryClient.setQueryData(questionKeys.result(), data);
     },
   });
 

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Flex, Text } from 'rebass';
 
 import useFetchQuestion from '~hooks/api/useFetchQuestion';
+import useFetchQuestionResult from '~hooks/api/useFetchQuestionResult';
 import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
 import useModal from '~hooks/useModal';
 import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
@@ -24,6 +25,9 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
   const { data: questions, isError } = useFetchQuestion();
 
   const { mutateQuestionResult } = usePostQuestionResult();
+
+  const { loadQuestionResult } = useFetchQuestionResult();
+
   const { handleOpen, renderModal } = useModal({
     children: (
       <ConfirmModal confirmText="확인">
@@ -56,17 +60,30 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
 
   const isFinishedSummary = () => answers.length === questions?.length;
 
+  const routeResultPage = (queryParams: string) => {
+    const uri = `/result/${queryParams}`;
+    push(uri);
+  };
+
+  const requestQuestionResult = async () => {
+    const { result, job } = await mutateQuestionResult(answers);
+    const { A, C, L, P, S, T, V, W } = result;
+
+    const queryParams = `A=${A}&C=${C}&L=${L}&P=${P}&S=${S}&T=${T}&V=${V}&W=${W}&job=${job}`;
+
+    loadQuestionResult(queryParams, {
+      onSuccess: (response) => {
+        console.log(response);
+      },
+    });
+    routeResultPage(`fcpw/${queryParams}`);
+  };
+
   useEffect(() => {
-    const fetchResult = async () => {
-      const response = await mutateQuestionResult(answers);
-      const {
-        result: { A, C, L, P },
-      } = response;
-      push(`/results/fcpw?A=${A}&C=${C}&L=${L}&P=${P}`);
-    };
-
-    if (isFinishedSummary()) fetchResult();
-
+    if (isFinishedSummary()) {
+      requestQuestionResult();
+      return;
+    }
     handleScrollTo();
   }, [answers]);
 
