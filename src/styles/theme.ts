@@ -3,6 +3,7 @@ import forms from './forms';
 import text from './text';
 import variants from './variants';
 
+// @deprecated use below colors
 const theme = {
   colors: {
     white: '#ffffff',
@@ -26,15 +27,29 @@ const theme = {
   forms,
 };
 
-export const themeV2 = {
-  color: {
-    grey100: '#EFEFEF',
-    grey200: '#BBBBBB',
-    grey300: '#454545',
-    // g3: '#3A3D3F',
-    // g3: '#353C40',
-    grey800: '#121517',
-  },
+const greyColors = {
+  grey100: '#EFEFEF',
+  grey200: '#BBBBBB',
+  grey300: '#454545',
+  // g3: '#3A3D3F',
+  // g3: '#353C40',
+  grey800: '#121517',
+};
+
+export const colors = {
+  ...greyColors,
+  background: greyColors.grey800,
+  fontDefault: greyColors.grey200,
+};
+
+export const fontSize = {
+  t1: 24,
+  t2: 18,
+  t3: 15,
+};
+
+export const margin = {
+  default: '24px',
 };
 
 export default theme;

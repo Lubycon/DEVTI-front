@@ -8,7 +8,7 @@ const GlobalStyle = () => (
       ${emotionReset}
       html,
       body {
-        line-height: 1.1;
+        line-height: 1.5;
         font-family: 'Spoqa Han Sans Neo', 'sans-serif', 'apple SD gothic Neo', monospace;
         *:focus {
           outline: none;
