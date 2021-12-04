@@ -24,6 +24,7 @@ module.exports = {
     'react/prop-types': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-throw-literal': 0,
+    '@typescript-eslint/no-use-before-define': "off",
     'react/require-default-props': 0,
     'react/react-in-jsx-scope': 0,
     'jsx-a11y/anchor-is-valid': 0,
