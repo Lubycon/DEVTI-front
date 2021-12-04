@@ -5,6 +5,7 @@ import { Box, Flex, Text } from 'rebass';
 import useFetchQuestion from '~hooks/api/useFetchQuestion';
 import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
 import useModal from '~hooks/useModal';
+import stringifyQueryParams from '~libs/stringifyQueryParams';
 import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
 import ConfirmModal from '~molecules/ConfirmModal';
 import Multiple from '~molecules/MultipleAnswer';
@@ -59,10 +60,11 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
   useEffect(() => {
     const fetchResult = async () => {
       const response = await mutateQuestionResult(answers);
-      const {
-        result: { A, C, L, P },
-      } = response;
-      push(`/result/fcpw?A=${A}&C=${C}&L=${L}&P=${P}`);
+      const { result } = response;
+
+      const query = stringifyQueryParams(result);
+
+      push(`/result/fcpw${query}`);
     };
 
     if (isFinishedSummary()) fetchResult();
