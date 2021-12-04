@@ -1,3 +1,4 @@
+import AdCarousel from 'components/AdCarousel';
 import List from 'components/List';
 import Margin from 'components/Margin';
 import PillarAnalysis from 'components/PillarAnalysis';
@@ -6,6 +7,7 @@ import { Flex } from 'rebass';
 import { colors, fontSize, margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
+import convertNewLineToJSX from '~utils/convertNewLineToJSX';
 
 const DUMMY_DOG_IMG_URL = 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg';
 export interface Analysis {
@@ -80,13 +82,15 @@ const SummarySection = () => (
 );
 
 const ResultSection = () => (
-  <section style={{ background: colors.backgroundHighLight, padding: margin.default }}>
-    <div style={{ paddingBottom: 32 }}>
-      <Txt typography="t1" fontWeight={700} style={{ textAlign: 'center', paddingBottom: 20 }}>
-        분석 결과
-      </Txt>
-      <Divider />
-    </div>
+  <section style={{ background: colors.backgroundHighLight, paddingTop: margin.default }}>
+    <Margin>
+      <div style={{ paddingBottom: 32 }}>
+        <Txt typography="t1" fontWeight={700} style={{ textAlign: 'center', paddingBottom: 20 }}>
+          분석 결과
+        </Txt>
+        <Divider />
+      </div>
+    </Margin>
     <PillarAnalysis
       title="당신의 개발강점"
       highLightColor={colors.red}
@@ -103,6 +107,7 @@ const ResultSection = () => (
       summary={DATA.pillars.pt.title}
       analysisList={DATA.pillars.pt.analysisList}
     />
+    <AdSection title={`시각화 + 프로덕트 성향 개발자인\n당신에게 추천하는 강의예요 📚`} />
     <PillarAnalysis
       title="당신과 어울리는 회사"
       highLightColor={colors.blue}
@@ -110,6 +115,7 @@ const ResultSection = () => (
       percentageFromLeft={DATA.pillars.sc.percentageFromLeft}
       summary={DATA.pillars.sc.title}
       analysisList={DATA.pillars.sc.analysisList}
+      style={{ paddingTop: 45 }}
     />
     <PillarAnalysis
       title="당신이 추구하는 워라밸"
@@ -119,6 +125,18 @@ const ResultSection = () => (
       summary={DATA.pillars.lc.title}
       analysisList={DATA.pillars.lc.analysisList}
     />
+    <AdSection title={`스타트업과 어울리는 당신,\n당신같은 인재를 기다리는 회사예요 ☕️`} />
+  </section>
+);
+
+const AdSection = ({ title }: { title: string }) => (
+  <section style={{ background: colors.backgroundLight }}>
+    <Margin style={{ padding: '32px 0 24px' }}>
+      <Txt typography="t2" fontWeight={700} color={colors.grey100} style={{ marginBottom: 24 }}>
+        {convertNewLineToJSX(title)}
+      </Txt>
+      <AdCarousel />
+    </Margin>
   </section>
 );
 
