@@ -26,4 +26,15 @@ const theme = {
   forms,
 };
 
+export const themeV2 = {
+  color: {
+    grey100: '#EFEFEF',
+    grey200: '#BBBBBB',
+    grey300: '#454545',
+    // g3: '#3A3D3F',
+    // g3: '#353C40',
+    grey800: '#121517',
+  },
+};
+
 export default theme;

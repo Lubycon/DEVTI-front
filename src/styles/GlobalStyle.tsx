@@ -13,6 +13,9 @@ const GlobalStyle = () => (
         *:focus {
           outline: none;
         }
+        * {
+          box-sizing: border-box;
+        }
       }
     `}
   />
