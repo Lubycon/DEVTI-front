@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { Flex, Text } from 'rebass';
+import { Box, Flex, Text } from 'rebass';
 
 import useFetchQuestion from '~hooks/api/useFetchQuestion';
 import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
@@ -62,7 +62,7 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
       const {
         result: { A, C, L, P },
       } = response;
-      push(`/results/fcpw?A=${A}&C=${C}&L=${L}&P=${P}`);
+      push(`/result/fcpw?A=${A}&C=${C}&L=${L}&P=${P}`);
     };
 
     if (isFinishedSummary()) fetchResult();
@@ -75,7 +75,7 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
   }, [isError]);
 
   return (
-    <>
+    <Box variant="form">
       {renderModal()}
       {questions
         ?.filter((_, i) => i < answers.length + 1)
@@ -94,7 +94,7 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
             </Flex>
           </Flex>
         ))}
-    </>
+    </Box>
   );
 };
 

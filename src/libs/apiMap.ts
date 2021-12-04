@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://52.78.185.130:8090';
+export const BASE_URL = 'http://13.209.10.232:8090';
 
 const apiMap = {
   fetchQuestion: {

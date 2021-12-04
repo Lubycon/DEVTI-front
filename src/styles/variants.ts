@@ -128,7 +128,12 @@ const variants = {
     backgroundColor: 'primary',
     transition: '0.5s',
   },
-
+  form: {
+    px: 140,
+    '@media screen and (max-width: 64em)': {
+      px: 0,
+    },
+  },
   question: {
     variant: 'variants.verticalCentralCenter',
     height: '100vh',

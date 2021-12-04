@@ -67,7 +67,6 @@ const Question = () => {
 
   return (
     <Box variant="snapScroll" ref={ref}>
-      {undefined}
       <Navigation>
         <Flex flex={1} flexDirection="column">
           <Flex flex={1} mb={3} justifyContent="space-between" alignItems="center">
