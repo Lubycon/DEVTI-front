@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import React, { Component, CSSProperties } from 'react';
-import { colors, margin } from 'styles/theme';
+import React, { CSSProperties } from 'react';
+import { colors } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
 
