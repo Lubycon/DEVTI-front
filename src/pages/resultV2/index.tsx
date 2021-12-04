@@ -1,8 +1,9 @@
 import List from 'components/List';
+import Margin from 'components/Margin';
 import PillarAnalysis from 'components/PillarAnalysis';
 import React from 'react';
 import { Flex } from 'rebass';
-import { colors, fontSize } from 'styles/theme';
+import { colors, fontSize, margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
 
@@ -42,8 +43,8 @@ const Index = () => (
 );
 
 const SummarySection = () => (
-  <section>
-    <Flex flexDirection="column" alignItems="center" style={{ paddingTop: 64 }}>
+  <section style={{ padding: '64px 0 40px' }}>
+    <Flex flexDirection="column" alignItems="center">
       {/* TODO: as prop 추가해서 H1으로 만들기 */}
       <Txt typography="t1" fontWeight={700} style={{ marginBottom: 8 }}>
         {DATA.title}
@@ -51,22 +52,29 @@ const SummarySection = () => (
       <Txt typography="t2">{DATA.summary}</Txt>
     </Flex>
     <img src={DATA.mainImage.url} alt="내 성향이 모두 들어가 있는 아바타" style={{ width: '100%', padding: 24 }} />
-    <List>
-      {DATA.summaryList.map((summary) => (
-        <List.Row key={summary.emoji} left={summary.emoji}>
-          {summary.text}
-        </List.Row>
-      ))}
-    </List>
+    <Margin>
+      <List>
+        {DATA.summaryList.map((summary) => (
+          <List.Row key={summary.emoji} left={summary.emoji}>
+            {summary.text}
+          </List.Row>
+        ))}
+      </List>
+    </Margin>
   </section>
 );
 
 const ResultSection = () => (
-  <section>
-    <Txt>분석 결과</Txt>
-    <hr />
+  <section style={{ background: colors.backgroundHighLight, padding: margin.default }}>
+    <div style={{ paddingBottom: 32 }}>
+      <Txt typography="t1" fontWeight={700} style={{ textAlign: 'center', paddingBottom: 20 }}>
+        분석 결과
+      </Txt>
+      <Divider />
+    </div>
     <PillarAnalysis
       title="당신의 개발강점"
+      highLightColor={colors.red}
       bias={{ left: '프로덕트', right: '테크' }}
       percentageFromLeft={DATA.pillars.vf.percentageFromLeft}
       summary={DATA.pillars.vf.title}
@@ -74,5 +82,7 @@ const ResultSection = () => (
     />
   </section>
 );
+
+const Divider = () => <div style={{ borderTop: `1px solid ${colors.grey400}` }} />;
 
 export default Index;

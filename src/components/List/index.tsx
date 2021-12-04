@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import { colors, margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
@@ -11,20 +11,40 @@ interface CompositionMembers {
 interface ListProps {
   children: React.ReactNode;
   title?: string;
+  highLightColor?: string;
+  style?: CSSProperties;
 }
 
-const List: React.FC<ListProps> & CompositionMembers = ({ title, children }) => (
-  <ListWrapper>
-    <Txt>{title}</Txt>
-    <Ul>{children}</Ul>
-  </ListWrapper>
-);
+const List: React.FC<ListProps> & CompositionMembers = ({ title, children, highLightColor, style }) => {
+  if (title !== undefined) {
+    return (
+      <ListWrapper style={style}>
+        <Txt typography="t2" fontWeight={700}>
+          <Txt display="inline" color={highLightColor ?? 'inherit'}>
+            {title}
+          </Txt>
+          <Txt display="inline" style={{ marginLeft: 3 }}>
+            &#123; {/* 여는 중괄호 유니코드 */}
+          </Txt>
+        </Txt>
+        <Ul>{children}</Ul>
+        <Txt typography="t2" fontWeight={700}>
+          &#125;&#59; {/* 닫는 중괄호, 세미콜론 유니코드 */}
+        </Txt>
+      </ListWrapper>
+    );
+  }
+  return (
+    <ListWrapper>
+      <Ul>{children}</Ul>
+    </ListWrapper>
+  );
+};
 
-const ListWrapper = styled.div`
-  padding: 0 ${margin.default};
-`;
+const ListWrapper = styled.div``;
+
 const Ul = styled.ul`
-  border-left: 1px solid ${colors.grey300};
+  border-left: 1px solid ${colors.grey400};
   padding-left: 17px;
 `;
 
