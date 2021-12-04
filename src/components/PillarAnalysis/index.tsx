@@ -8,7 +8,7 @@ import { margin } from 'styles/theme';
 import Txt from '~atoms/Txt';
 
 interface Props {
-  title: '당신의 개발강점';
+  title: string;
   bias: { left: string; right: string };
   percentageFromLeft: number;
   summary: string;
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const PillarAnalysis = ({ title, bias, percentageFromLeft, summary, analysisList, highLightColor }: Props) => (
-  <article>
+  <article style={{ marginBottom: 24 }}>
     <Flex justifyContent="space-between" style={{ marginBottom: 8 }}>
       <Txt>{bias.left}</Txt>
       <Txt color={highLightColor} fontWeight={700}>

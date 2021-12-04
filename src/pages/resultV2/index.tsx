@@ -31,6 +31,21 @@ const DATA = {
       percentageFromLeft: 60,
       analysisList: DUMMY_ANALYSIS_LIST,
     },
+    pt: {
+      title: '제품이 우선! 🙉',
+      percentageFromLeft: 60,
+      analysisList: DUMMY_ANALYSIS_LIST,
+    },
+    sc: {
+      title: '중견 스타트업 🔧',
+      percentageFromLeft: 60,
+      analysisList: DUMMY_ANALYSIS_LIST,
+    },
+    lc: {
+      title: '라이프 중시 성향 🎾',
+      percentageFromLeft: 60,
+      analysisList: DUMMY_ANALYSIS_LIST,
+    },
   },
 };
 
@@ -75,10 +90,34 @@ const ResultSection = () => (
     <PillarAnalysis
       title="당신의 개발강점"
       highLightColor={colors.red}
-      bias={{ left: '프로덕트', right: '테크' }}
+      bias={{ left: '시각화', right: '설계' }}
       percentageFromLeft={DATA.pillars.vf.percentageFromLeft}
       summary={DATA.pillars.vf.title}
       analysisList={DATA.pillars.vf.analysisList}
+    />
+    <PillarAnalysis
+      title="당신이 중시하는 가치"
+      highLightColor={colors.yellow}
+      bias={{ left: '프로덕트', right: '테크' }}
+      percentageFromLeft={DATA.pillars.pt.percentageFromLeft}
+      summary={DATA.pillars.pt.title}
+      analysisList={DATA.pillars.pt.analysisList}
+    />
+    <PillarAnalysis
+      title="당신과 어울리는 회사"
+      highLightColor={colors.blue}
+      bias={{ left: '스타트업', right: 'IT대기업' }}
+      percentageFromLeft={DATA.pillars.sc.percentageFromLeft}
+      summary={DATA.pillars.sc.title}
+      analysisList={DATA.pillars.sc.analysisList}
+    />
+    <PillarAnalysis
+      title="당신이 추구하는 워라밸"
+      highLightColor={colors.green}
+      bias={{ left: '라이프', right: '커리어' }}
+      percentageFromLeft={DATA.pillars.lc.percentageFromLeft}
+      summary={DATA.pillars.lc.title}
+      analysisList={DATA.pillars.lc.analysisList}
     />
   </section>
 );

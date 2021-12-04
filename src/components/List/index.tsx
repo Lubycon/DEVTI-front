@@ -19,7 +19,7 @@ const List: React.FC<ListProps> & CompositionMembers = ({ title, children, highL
   if (title !== undefined) {
     return (
       <ListWrapper style={style}>
-        <Txt typography="t2" fontWeight={700}>
+        <Txt typography="t2" fontWeight={700} style={{ marginBottom: 20 }}>
           <Txt display="inline" color={highLightColor ?? 'inherit'}>
             {title}
           </Txt>
