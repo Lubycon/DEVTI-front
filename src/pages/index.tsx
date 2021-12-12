@@ -1,14 +1,6 @@
 import { useQuery } from 'react-query';
-import { Button, Flex, Text } from 'rebass';
+import { Flex } from 'rebass';
 
-import usePostEventLog from '~hooks/api/usePostEventLog';
-import useScrollTo from '~hooks/useScrollTo';
-import Navigation from '~molecules/Navigation';
-import FormSection from '~organisms/Home/FormSection';
-import InformationSection from '~organisms/Home/InformationSection';
-import MainSection from '~organisms/Home/MainSection';
-import PreviewSection from '~organisms/Home/PreviewSection';
-import ShareSection from '~organisms/Home/ShareSection';
 import { sendAmplitudeData, useInitAmplitude } from '~utils/amplitude';
 
 const Index = () => {
@@ -23,60 +15,7 @@ const Index = () => {
     },
   });
 
-  const { handleExecuteScroll } = useScrollTo('test');
-
-  const { mutateEventLog } = usePostEventLog();
-
-  const handleClick = () => {
-    sendAmplitudeData('버튼클릭_검사하기__네비게이션', { source: data?.testType, utmSource });
-    handleExecuteScroll();
-    mutateEventLog('CLICK_CTA_BUTTON');
-  };
-
-  return (
-    <Flex flexDirection="column">
-      <Navigation>
-        <Flex flexDirection="row" alignItems="flex-end">
-          <Text fontWeight={800} fontSize="30px" flex={2} color="primary">
-            DEVTI
-          </Text>
-          <Text fontWeight={800} fontSize={11} color="#789FFE">
-            by EP4
-          </Text>
-        </Flex>
-        <Button variant="primary" fontWeight={700} onClick={handleClick}>
-          검사하기
-        </Button>
-      </Navigation>
-      <MainSection />
-      <PreviewSection />
-      <InformationSection />
-      <FormSection />
-      <ShareSection />
-    </Flex>
-  );
+  return <Flex flexDirection="column"></Flex>;
 };
-
-// export async function getServerSideProps(context: NextPageContext) {
-//   const {
-//     req,
-//     query: { source, utm_source: utmSourceType },
-//   } = context;
-
-//   const isMobile = isMobileDetect(req);
-//   const entryPoint = (source as string) ?? 'COMMON_ENTRY_POINT';
-//   const utmSource = (utmSourceType as string) ?? 'empty';
-//   const eventType = 'CLICK_SHARE_BUTTON';
-
-//   const queryCache = new QueryClient();
-//   await queryCache.prefetchQuery('source', () => callApi({ key: 'getBucketTest', data: { entryPoint } }));
-//   await queryCache.prefetchQuery('sharedCount', () => getSharedCount({ eventType }));
-//   queryCache.setQueryData('utmSource', utmSource);
-//   queryCache.setQueryData('isMobile', isMobile);
-
-//   return {
-//     props: { dehydratedState: dehydrate(queryCache) },
-//   };
-// }
 
 export default Index;
