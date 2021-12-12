@@ -1,6 +1,6 @@
-const questions = {
+const results = {
   all: ['result'] as const,
-  summary: (filter: unknown) => [...questions.all, filter] as const,
+  summary: (filter: unknown) => [...results.all, filter] as const,
 };
 
-export default questions;
+export default results;
