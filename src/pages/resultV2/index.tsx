@@ -4,7 +4,7 @@ import Margin from 'components/Margin';
 import PillarAnalysis from 'components/PillarAnalysis';
 import React from 'react';
 import { Flex } from 'rebass';
-import { colors, fontSize, margin } from 'styles/theme';
+import { colors, margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
 import convertNewLineToJSX from '~utils/convertNewLineToJSX';
@@ -140,5 +140,12 @@ const AdSection = ({ title }: { title: string }) => (
 );
 
 const Divider = () => <div style={{ borderTop: `1px solid ${colors.grey400}` }} />;
+
+export async function getStaticProps() {
+  // TODO: 쿼리파라미터 받아서 결과 페이지 정보 요청
+  return {
+    props: {},
+  };
+}
 
 export default Index;

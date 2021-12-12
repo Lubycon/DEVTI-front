@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://13.209.10.232:8090';
+export const BASE_URL = 'http://stage.devti.kr';
 
 const apiMap = {
   fetchQuestion: {
@@ -10,7 +10,7 @@ const apiMap = {
     method: 'POST',
   },
   getQuestionResult: {
-    url: `${BASE_URL}/results?A=:A&C=:C&job=:job&L=:L&P=:P&S=:S&T=:T&V=:V&W=:W`,
+    url: `${BASE_URL}/results?A=:A&C=:C&L=:L&P=:P&S=:S&T=:T&V=:V&W=:W&job=:job`,
     method: 'GET',
   },
   // getQuestionResult: {

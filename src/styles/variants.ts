@@ -42,7 +42,6 @@ const variants = {
     width: '100%',
     transition: '0.5s',
     zIndex: 999,
-    bg: 'white',
     '@media screen and (max-width: 64em)': {
       px: 3,
       '> button': {

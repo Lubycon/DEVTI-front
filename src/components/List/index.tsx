@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React, { CSSProperties } from 'react';
+import { Box, BoxProps } from 'rebass';
 import { colors } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
@@ -8,17 +9,17 @@ interface CompositionMembers {
   Row: typeof Row;
 }
 
-interface ListProps {
+interface ListProps extends BoxProps {
   children: React.ReactNode;
   title?: string;
   highLightColor?: string;
   style?: CSSProperties;
 }
 
-const List: React.FC<ListProps> & CompositionMembers = ({ title, children, highLightColor, style }) => {
+const List: React.FC<ListProps> & CompositionMembers = ({ title, children, highLightColor, style, ...props }) => {
   if (title !== undefined) {
     return (
-      <ListWrapper style={style}>
+      <ListWrapper {...props} style={style}>
         <Txt typography="t2" fontWeight={700} style={{ marginBottom: 20 }}>
           <Txt display="inline" color={highLightColor ?? 'inherit'}>
             {title}
@@ -41,7 +42,7 @@ const List: React.FC<ListProps> & CompositionMembers = ({ title, children, highL
   );
 };
 
-const ListWrapper = styled.div``;
+const ListWrapper = styled(Box)``;
 
 const Ul = styled.ul`
   border-left: 1px solid ${colors.grey400};

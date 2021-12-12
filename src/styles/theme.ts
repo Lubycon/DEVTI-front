@@ -47,9 +47,10 @@ export const colors = {
   ...greyColors,
   ...highLightColors,
 
-  background: greyColors.grey800,
+  background: greyColors.grey300,
   backgroundHighLight: greyColors.grey300,
   backgroundLight: greyColors.grey400,
+  backgroundDark: greyColors.grey800,
 
   fontDefault: greyColors.grey200,
 };

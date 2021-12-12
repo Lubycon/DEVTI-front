@@ -59,12 +59,11 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
 
   useEffect(() => {
     const fetchResult = async () => {
-      const response = await mutateQuestionResult(answers);
-      const { result } = response;
+      const { result } = await mutateQuestionResult(answers);
 
       const query = stringifyQueryParams(result);
 
-      push(`/result/fcpw${query}`);
+      push(`/resultV2${query}&job=F`);
     };
 
     if (isFinishedSummary()) fetchResult();
