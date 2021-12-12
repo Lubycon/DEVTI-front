@@ -2,6 +2,8 @@ import { Global, css } from '@emotion/react';
 import emotionReset from 'emotion-reset';
 import React from 'react';
 
+import { colors, fontSize } from './theme';
+
 const GlobalStyle = () => (
   <Global
     styles={css`
@@ -16,6 +18,9 @@ const GlobalStyle = () => (
         * {
           box-sizing: border-box;
         }
+        background: ${colors.background};
+        color: ${colors.fontDefault};
+        font-size: ${fontSize.t3};
       }
     `}
   />

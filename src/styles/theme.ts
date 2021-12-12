@@ -40,6 +40,7 @@ const highLightColors = {
   yellow: '#FAC863',
   blue: '#6699CC',
   green: '#99C794',
+  purple: '#A661EB',
 };
 
 export const colors = {

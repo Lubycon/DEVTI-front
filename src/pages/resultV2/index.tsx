@@ -52,8 +52,7 @@ const DATA = {
 };
 
 const Index = () => (
-  // TODO: 글로벌 스타일로 이동
-  <main style={{ background: colors.background, color: colors.fontDefault, fontSize: fontSize.t3 }}>
+  <main>
     <SummarySection />
     <ResultSection />
   </main>
