@@ -83,9 +83,9 @@ const Index = () => {
 
 const Infos = [
   { emoji: '🔧', text: '총 4 파트로 구성되어 있어요.' },
-  { emoji: '🔧', text: '총 4 파트로 구성되어 있어요.' },
-  { emoji: '🔧', text: '총 4 파트로 구성되어 있어요.' },
-  { emoji: '🔧', text: '총 4 파트로 구성되어 있어요.' },
+  { emoji: '👀', text: '총 4 파트로 구성되어 있어요.' },
+  { emoji: '🙏', text: '총 4 파트로 구성되어 있어요.' },
+  { emoji: '🎉', text: '총 4 파트로 구성되어 있어요.' },
 ];
 
 export default Index;
