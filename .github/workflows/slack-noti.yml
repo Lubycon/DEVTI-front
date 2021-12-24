@@ -1,7 +1,7 @@
 name: Slack Notification
 on:
   pull_request:
-    branches: [stage]
+    branches: [dev]
 
 jobs:
   create-pull-request:
