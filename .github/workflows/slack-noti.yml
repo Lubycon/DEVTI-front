@@ -1,18 +1,18 @@
-name: Slack
+name: Slack Notification
 on:
   pull_request:
     branches: [stage]
 
 jobs:
-  create-pr:
+  create-pull-request:
     runs-on: ubuntu-latest
-    name: Slack Notification
+    name: Run
     steps:
       - name: Checkout
         uses: actions/checkout@master
       - name: Fire Notification
-        uses: Lubycon/github-reviewer-slack-noti-action@v1.2.1
+        uses: Lubycon/github-reviewer-noti-action@v3.2.0
         with:
-          slack-bot-token: ${{ secrets.LUBYCON_SLACK_BOT_TOKEN }}
-          github-token: ${{ secrets.LUBYCON_GITHUB_TOKEN }}
-          channel-id: C01SSJ6HGTH
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          slack-channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-bot-signing-secret: ${{ secrets.SLACK_SIGNING_SECRET }}
