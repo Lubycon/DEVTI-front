@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Box, Flex, Text } from 'rebass';
+import { stringifyQueryParams } from 'temen';
 
 import useFetchQuestion from '~hooks/api/useFetchQuestion';
 import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
 import useModal from '~hooks/useModal';
-import stringifyQueryParams from '~libs/stringifyQueryParams';
 import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
 import ConfirmModal from '~molecules/ConfirmModal';
 import Multiple from '~molecules/MultipleAnswer';
@@ -59,11 +59,11 @@ const QuestionForm = ({ handleScrollTo, handleProceedStep, handleIncreaseGage }:
 
   useEffect(() => {
     const fetchResult = async () => {
-      const { result } = await mutateQuestionResult(answers);
+      const { result, job } = await mutateQuestionResult(answers);
 
       const query = stringifyQueryParams(result);
 
-      push(`/resultV2${query}&job=F`);
+      push(`/result${query}&job=${job}`);
     };
 
     if (isFinishedSummary()) fetchResult();

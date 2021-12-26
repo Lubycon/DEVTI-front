@@ -2,11 +2,13 @@ import AdCarousel from 'components/AdCarousel';
 import List from 'components/List';
 import Margin from 'components/Margin';
 import PillarAnalysis from 'components/PillarAnalysis';
-import React from 'react';
 import { Flex } from 'rebass';
 import { colors, margin } from 'styles/theme';
+import { stringifyQueryParams } from 'temen';
 
 import Txt from '~atoms/Txt';
+import useFetchQuestion from '~hooks/api/useFetchResult';
+import useQueryParam from '~hooks/useQueryParam';
 import convertNewLineToJSX from '~utils/convertNewLineToJSX';
 
 const DUMMY_DOG_IMG_URL = 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg';
@@ -51,12 +53,56 @@ const DATA = {
   },
 };
 
-const Index = () => (
-  <main>
-    <SummarySection />
-    <ResultSection />
-  </main>
-);
+const MOCK_BIAS_RESULT = [
+  {
+    id: '1',
+    bias1: {
+      name: '시각화',
+      weight: 70,
+    },
+    bias2: {
+      name: '설계',
+      weight: 40,
+    },
+    pillarTitle: '당신의 개발강점',
+    biasTitle: 'UI/UX 개발의 수호자',
+    reviewList: [
+      { emoji: '🔧', text: '프론트엔드 개발자 중에서도 기능을 시각화 해내는 역량이 대단하신 분이에요.' },
+      { emoji: '👀', text: '개발 그 자체도 좋아하지만, 개발한 제품을 유저가 사용하는 걸 볼 때 큰 희열을 느껴요.' },
+      { emoji: '🔎', text: '개발 그 자체도 좋아하지만, 개발한 제품을 유저가 사용하는 걸 볼 때 큰 희열을 느껴요.' },
+    ],
+  },
+  {
+    id: '2',
+    bias1: {
+      name: '프로덕트',
+      weight: 60,
+    },
+    bias2: {
+      name: '테크',
+      weight: 40,
+    },
+    pillarTitle: '당신이 중시하는 가치',
+    biasTitle: '제품이 우선!',
+    reviewList: [
+      { emoji: '🔧', text: '프론트엔드 개발자 중에서도 기능을 시각화 해내는 역량이 대단하신 분이에요.' },
+      { emoji: '👀', text: '개발 그 자체도 좋아하지만, 개발한 제품을 유저가 사용하는 걸 볼 때 큰 희열을 느껴요.' },
+      { emoji: '🔎', text: '개발 그 자체도 좋아하지만, 개발한 제품을 유저가 사용하는 걸 볼 때 큰 희열을 느껴요.' },
+    ],
+  },
+];
+
+const Index = () => {
+  const { query } = useQueryParam();
+  const { data } = useFetchQuestion(stringifyQueryParams(query));
+
+  return (
+    <main>
+      <SummarySection />
+      <ResultSection />
+    </main>
+  );
+};
 
 const SummarySection = () => (
   <section style={{ padding: '64px 0 40px' }}>
@@ -90,7 +136,18 @@ const ResultSection = () => (
         <Divider />
       </div>
     </Margin>
-    <PillarAnalysis
+    {MOCK_BIAS_RESULT.map(({ id, bias1, bias2, pillarTitle, biasTitle, reviewList }) => (
+      <PillarAnalysis
+        key={id}
+        title={pillarTitle}
+        highLightColor={colors.red}
+        bias={{ left: bias1.name, right: bias2.name }}
+        percentageFromLeft={bias1.weight}
+        summary={biasTitle}
+        analysisList={reviewList}
+      />
+    ))}
+    {/* <PillarAnalysis
       title="당신의 개발강점"
       highLightColor={colors.red}
       bias={{ left: '시각화', right: '설계' }}
@@ -123,7 +180,7 @@ const ResultSection = () => (
       percentageFromLeft={DATA.pillars.lc.percentageFromLeft}
       summary={DATA.pillars.lc.title}
       analysisList={DATA.pillars.lc.analysisList}
-    />
+    /> */}
     <AdSection title={`스타트업과 어울리는 당신,\n당신같은 인재를 기다리는 회사예요 ☕️`} />
   </section>
 );
@@ -140,12 +197,5 @@ const AdSection = ({ title }: { title: string }) => (
 );
 
 const Divider = () => <div style={{ borderTop: `1px solid ${colors.grey400}` }} />;
-
-export async function getStaticProps() {
-  // TODO: 쿼리파라미터 받아서 결과 페이지 정보 요청
-  return {
-    props: {},
-  };
-}
 
 export default Index;

@@ -1,7 +1,7 @@
 import BarGraph from 'components/BarGraph';
 import List from 'components/List';
 import Margin from 'components/Margin';
-import { Analysis } from 'pages/resultV2';
+import { Analysis } from 'pages/result';
 import React from 'react';
 import { Flex } from 'rebass';
 import { margin } from 'styles/theme';

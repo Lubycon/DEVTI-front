@@ -1,4 +1,4 @@
-export interface The123 {
+export interface Result {
   generalReview: GeneralReview;
   biasResults: BiasResult;
   advertisementList: AdvertisementList[];
