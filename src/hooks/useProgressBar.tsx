@@ -11,6 +11,7 @@ const useProgressBar = ({ totalCount, currentCount, minCount, ...props }: Progre
   const handleDecreaseGage = () => setCurrent(current - 1);
 
   const renderProgressBar = () => <ProgressBar totalCount={totalCount} currentCount={current} minCount={minCount} {...props} />;
+
   return { renderProgressBar, handleIncreaseGage, handleDecreaseGage, resetGage };
 };
 
