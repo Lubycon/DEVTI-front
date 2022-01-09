@@ -12,7 +12,6 @@ const Checkbox = ({ onChange, defaultChecked, checked, ...props }: Props) => (
       type="checkbox"
       css={css`
         ${visuallyHidden}
-        position: fixed;
       `}
       checked={checked}
       onChange={(value) => {
@@ -43,12 +42,7 @@ export const visuallyHidden = css`
   padding: 0;
   margin: -1px;
   width: 1px;
-  height: 1px;
-  border: 0;
-  overflow: hidden;
   clip: rect(0 0 0 0);
-  white-space: nowrap;
-  -webkit-appearance: none;
 `;
 
 export const transparentVisually = css`
