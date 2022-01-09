@@ -4,11 +4,8 @@ import Margin from 'components/Margin';
 import PillarAnalysis from 'components/PillarAnalysis';
 import { Flex } from 'rebass';
 import { colors, margin } from 'styles/theme';
-import { stringifyQueryParams } from 'temen';
 
 import Txt from '~atoms/Txt';
-import useFetchQuestion from '~hooks/api/useFetchResult';
-import useQueryParam from '~hooks/useQueryParam';
 import convertNewLineToJSX from '~utils/convertNewLineToJSX';
 
 const DUMMY_DOG_IMG_URL = 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg';
@@ -92,18 +89,15 @@ const MOCK_BIAS_RESULT = [
   },
 ];
 
-const Index = () => {
-  const { query } = useQueryParam();
-  const { data } = useFetchQuestion(stringifyQueryParams(query));
+const Index = () => (
+  // const { query } = useQueryParam();
+  // const { data } = useFetchQuestion(stringifyQueryParams(query));
 
-  return (
-    <main>
-      <SummarySection />
-      <ResultSection />
-    </main>
-  );
-};
-
+  <main>
+    <SummarySection />
+    <ResultSection />
+  </main>
+);
 const SummarySection = () => (
   <section style={{ padding: '64px 0 40px' }}>
     <Flex flexDirection="column" alignItems="center">
