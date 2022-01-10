@@ -1,93 +1,133 @@
+import Devti from 'components/Devti';
+import Opacity from 'components/Opacity';
+import ListRowPreset from 'components/QuestionForm';
 import questions from 'queryKeys/questions';
-import { useEffect, useState } from 'react';
+import { createRef, isValidElement, PropsWithChildren, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { Box, Flex, Heading, Text } from 'rebass';
+import { Box, Flex, Text } from 'rebass';
 
+import ProgressBar, { ProgressBarHandle } from '~atoms/ProgressBar';
 import useFetchQuestion, { fetchQuestion } from '~hooks/api/useFetchQuestion';
-import useProgressBar from '~hooks/useProgressBar';
-import useScrollTo from '~hooks/useScrollTo';
+import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
 import Navigation from '~molecules/Navigation';
-import QuestionForm from '~organisms/Question';
 
-const DEFAULT_STEP_LENGTH = 20;
+function hasFindAnswerOnId(answers: AnswerModel[], id: number) {
+  return Boolean(answers.find((answer) => answer.id === id));
+}
+
+interface CombineAnswersParams {
+  answers: AnswerModel[];
+  id: number;
+  omitAnswerInId: OmitAnswerInId;
+}
+
+function combineAnswers({ answers, id, omitAnswerInId }: CombineAnswersParams) {
+  const newAnswer = { id, ...omitAnswerInId };
+
+  return answers.reduce<AnswerModel[]>(
+    (acc, cur) => {
+      if (hasFindAnswerOnId(answers, id)) {
+        return answers.map(({ id: prevId, ...answer }) => (prevId === id ? newAnswer : { id: prevId, ...answer }));
+      }
+      return [...acc, cur];
+    },
+    [newAnswer]
+  );
+}
 
 const Question = () => {
+  const [answers, setAnswers] = useState<AnswerModel[]>([]);
+  const [opacites, setOpacites] = useState<number[]>([]);
+  const refs = useRef<RefObject<HTMLDivElement>[]>([]);
+
   const { data } = useFetchQuestion();
 
-  const [currentStepLenght, setCurrentStepLenght] = useState(DEFAULT_STEP_LENGTH);
-
-  const [innerHeight, setInnerHeight] = useState(0);
-
-  const { renderProgressBar, handleIncreaseGage, resetGage } = useProgressBar({ totalCount: currentStepLenght, minCount: 0 });
-
-  const { ref, handleExecuteScroll } = useScrollTo(undefined, { top: innerHeight });
-
-  const [step, setStep] = useState({
-    unit: 1,
-    number: 0,
-  });
-
-  const handleScrollTo = () => {
-    handleExecuteScroll();
-  };
-
-  const handleProceedStep = () => {
-    setStep({
-      ...step,
-      number: step.number + 1,
-    });
-  };
-
-  const moduloStep = () => {
-    if (!data) {
-      return;
-    }
-    setCurrentStepLenght(data.length - DEFAULT_STEP_LENGTH);
-  };
-
-  const finishedStep = () => {
-    if (currentStepLenght === step.number) {
-      moduloStep();
-      resetGage();
-      setStep({
-        unit: step.unit + 1,
-        number: 0,
-      });
-    }
-  };
+  const progessBarRef = useRef<ProgressBarHandle>(null);
 
   useEffect(() => {
-    setInnerHeight(document.body.scrollHeight);
-  }, []);
+    setOpacites([...Array(data?.length)].map((_, i) => (i ? 0.2 : 1)));
+    refs.current = [...Array(data?.length)].map(() => createRef<HTMLDivElement>());
+  }, [questions]);
 
-  useEffect(() => {
-    finishedStep();
-  }, [step]);
+  const handleAnswerClick = (id: number) => ({ ...omitAnswerInId }: OmitAnswerInId) => {
+    const updateAnswers = combineAnswers({ answers, id, omitAnswerInId });
+    setAnswers(updateAnswers);
+
+    if (hasFindAnswerOnId(answers, id)) return;
+
+    progessBarRef.current?.handleIncreaseGage();
+  };
+
+  const focusedElementRemoveOpacity = (refIndex: number, id: number) => {
+    const element = refs.current[refIndex + 1].current as HTMLDivElement;
+    const prevElement = refs.current[refIndex].current as HTMLDivElement;
+
+    prevElement.style.opacity = '0.2';
+
+    if (!hasFindAnswerOnId(answers, id)) element.style.opacity = '1';
+  };
+
+  const scrollIntoView = (refIndex: number) => {
+    refs.current[refIndex].current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleClick = (refIndex: number, id: number) => () => {
+    scrollIntoView(refIndex);
+    focusedElementRemoveOpacity(refIndex, id);
+  };
 
   return (
-    <Box variant="snapScroll" ref={ref}>
+    <Box
+      style={{
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        overflowY: 'hidden',
+      }}
+    >
       <Navigation>
-        <Flex flex={1} flexDirection="column">
-          <Flex flex={1} mb={3} justifyContent="space-between" alignItems="center">
-            <Heading fontSize={20} fontWeight={800} color="primary">
-              DEVTI
-            </Heading>
-            <Text fontSize={12} fontWeight={400}>
-              {`${step.number} / ${currentStepLenght >= 20 ? DEFAULT_STEP_LENGTH : currentStepLenght}`}
-            </Text>
-          </Flex>
-          {renderProgressBar()}
-        </Flex>
+        <HeaderProgessBar left={<Devti size="small" />} right={`${answers.length} / ${data?.length}`}>
+          <ProgressBar ref={progessBarRef} totalCount={data?.length ?? 0} minCount={0} />
+        </HeaderProgessBar>
       </Navigation>
-      <QuestionForm
-        handleScrollTo={handleScrollTo}
-        handleProceedStep={handleProceedStep}
-        handleIncreaseGage={handleIncreaseGage}
-      />
+      <Box
+        style={{
+          position: 'absolute',
+          top: 50,
+        }}
+      >
+        {data
+          ?.filter(({ answerType }) => answerType === AnswerType.Preset)
+          .map(({ id, title, presetList }, i) => (
+            <Opacity key={id} ref={refs.current[i]} opacity={opacites[i]} mb={!i ? 0 : 28} mt={!i ? 60 : 28}>
+              <ListRowPreset
+                key={id}
+                title={title}
+                presets={presetList}
+                onPhaseClick={handleClick(i, id)}
+                onAnswerClick={handleAnswerClick(id)}
+              />
+            </Opacity>
+          ))}
+      </Box>
     </Box>
   );
 };
+
+interface HeaderProgessBarProps {
+  left?: ReactNode;
+  right?: ReactNode;
+}
+
+const HeaderProgessBar = ({ left, right, children }: PropsWithChildren<HeaderProgessBarProps>) => (
+  <Flex flex={1} flexDirection="column">
+    <Flex flex={1} mb={3} justifyContent="space-between" alignItems="center">
+      {left}
+      {isValidElement(right) ? right : <Text>{right}</Text>}
+    </Flex>
+    {children}
+  </Flex>
+);
 
 export async function getStaticProps() {
   const queryCache = new QueryClient();

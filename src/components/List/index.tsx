@@ -49,8 +49,8 @@ const Ul = styled.ul`
   padding-left: 17px;
 `;
 
-const Row = ({ left, children }: { left?: React.ReactNode; children: React.ReactNode }) => (
-  <Li>
+const Row = ({ left, onClick, children }: { left?: React.ReactNode; onClick?: VoidFunction; children: React.ReactNode }) => (
+  <Li onClick={onClick}>
     <div style={{ marginRight: 12 }}>{left}</div>
     <div>{children}</div>
   </Li>

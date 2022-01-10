@@ -9,8 +9,8 @@ const apiMap = {
     url: `${BASE_URL}/results`,
     method: 'POST',
   },
-  getQuestionResult: {
-    url: `${BASE_URL}/results?A=:A&C=:C&L=:L&P=:P&S=:S&T=:T&V=:V&W=:W&job=:job`,
+  fetchQuestionResult: {
+    url: `${BASE_URL}/results/:queries`,
     method: 'GET',
   },
 };

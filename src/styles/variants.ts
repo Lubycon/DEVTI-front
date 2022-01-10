@@ -40,8 +40,8 @@ const variants = {
     px: 140,
     height: 80,
     width: '100%',
-    transition: '0.5s',
     zIndex: 999,
+    bg: '#1d2022',
     '@media screen and (max-width: 64em)': {
       px: 3,
       '> button': {
@@ -109,22 +109,23 @@ const variants = {
     zIndex: 1000,
   },
   bar: {
-    position: 'relative',
-    minHeight: '8px',
-    borderRadius: '30px',
+    position: 'fixed',
+    top: 60,
+    left: 0,
+    height: '5px',
     overflow: 'hidden',
     width: '100%',
   },
   gageBar: {
     position: 'absolute',
     width: '100%',
-    height: '100%',
-    backgroundColor: 'gray.2',
+    height: '5px',
+    backgroundColor: '#EFEFEF',
   },
   gage: {
     position: 'absolute',
-    height: '100%',
-    backgroundColor: 'primary',
+    height: '5px',
+    backgroundColor: '#A661EB',
     transition: '0.5s',
   },
   form: {
