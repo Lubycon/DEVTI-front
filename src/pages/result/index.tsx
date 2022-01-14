@@ -1,14 +1,18 @@
+import styled from '@emotion/styled';
 import AdCarousel from 'components/AdCarousel';
 import List from 'components/List';
 import Margin from 'components/Margin';
 import PillarAnalysis from 'components/PillarAnalysis';
+import domtoimage from 'dom-to-image';
+import { useRef, useState } from 'react';
 import { Flex } from 'rebass';
 import { colors, margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
+import mainDummyImage from '~public/assets/types/vspl.png';
 import convertNewLineToJSX from '~utils/convertNewLineToJSX';
 
-const DUMMY_DOG_IMG_URL = 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg';
+const DUMMY_DOG_IMG_URL = 'https://user-images.githubusercontent.com/3839771/149458424-4115add3-4cc7-4653-83ad-72c0aab6e76d.png';
 export interface Analysis {
   emoji: string;
   text: string;
@@ -98,27 +102,51 @@ const Index = () => (
     <ResultSection />
   </main>
 );
-const SummarySection = () => (
-  <section style={{ padding: '64px 0 40px' }}>
-    <Flex flexDirection="column" alignItems="center">
-      {/* TODO: as prop 추가해서 H1으로 만들기 */}
-      <Txt typography="t1" fontWeight={700} style={{ marginBottom: 8 }}>
-        {DATA.title}
-      </Txt>
-      <Txt typography="t2">{DATA.summary}</Txt>
-    </Flex>
-    <img src={DATA.mainImage.url} alt="내 성향이 모두 들어가 있는 아바타" style={{ width: '100%', padding: 24 }} />
-    <Margin>
-      <List>
-        {DATA.summaryList.map((summary) => (
-          <List.Row key={summary.emoji} left={summary.emoji}>
-            {summary.text}
-          </List.Row>
-        ))}
-      </List>
-    </Margin>
-  </section>
-);
+const SummarySection = () => {
+  const [nickname, setNickname] = useState('');
+  const inputSize = nickname.length === 0 ? 5 : nickname.length + 2;
+  const mainCardRef = useRef(null);
+
+  function downloadImage() {
+    const canvas = mainCardRef.current;
+    if (canvas !== null)
+      domtoimage.toJpeg(canvas, { quality: 0.95 }).then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = `${nickname}-devti.jpeg`;
+        link.href = dataUrl;
+        link.click();
+      });
+  }
+
+  return (
+    <section style={{ padding: '64px 0 40px' }}>
+      <Flex flexDirection="column" alignItems="center">
+        {/* TODO: as prop 추가해서 H1으로 만들기 */}
+        <Txt typography="t1" fontWeight={700} style={{ marginBottom: 8 }}>
+          {DATA.title}
+        </Txt>
+        <Txt typography="t2">{DATA.summary}</Txt>
+      </Flex>
+      <MainCard ref={mainCardRef}>
+        <img src={mainDummyImage} alt="내 성향이 모두 들어가 있는 아바타" style={{ width: '100%', padding: 24 }} />
+        {/* <img src={DATA.mainImage.url} alt="내 성향이 모두 들어가 있는 아바타" style={{ width: '100%', padding: 24 }} /> */}
+        <input value={nickname} placeholder="닉네임" onChange={(e) => setNickname(e.target.value)} size={inputSize} />
+      </MainCard>
+      <DownloadButton type="button" onClick={downloadImage}>
+        나만의 이미지 다운로드
+      </DownloadButton>
+      <Margin>
+        <List>
+          {DATA.summaryList.map((summary) => (
+            <List.Row key={summary.emoji} left={summary.emoji}>
+              {summary.text}
+            </List.Row>
+          ))}
+        </List>
+      </Margin>
+    </section>
+  );
+};
 
 const ResultSection = () => (
   <section style={{ background: colors.backgroundHighLight, paddingTop: margin.default }}>
@@ -191,5 +219,38 @@ const AdSection = ({ title }: { title: string }) => (
 );
 
 const Divider = () => <div style={{ borderTop: `1px solid ${colors.grey400}` }} />;
+
+const MainCard = styled.div`
+  position: relative;
+  input {
+    background: #a55fea;
+    position: absolute;
+    left: 25vw;
+    bottom: 70px;
+    font-size: 1.5rem;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-weight: bold;
+
+    &::placeholder {
+      color: ${colors.grey200};
+      font-style: italic;
+    }
+  }
+`;
+
+const DownloadButton = styled.button`
+  background: #1cf84f;
+  width: 100%;
+  border: none;
+  padding: 14px;
+  color: #3d3d3d;
+  font-weight: bold;
+  font-size: 1rem;
+  top: -63px;
+  position: relative;
+`;
 
 export default Index;
