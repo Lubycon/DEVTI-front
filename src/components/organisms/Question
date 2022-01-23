@@ -4,7 +4,7 @@ import { Box, Flex, Text } from 'rebass';
 import { stringifyQueryParams } from 'temen';
 
 import useFetchQuestion from '~hooks/api/useFetchQuestion';
-import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
+import usePostQuestionResult from '~hooks/api/useFetchSummary';
 import useModal from '~hooks/useModal';
 import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
 import ConfirmModal from '~molecules/ConfirmModal';

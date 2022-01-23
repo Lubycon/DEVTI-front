@@ -13,7 +13,7 @@ interface ListProps extends BoxProps {
   children: React.ReactNode;
   title?: string;
   highLightColor?: string;
-  style?: CSSProperties;
+  liDirection?: CSSProperties['flexDirection'];
 }
 
 const List: React.FC<ListProps> & CompositionMembers = ({ title, children, highLightColor, style, ...props }) => {

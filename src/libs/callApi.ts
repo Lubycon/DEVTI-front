@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface Request extends Omit<RequestInit, 'body'> {
   body?: any;
-  data?: { [key: string]: string };
+  data?: { [key: string]: string | number };
 }
 
 const findParamsInUrl = (url: string) => {
@@ -19,7 +19,16 @@ const makeRequestUrl = ({ url, params, data }: { url: string; params: string[]; 
 
 const callApi = async <T = any>(url: string, requestInit: Request) => {
   const params = findParamsInUrl(url);
-  const urlWithParams = makeRequestUrl({ url, params, data: requestInit.data });
+
+  const castedRequestInitNumberToString: { [key: string]: string } = {};
+
+  if (requestInit.data) {
+    Object.entries(requestInit.data).forEach(([key, value]) => {
+      castedRequestInitNumberToString[key] = `${value}`;
+    });
+  }
+
+  const urlWithParams = makeRequestUrl({ url, params, data: castedRequestInitNumberToString });
 
   try {
     const response = await fetch(urlWithParams, {

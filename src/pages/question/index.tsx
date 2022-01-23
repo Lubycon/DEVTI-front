@@ -1,25 +1,38 @@
+import Answer from 'components/AnswerType/Answer';
 import Devti from 'components/Devti';
 import Opacity from 'components/Opacity';
-import ListRowPreset from 'components/QuestionForm';
+import { useRouter } from 'next/router';
 import questions from 'queryKeys/questions';
-import { createRef, isValidElement, PropsWithChildren, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import {
+  createRef,
+  isValidElement,
+  PropsWithChildren,
+  ReactNode,
+  RefObject,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import { Box, Flex, Text } from 'rebass';
+import { stringifyQueryParams } from 'temen';
 
 import ProgressBar, { ProgressBarHandle } from '~atoms/ProgressBar';
 import useFetchQuestion, { fetchQuestion } from '~hooks/api/useFetchQuestion';
-import { AnswerModel, AnswerType, OmitAnswerInId } from '~models/Question';
+import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
+import { AnswerModel, OmitAnswerInId } from '~models/Question';
 import Navigation from '~molecules/Navigation';
-
-function hasFindAnswerOnId(answers: AnswerModel[], id: number) {
-  return Boolean(answers.find((answer) => answer.id === id));
-}
 
 interface CombineAnswersParams {
   answers: AnswerModel[];
   id: number;
   omitAnswerInId: OmitAnswerInId;
+}
+
+function hasFindAnswerOnId(answers: AnswerModel[], id: number) {
+  return Boolean(answers.find((answer) => answer.id === id));
 }
 
 function combineAnswers({ answers, id, omitAnswerInId }: CombineAnswersParams) {
@@ -36,12 +49,21 @@ function combineAnswers({ answers, id, omitAnswerInId }: CombineAnswersParams) {
   );
 }
 
+const selectedReducer = (state: number[], id: number) => {
+  const index = state.findIndex((prevId) => prevId === id);
+
+  return index === -1 ? [...state, id] : [...state];
+};
+
 const Question = () => {
   const [answers, setAnswers] = useState<AnswerModel[]>([]);
   const [opacites, setOpacites] = useState<number[]>([]);
   const refs = useRef<RefObject<HTMLDivElement>[]>([]);
-
+  const { push } = useRouter();
   const { data } = useFetchQuestion();
+  const [values, pushSelectedValues] = useReducer(selectedReducer, []);
+
+  const { mutateQuestionResult } = usePostQuestionResult();
 
   const progessBarRef = useRef<ProgressBarHandle>(null);
 
@@ -52,39 +74,48 @@ const Question = () => {
 
   const handleAnswerClick = (id: number) => ({ ...omitAnswerInId }: OmitAnswerInId) => {
     const updateAnswers = combineAnswers({ answers, id, omitAnswerInId });
-    setAnswers(updateAnswers);
+    setAnswers(() => {
+      navigateResult(updateAnswers); // 마지막 엘리먼트일 경우 결과 페이지로 이동한다.
+      return updateAnswers;
+    });
 
     if (hasFindAnswerOnId(answers, id)) return;
 
     progessBarRef.current?.handleIncreaseGage();
   };
 
-  const focusedElementRemoveOpacity = (refIndex: number, id: number) => {
-    const element = refs.current[refIndex + 1].current as HTMLDivElement;
-    const prevElement = refs.current[refIndex].current as HTMLDivElement;
+  const focusedElementRemoveOpacity = (index: number) => {
+    if (index + 1 === data?.length) return;
+
+    const element = refs.current[index + 1].current as HTMLDivElement;
+    const prevElement = refs.current[index].current as HTMLDivElement;
 
     prevElement.style.opacity = '0.2';
 
-    if (!hasFindAnswerOnId(answers, id)) element.style.opacity = '1';
+    if (!values.find((value) => value === index + 1)) element.style.opacity = '1';
   };
 
-  const scrollIntoView = (refIndex: number) => {
-    refs.current[refIndex].current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollIntoView = (index: number) => {
+    refs.current[index].current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleClick = (refIndex: number, id: number) => () => {
-    scrollIntoView(refIndex);
-    focusedElementRemoveOpacity(refIndex, id);
+  const navigateResult = async (updateAnswers: AnswerModel[]) => {
+    if (updateAnswers.length !== data?.length) return;
+
+    const { result } = await mutateQuestionResult(updateAnswers);
+    const query = stringifyQueryParams(result);
+
+    push(`/result${query}`);
+  };
+
+  const handleClick = (index: number) => () => {
+    pushSelectedValues(index);
+    scrollIntoView(index); // 스크롤을 이동시킨다.
+    focusedElementRemoveOpacity(index); // 포커스된 엘리먼트의 오프셋을 제거한다.
   };
 
   return (
-    <Box
-      style={{
-        scrollbarWidth: 'none',
-        msOverflowStyle: 'none',
-        overflowY: 'hidden',
-      }}
-    >
+    <Box>
       <Navigation>
         <HeaderProgessBar left={<Devti size="small" />} right={`${answers.length} / ${data?.length}`}>
           <ProgressBar ref={progessBarRef} totalCount={data?.length ?? 0} minCount={0} />
@@ -96,19 +127,18 @@ const Question = () => {
           top: 50,
         }}
       >
-        {data
-          ?.filter(({ answerType }) => answerType === AnswerType.Preset)
-          .map(({ id, title, presetList }, i) => (
-            <Opacity key={id} ref={refs.current[i]} opacity={opacites[i]} mb={!i ? 0 : 28} mt={!i ? 60 : 28}>
-              <ListRowPreset
-                key={id}
-                title={title}
-                presets={presetList}
-                onPhaseClick={handleClick(i, id)}
-                onAnswerClick={handleAnswerClick(id)}
-              />
-            </Opacity>
-          ))}
+        {data?.map(({ id, title, presetList, answerType }, i) => (
+          <Opacity key={id} ref={refs.current[i]} opacity={opacites[i]} mb={!i ? 0 : 28} mt={!i ? 60 : 28}>
+            <Answer
+              key={id}
+              type={answerType}
+              title={title}
+              presets={presetList}
+              onPhaseClick={handleClick(i)}
+              onAnswerClick={handleAnswerClick(id)}
+            />
+          </Opacity>
+        ))}
       </Box>
     </Box>
   );

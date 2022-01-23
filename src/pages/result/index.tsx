@@ -4,11 +4,17 @@ import List from 'components/List';
 import Margin from 'components/Margin';
 import PillarAnalysis from 'components/PillarAnalysis';
 import domtoimage from 'dom-to-image';
+import { GetServerSideProps } from 'next';
+import results from 'queryKeys/results';
 import { useRef, useState } from 'react';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import { Flex } from 'rebass';
 import { colors, margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
+import { fetchSummary } from '~hooks/api/useFetchSummary';
+import { CastQuery } from '~hooks/useQueryParam';
 import mainDummyImage from '~public/assets/types/vspl.png';
 import convertNewLineToJSX from '~utils/convertNewLineToJSX';
 
@@ -94,9 +100,6 @@ const MOCK_BIAS_RESULT = [
 ];
 
 const Index = () => (
-  // const { query } = useQueryParam();
-  // const { data } = useFetchQuestion(stringifyQueryParams(query));
-
   <main>
     <SummarySection />
     <ResultSection />
@@ -169,40 +172,7 @@ const ResultSection = () => (
         analysisList={reviewList}
       />
     ))}
-    {/* <PillarAnalysis
-      title="당신의 개발강점"
-      highLightColor={colors.red}
-      bias={{ left: '시각화', right: '설계' }}
-      percentageFromLeft={DATA.pillars.vf.percentageFromLeft}
-      summary={DATA.pillars.vf.title}
-      analysisList={DATA.pillars.vf.analysisList}
-    />
-    <PillarAnalysis
-      title="당신이 중시하는 가치"
-      highLightColor={colors.yellow}
-      bias={{ left: '프로덕트', right: '테크' }}
-      percentageFromLeft={DATA.pillars.pt.percentageFromLeft}
-      summary={DATA.pillars.pt.title}
-      analysisList={DATA.pillars.pt.analysisList}
-    />
-    <AdSection title={`시각화 + 프로덕트 성향 개발자인\n당신에게 추천하는 강의예요 📚`} />
-    <PillarAnalysis
-      title="당신과 어울리는 회사"
-      highLightColor={colors.blue}
-      bias={{ left: '스타트업', right: 'IT대기업' }}
-      percentageFromLeft={DATA.pillars.sc.percentageFromLeft}
-      summary={DATA.pillars.sc.title}
-      analysisList={DATA.pillars.sc.analysisList}
-      style={{ paddingTop: 45 }}
-    />
-    <PillarAnalysis
-      title="당신이 추구하는 워라밸"
-      highLightColor={colors.green}
-      bias={{ left: '라이프', right: '커리어' }}
-      percentageFromLeft={DATA.pillars.lc.percentageFromLeft}
-      summary={DATA.pillars.lc.title}
-      analysisList={DATA.pillars.lc.analysisList}
-    /> */}
+
     <AdSection title={`스타트업과 어울리는 당신,\n당신같은 인재를 기다리는 회사예요 ☕️`} />
   </section>
 );
@@ -252,5 +222,17 @@ const DownloadButton = styled.button`
   top: -63px;
   position: relative;
 `;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const queryCache = new QueryClient();
+
+  const { query } = context as { query: CastQuery<{ [key: string]: string }> };
+
+  await queryCache.prefetchQuery(results.summary(query), () => fetchSummary(query));
+
+  return {
+    props: { dehydratedState: dehydrate(queryCache) },
+  };
+};
 
 export default Index;

@@ -2,7 +2,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { useRouter } from 'next/router';
 
-type CastQuery<T> = T & ParsedUrlQuery;
+export type CastQuery<T> = T & ParsedUrlQuery;
 
 const useQueryParam = <T>() => {
   const { query: nextQuery } = useRouter();
