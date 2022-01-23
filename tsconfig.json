@@ -19,36 +19,16 @@
     "target": "esnext",
     "baseUrl": "./src",
     "paths": {
-      "~atoms/*": [
-        "components/atoms/*"
-      ],
-      "~molecules/*": [
-        "components/molecules/*"
-      ],
-      "~organisms/*": [
-        "components/organisms/*"
-      ],
-      "~templates/*": [
-        "components/templates/*"
-      ],
-      "~public/*": [
-        "public/*"
-      ],
-      "~libs/*": [
-        "libs/*"
-      ],
-      "~utils/*": [
-        "utils/*"
-      ],
-      "~hooks/*": [
-        "hooks/*"
-      ],
-      "~config/*": [
-        "config/*"
-      ],
-      "~models/*": [
-        "models/*"
-      ],
+      "~atoms/*": ["components/atoms/*"],
+      "~molecules/*": ["components/molecules/*"],
+      "~organisms/*": ["components/organisms/*"],
+      "~templates/*": ["components/templates/*"],
+      "~public/*": ["public/*"],
+      "~libs/*": ["libs/*"],
+      "~utils/*": ["utils/*"],
+      "~hooks/*": ["hooks/*"],
+      "~config/*": ["config/*"],
+      "~models/*": ["models/*"]
     }
   },
   "exclude": ["node_modules"],
@@ -57,6 +37,7 @@
     "next.config.js",
     "src/**/*.ts",
     "src/**/*.tsx",
-    ".eslintrc.js"
-  ],
+    ".eslintrc.js",
+    "src/components/organisms/Question"
+  ]
 }
