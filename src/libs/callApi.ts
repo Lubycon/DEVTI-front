@@ -5,7 +5,7 @@ interface Request extends Omit<RequestInit, 'body'> {
 }
 
 const findParamsInUrl = (url: string) => {
-  const regexp = /(?::)(\D\w+)/gim;
+  const regexp = /(?::)([a-zA-z]+)/gim;
   const params = url.match(regexp);
 
   return params && params.length > 0 ? params.map((match) => match.replace(':', '')) : [];
