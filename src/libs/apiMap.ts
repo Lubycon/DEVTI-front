@@ -10,7 +10,7 @@ const apiMap = {
     method: 'POST',
   },
   fetchSummary: {
-    url: `${BASE_URL}/results/:A&:C&:L&:P&:S&:T&:V&:W&:job`,
+    url: `${BASE_URL}/results?A=:A&C=:C&L=:L&P=:P&S=:S&T=:T&V=:V&W=:W&job=:job`,
     method: 'GET',
   },
 };

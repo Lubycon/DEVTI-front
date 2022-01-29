@@ -1,6 +1,6 @@
 export interface Result {
   generalReview: GeneralReview;
-  biasResults: BiasResult;
+  biasResults: BiasResult[];
   advertisementList: AdvertisementList[];
   devtiRatioList: DevtiRatioList[];
 }
@@ -8,17 +8,22 @@ export interface Result {
 type AdvertisementList = Array<{ [key: string]: string }>;
 
 export interface BiasResult {
-  VA: PillarResult;
-  PT: PillarResult;
-  SC: PillarResult;
-  WL: PillarResult;
+  id: number;
+  bias1: Bias;
+  bias2: Bias;
+  pillarTitle: string;
+  biasTitle: string;
+  reviewList: ReviewList[];
 }
 
-export interface PillarResult {
-  bias: string;
+export interface Bias {
+  name: string;
   weight: number;
-  biasTitle: string;
-  reviewList: string[];
+}
+
+export interface ReviewList {
+  emoji: string;
+  contents: string;
 }
 
 export interface DevtiRatioList {
@@ -27,8 +32,11 @@ export interface DevtiRatioList {
 }
 
 export interface GeneralReview {
-  result: string;
   title: string;
-  content: string;
-  summaryReview: string[];
+  summary: string;
+  summaryList: ReviewList[];
+  mainImage: {
+    url: string;
+    alt: string;
+  };
 }

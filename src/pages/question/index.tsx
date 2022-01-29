@@ -1,28 +1,19 @@
 import Answer from 'components/AnswerType/Answer';
 import Devti from 'components/Devti';
 import Opacity from 'components/Opacity';
+import ProgessBar from 'components/ProgessBar';
 import { useRouter } from 'next/router';
 import questions from 'queryKeys/questions';
-import {
-  createRef,
-  isValidElement,
-  PropsWithChildren,
-  ReactNode,
-  RefObject,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
+import { createRef, MutableRefObject, RefObject, useEffect, useReducer, useRef, useState } from 'react';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { Box, Flex, Text } from 'rebass';
+import { Box } from 'rebass';
 import { stringifyQueryParams } from 'temen';
 
 import ProgressBar, { ProgressBarHandle } from '~atoms/ProgressBar';
 import useFetchQuestion, { fetchQuestion } from '~hooks/api/useFetchQuestion';
 import usePostQuestionResult from '~hooks/api/usePostQuestionResult';
-import { AnswerModel, OmitAnswerInId } from '~models/Question';
+import { AnswerModel, OmitAnswerInId, Question as QuestionModel } from '~models/Question';
 import Navigation from '~molecules/Navigation';
 
 interface CombineAnswersParams {
@@ -31,11 +22,10 @@ interface CombineAnswersParams {
   omitAnswerInId: OmitAnswerInId;
 }
 
-function hasFindAnswerOnId(answers: AnswerModel[], id: number) {
-  return Boolean(answers.find((answer) => answer.id === id));
-}
+type Refs = MutableRefObject<RefObject<HTMLDivElement>[]>;
 
-function combineAnswers({ answers, id, omitAnswerInId }: CombineAnswersParams) {
+const hasFindAnswerOnId = (answers: AnswerModel[], id: number) => Boolean(answers.find((answer) => answer.id === id));
+const combineAnswers = ({ answers, id, omitAnswerInId }: CombineAnswersParams) => {
   const newAnswer = { id, ...omitAnswerInId };
 
   return answers.reduce<AnswerModel[]>(
@@ -47,24 +37,47 @@ function combineAnswers({ answers, id, omitAnswerInId }: CombineAnswersParams) {
     },
     [newAnswer]
   );
-}
-
+};
 const selectedReducer = (state: number[], id: number) => {
   const index = state.findIndex((prevId) => prevId === id);
 
   return index === -1 ? [...state, id] : [...state];
 };
+const increaseProgressGage = (ref: RefObject<ProgressBarHandle>) => {
+  ref.current?.handleIncreaseGage();
+};
+const scrollIntoView = (index: number, refs: Refs) => {
+  refs.current[index].current?.scrollIntoView({ behavior: 'smooth' });
+};
+const focusedElementRemoveOpacity = ({
+  index,
+  data,
+  refs,
+  values,
+}: {
+  index: number;
+  data?: QuestionModel[];
+  refs: Refs;
+  values: number[];
+}) => {
+  if (index + 1 === data?.length) return;
+
+  const element = refs.current[index + 1].current as HTMLDivElement;
+  const prevElement = refs.current[index].current as HTMLDivElement;
+
+  prevElement.style.opacity = '0.2';
+
+  if (!values.find((value) => value === index + 1)) element.style.opacity = '1';
+};
 
 const Question = () => {
   const [answers, setAnswers] = useState<AnswerModel[]>([]);
   const [opacites, setOpacites] = useState<number[]>([]);
-  const refs = useRef<RefObject<HTMLDivElement>[]>([]);
   const { push } = useRouter();
   const { data } = useFetchQuestion();
   const [values, pushSelectedValues] = useReducer(selectedReducer, []);
-
   const { mutateQuestionResult } = usePostQuestionResult();
-
+  const refs = useRef<RefObject<HTMLDivElement>[]>([]);
   const progessBarRef = useRef<ProgressBarHandle>(null);
 
   useEffect(() => {
@@ -74,52 +87,42 @@ const Question = () => {
 
   const handleAnswerClick = (id: number) => ({ ...omitAnswerInId }: OmitAnswerInId) => {
     const updateAnswers = combineAnswers({ answers, id, omitAnswerInId });
+    appendAnswerAndNavigateResult(updateAnswers);
+    if (hasFindAnswerOnId(answers, id)) return;
+    increaseProgressGage(progessBarRef);
+  };
+
+  const appendAnswerAndNavigateResult = (updateAnswers: AnswerModel[]) => {
     setAnswers(() => {
-      navigateResult(updateAnswers); // 마지막 엘리먼트일 경우 결과 페이지로 이동한다.
+      navigateResult(updateAnswers);
       return updateAnswers;
     });
-
-    if (hasFindAnswerOnId(answers, id)) return;
-
-    progessBarRef.current?.handleIncreaseGage();
   };
 
-  const focusedElementRemoveOpacity = (index: number) => {
-    if (index + 1 === data?.length) return;
-
-    const element = refs.current[index + 1].current as HTMLDivElement;
-    const prevElement = refs.current[index].current as HTMLDivElement;
-
-    prevElement.style.opacity = '0.2';
-
-    if (!values.find((value) => value === index + 1)) element.style.opacity = '1';
-  };
-
-  const scrollIntoView = (index: number) => {
-    refs.current[index].current?.scrollIntoView({ behavior: 'smooth' });
+  const replaceFetchResultQueryParams = async (updateAnswers: AnswerModel[]) => {
+    const { result } = await mutateQuestionResult(updateAnswers);
+    return stringifyQueryParams(result);
   };
 
   const navigateResult = async (updateAnswers: AnswerModel[]) => {
     if (updateAnswers.length !== data?.length) return;
 
-    const { result } = await mutateQuestionResult(updateAnswers);
-    const query = stringifyQueryParams(result);
-
+    const query = await replaceFetchResultQueryParams(updateAnswers);
     push(`/result${query}`);
   };
 
   const handleClick = (index: number) => () => {
     pushSelectedValues(index);
-    scrollIntoView(index); // 스크롤을 이동시킨다.
-    focusedElementRemoveOpacity(index); // 포커스된 엘리먼트의 오프셋을 제거한다.
+    scrollIntoView(index, refs);
+    focusedElementRemoveOpacity({ index, data, refs, values });
   };
 
   return (
     <Box>
       <Navigation>
-        <HeaderProgessBar left={<Devti size="small" />} right={`${answers.length} / ${data?.length}`}>
+        <ProgessBar left={<Devti size="small" />} right={`${answers.length} / ${data?.length}`}>
           <ProgressBar ref={progessBarRef} totalCount={data?.length ?? 0} minCount={0} />
-        </HeaderProgessBar>
+        </ProgessBar>
       </Navigation>
       <Box
         style={{
@@ -143,21 +146,6 @@ const Question = () => {
     </Box>
   );
 };
-
-interface HeaderProgessBarProps {
-  left?: ReactNode;
-  right?: ReactNode;
-}
-
-const HeaderProgessBar = ({ left, right, children }: PropsWithChildren<HeaderProgessBarProps>) => (
-  <Flex flex={1} flexDirection="column">
-    <Flex flex={1} mb={3} justifyContent="space-between" alignItems="center">
-      {left}
-      {isValidElement(right) ? right : <Text>{right}</Text>}
-    </Flex>
-    {children}
-  </Flex>
-);
 
 export async function getStaticProps() {
   const queryCache = new QueryClient();

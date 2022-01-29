@@ -48,6 +48,17 @@ export interface PresetModel {
 }
 
 export interface QuestionResult {
+  result: { P: number; C: number; W: number; S: number; A: number; V: number; L: number; T: number; job: 'F' | 'B' };
+}
+
+export interface QueryResult {
+  P: string;
+  C: string;
+  W: string;
+  S: string;
+  A: string;
+  V: string;
+  L: string;
+  T: string;
   job: string;
-  result: { P: number; C: number; W: number; S: number; A: number; V: number; L: number; T: number };
 }

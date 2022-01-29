@@ -1,19 +1,19 @@
 import BarGraph from 'components/BarGraph';
 import List from 'components/List';
 import Margin from 'components/Margin';
-import { Analysis } from 'pages/result';
 import React from 'react';
 import { Flex } from 'rebass';
 import { margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
+import { ReviewList } from '~models/Result';
 
 interface Props {
   title: string;
   bias: { left: string; right: string };
   percentageFromLeft: number;
   summary: string;
-  analysisList: Analysis[];
+  analysisList: ReviewList[];
   highLightColor: string;
   style?: React.CSSProperties;
 }
@@ -32,7 +32,7 @@ const PillarAnalysis = ({ title, bias, percentageFromLeft, summary, analysisList
       <List title={summary} highLightColor={highLightColor} style={{ marginTop: margin.default }}>
         {analysisList.map((analysis) => (
           <List.Row key={analysis.emoji} left={analysis.emoji}>
-            {analysis.text}
+            {analysis.contents}
           </List.Row>
         ))}
       </List>
