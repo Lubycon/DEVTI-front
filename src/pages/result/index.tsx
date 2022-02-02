@@ -3,13 +3,14 @@ import AdCarousel from 'components/AdCarousel';
 import List from 'components/List';
 import Margin from 'components/Margin';
 import PillarAnalysis from 'components/PillarAnalysis';
+import TypePersentage from 'components/TypePersentage';
 import domtoimage from 'dom-to-image';
 import { GetServerSideProps } from 'next';
 import results from 'queryKeys/results';
-import { useRef, useState } from 'react';
+import { useRef, useState, Children } from 'react';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { Flex } from 'rebass';
+import { Box, Flex } from 'rebass';
 import { colors, margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
@@ -98,6 +99,8 @@ const ResultSection = ({ bias }: { bias?: BiasResult[] }) => (
     ))}
 
     <AdSection title={`스타트업과 어울리는 당신,\n당신같은 인재를 기다리는 회사예요 ☕️`} />
+    <OtherSection title={`스타트업과 어울리는 당신,\n당신같은 인재를 기다리는 회사예요 ☕️`} />
+    <Footer />
   </section>
 );
 
@@ -110,6 +113,28 @@ const AdSection = ({ title }: { title: string }) => (
       <AdCarousel />
     </Margin>
   </section>
+);
+
+const OtherSection = ({ title }: { title: string }) => (
+  <section style={{ background: colors.backgroundLight, marginTop: 16 }}>
+    <Margin style={{ padding: '32px 0 24px' }}>
+      <Txt typography="t2" fontWeight={700} color={colors.grey100} style={{ marginBottom: 24 }}>
+        {convertNewLineToJSX(title)}
+      </Txt>
+      {Children.toArray(
+        Array.from({ length: 3 }).map(() => (
+          // eslint-disable-next-line react/jsx-key
+          <TypePersentage />
+        ))
+      )}
+    </Margin>
+  </section>
+);
+
+const Footer = () => (
+  <Flex variant="verticalCentralCenter" height={180}>
+    Footer
+  </Flex>
 );
 
 const Divider = () => <div style={{ borderTop: `1px solid ${colors.grey400}` }} />;
