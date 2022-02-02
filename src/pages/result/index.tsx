@@ -10,7 +10,7 @@ import results from 'queryKeys/results';
 import { useRef, useState, Children } from 'react';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { Box, Flex } from 'rebass';
+import { Flex } from 'rebass';
 import { colors, margin } from 'styles/theme';
 
 import Txt from '~atoms/Txt';
