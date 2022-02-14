@@ -1,0 +1,40 @@
+name: swagger-generate
+
+on:
+  push:
+    branches:
+      - stage
+  workflow_dispatch:
+
+env:
+  SWAGGER_JSON_PATH: http://13.209.10.232:8090/v2/api-docs
+
+jobs:
+  swagger-auto-gen:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - uses: actions/checkout@master
+        with:
+          repository: acacode/swagger-typescript-api
+
+      - name: generate Auto Generated TS API Interface from Swagger
+        run: npx swagger-typescript-api -p ${{ env.SWAGGER_JSON_PATH }} -n api.ts
+
+      - name: clone repo and push to front repo
+        run: |
+          git clone https://github.com/Lubycon/DEVTI-front.git
+          mv ./api.ts ./DEVTI-front/src/api
+          cd ./DEVTI-front
+
+          git config --global user.email "doscmdev@gmail.com"
+          git config --global user.name "geonwoo.jeong"
+          git add .
+          if ! git diff-index --quiet HEAD --; then
+              git commit -m "Add Auto Generated api.ts"
+              git push https://${{ secrets.ACCESS_TOKEN_FOR_GITHUB }}@github.com/Nexters/DEVTI-front.git
+          fi
