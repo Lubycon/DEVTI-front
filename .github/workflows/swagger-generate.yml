@@ -23,7 +23,7 @@ jobs:
           repository: acacode/swagger-typescript-api
 
       - name: generate Auto Generated TS API Interface from Swagger
-        run: npx swagger-typescript-api -p ${{ env.SWAGGER_JSON_PATH }} -n --no-client true
+        run: npx swagger-typescript-api -p ${{ env.SWAGGER_JSON_PATH }} -n api.ts --no-client true
 
       - name: clone repo and push to front repo
         run: |
