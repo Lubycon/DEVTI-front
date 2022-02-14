@@ -17,7 +17,7 @@ export interface AdvertisementResDto {
 
   /** @format date */
   advertisementStartDate?: string;
-  advertisementType?: 'ALL' | 'LECTURE' | 'RECRUIT' | 'ETC';
+  advertisementType?: "ALL" | "LECTURE" | "RECRUIT" | "ETC";
   advertiser?: string;
 
   /** @format int64 */
@@ -27,8 +27,8 @@ export interface AdvertisementResDto {
 }
 
 export interface AnswerAttribute {
-  answerType?: 'PRESET' | 'GAGE' | 'INFO';
-  bias?: 'V' | 'A' | 'S' | 'C' | 'P' | 'T' | 'W' | 'L' | 'J' | 'Y';
+  answerType?: "PRESET" | "GAGE" | "INFO";
+  bias?: "V" | "A" | "S" | "C" | "P" | "T" | "W" | "L" | "J" | "Y";
 
   /** @format int64 */
   id?: number;
@@ -42,7 +42,12 @@ export interface AnswerAttribute {
 
 export interface BucketTestTypeGetResDto {
   phrases?: string;
-  testType?: 'TYPE_COMMON_1' | 'TYPE_COMMON_2' | 'TYPE_COMMON_3' | 'TYPE_COMMON_4' | 'TYPE_MOM_CAFE_1';
+  testType?:
+    | "TYPE_COMMON_1"
+    | "TYPE_COMMON_2"
+    | "TYPE_COMMON_3"
+    | "TYPE_COMMON_4"
+    | "TYPE_MOM_CAFE_1";
 }
 
 export interface DevtiBiasResDto {
@@ -100,13 +105,18 @@ export interface EventLogPostReqDto {
    * event type
    * @example CLICK_CTA_BUTTON
    */
-  eventType?: 'CLICK_CTA_BUTTON' | 'CLICK_SHARE_BUTTON';
+  eventType?: "CLICK_CTA_BUTTON" | "CLICK_SHARE_BUTTON";
 
   /**
    * Bucket test type
    * @example TYPE_COMMON_1
    */
-  testType?: 'TYPE_COMMON_1' | 'TYPE_COMMON_2' | 'TYPE_COMMON_3' | 'TYPE_COMMON_4' | 'TYPE_MOM_CAFE_1';
+  testType?:
+    | "TYPE_COMMON_1"
+    | "TYPE_COMMON_2"
+    | "TYPE_COMMON_3"
+    | "TYPE_COMMON_4"
+    | "TYPE_MOM_CAFE_1";
 }
 
 export type EventLogPostResDto = object;
@@ -119,7 +129,7 @@ export interface GeneralReviewDto {
 }
 
 export interface PresetResDto {
-  bias?: 'V' | 'A' | 'S' | 'C' | 'P' | 'T' | 'W' | 'L' | 'J' | 'Y';
+  bias?: "V" | "A" | "S" | "C" | "P" | "T" | "W" | "L" | "J" | "Y";
   label?: string;
 
   /** @format int64 */
@@ -130,7 +140,7 @@ export interface PresetResDto {
 }
 
 export interface QuestionListResDto {
-  answerType?: 'PRESET' | 'GAGE' | 'INFO';
+  answerType?: "PRESET" | "GAGE" | "INFO";
 
   /** @format int64 */
   id?: number;
@@ -166,13 +176,18 @@ export interface SurveyPostReqDto {
    * 사전 참여 조사 타입(현재는 DEVTI만 존재)
    * @example DEVTI
    */
-  surveyType?: 'DEVTI';
+  surveyType?: "DEVTI";
 
   /**
    * Bucket test type
    * @example TYPE_COMMON_1
    */
-  testType?: 'TYPE_COMMON_1' | 'TYPE_COMMON_2' | 'TYPE_COMMON_3' | 'TYPE_COMMON_4' | 'TYPE_MOM_CAFE_1';
+  testType?:
+    | "TYPE_COMMON_1"
+    | "TYPE_COMMON_2"
+    | "TYPE_COMMON_3"
+    | "TYPE_COMMON_4"
+    | "TYPE_MOM_CAFE_1";
 }
 
 export interface SurveyPostResDto {
@@ -182,7 +197,12 @@ export interface SurveyPostResDto {
   /** @format int64 */
   id?: number;
   phone?: string;
-  testType?: 'TYPE_COMMON_1' | 'TYPE_COMMON_2' | 'TYPE_COMMON_3' | 'TYPE_COMMON_4' | 'TYPE_MOM_CAFE_1';
+  testType?:
+    | "TYPE_COMMON_1"
+    | "TYPE_COMMON_2"
+    | "TYPE_COMMON_3"
+    | "TYPE_COMMON_4"
+    | "TYPE_MOM_CAFE_1";
 }
 
 export interface BiasResNewDto {
@@ -193,9 +213,9 @@ export interface BiasResNewDto {
 }
 
 export type QueryParamsType = Record<string | number, any>;
-export type ResponseFormat = keyof Omit<Body, 'body' | 'bodyUsed'>;
+export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
-export interface FullRequestParams extends Omit<RequestInit, 'body'> {
+export interface FullRequestParams extends Omit<RequestInit, "body"> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -214,12 +234,14 @@ export interface FullRequestParams extends Omit<RequestInit, 'body'> {
   cancelToken?: CancelToken;
 }
 
-export type RequestParams = Omit<FullRequestParams, 'body' | 'method' | 'query' | 'path'>;
+export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 
 export interface ApiConfig<SecurityDataType = unknown> {
   baseUrl?: string;
-  baseApiParams?: Omit<RequestParams, 'baseUrl' | 'cancelToken' | 'signal'>;
-  securityWorker?: (securityData: SecurityDataType | null) => Promise<RequestParams | void> | RequestParams | void;
+  baseApiParams?: Omit<RequestParams, "baseUrl" | "cancelToken" | "signal">;
+  securityWorker?: (
+    securityData: SecurityDataType | null,
+  ) => Promise<RequestParams | void> | RequestParams | void;
   customFetch?: typeof fetch;
 }
 
@@ -231,23 +253,23 @@ export interface HttpResponse<D extends unknown, E extends unknown = unknown> ex
 type CancelToken = Symbol | string | number;
 
 export enum ContentType {
-  Json = 'application/json',
-  FormData = 'multipart/form-data',
-  UrlEncoded = 'application/x-www-form-urlencoded',
+  Json = "application/json",
+  FormData = "multipart/form-data",
+  UrlEncoded = "application/x-www-form-urlencoded",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public baseUrl: string = '//13.209.10.232:8090';
+  public baseUrl: string = "//13.209.10.232:8090";
   private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
+  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
   private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
 
   private baseApiParams: RequestParams = {
-    credentials: 'same-origin',
+    credentials: "same-origin",
     headers: {},
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
   };
 
   constructor(apiConfig: ApiConfig<SecurityDataType> = {}) {
@@ -260,7 +282,7 @@ export class HttpClient<SecurityDataType = unknown> {
 
   private encodeQueryParam(key: string, value: any) {
     const encodedKey = encodeURIComponent(key);
-    return `${encodedKey}=${encodeURIComponent(typeof value === 'number' ? value : `${value}`)}`;
+    return `${encodedKey}=${encodeURIComponent(typeof value === "number" ? value : `${value}`)}`;
   }
 
   private addQueryParam(query: QueryParamsType, key: string) {
@@ -269,25 +291,31 @@ export class HttpClient<SecurityDataType = unknown> {
 
   private addArrayQueryParam(query: QueryParamsType, key: string) {
     const value = query[key];
-    return value.map((v: any) => this.encodeQueryParam(key, v)).join('&');
+    return value.map((v: any) => this.encodeQueryParam(key, v)).join("&");
   }
 
   protected toQueryString(rawQuery?: QueryParamsType): string {
     const query = rawQuery || {};
-    const keys = Object.keys(query).filter((key) => 'undefined' !== typeof query[key]);
+    const keys = Object.keys(query).filter((key) => "undefined" !== typeof query[key]);
     return keys
-      .map((key) => (Array.isArray(query[key]) ? this.addArrayQueryParam(query, key) : this.addQueryParam(query, key)))
-      .join('&');
+      .map((key) =>
+        Array.isArray(query[key])
+          ? this.addArrayQueryParam(query, key)
+          : this.addQueryParam(query, key),
+      )
+      .join("&");
   }
 
   protected addQueryParams(rawQuery?: QueryParamsType): string {
     const queryString = this.toQueryString(rawQuery);
-    return queryString ? `?${queryString}` : '';
+    return queryString ? `?${queryString}` : "";
   }
 
   private contentFormatters: Record<ContentType, (input: any) => any> = {
     [ContentType.Json]: (input: any) =>
-      input !== null && (typeof input === 'object' || typeof input === 'string') ? JSON.stringify(input) : input,
+      input !== null && (typeof input === "object" || typeof input === "string")
+        ? JSON.stringify(input)
+        : input,
     [ContentType.FormData]: (input: any) =>
       Object.keys(input || {}).reduce((formData, key) => {
         const property = input[key];
@@ -295,9 +323,9 @@ export class HttpClient<SecurityDataType = unknown> {
           key,
           property instanceof Blob
             ? property
-            : typeof property === 'object' && property !== null
+            : typeof property === "object" && property !== null
             ? JSON.stringify(property)
-            : `${property}`
+            : `${property}`,
         );
         return formData;
       }, new FormData()),
@@ -352,7 +380,7 @@ export class HttpClient<SecurityDataType = unknown> {
     ...params
   }: FullRequestParams): Promise<HttpResponse<T, E>> => {
     const secureParams =
-      ((typeof secure === 'boolean' ? secure : this.baseApiParams.secure) &&
+      ((typeof secure === "boolean" ? secure : this.baseApiParams.secure) &&
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
       {};
@@ -361,18 +389,21 @@ export class HttpClient<SecurityDataType = unknown> {
     const payloadFormatter = this.contentFormatters[type || ContentType.Json];
     const responseFormat = format || requestParams.format;
 
-    return this.customFetch(`${baseUrl || this.baseUrl || ''}${path}${queryString ? `?${queryString}` : ''}`, {
-      ...requestParams,
-      headers: {
-        ...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {}),
-        ...(requestParams.headers || {}),
+    return this.customFetch(
+      `${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`,
+      {
+        ...requestParams,
+        headers: {
+          ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+          ...(requestParams.headers || {}),
+        },
+        signal: cancelToken ? this.createAbortSignal(cancelToken) : void 0,
+        body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
       },
-      signal: cancelToken ? this.createAbortSignal(cancelToken) : void 0,
-      body: typeof body === 'undefined' || body === null ? null : payloadFormatter(body),
-    }).then(async (response) => {
+    ).then(async (response) => {
       const r = response as HttpResponse<T, E>;
-      r.data = (null as unknown) as T;
-      r.error = (null as unknown) as E;
+      r.data = null as unknown as T;
+      r.error = null as unknown as E;
 
       const data = !responseFormat
         ? r
@@ -421,12 +452,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/advertisement
      */
     getAdvertisementByAdvertisementTypeUsingGet: (
-      query?: { advertisementType?: 'ALL' | 'LECTURE' | 'RECRUIT' | 'ETC' },
-      params: RequestParams = {}
+      query?: { advertisementType?: "ALL" | "LECTURE" | "RECRUIT" | "ETC" },
+      params: RequestParams = {},
     ) =>
       this.request<AdvertisementResDto[], void>({
         path: `/advertisement`,
-        method: 'GET',
+        method: "GET",
         query: query,
         ...params,
       }),
@@ -441,12 +472,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/bucket-test-type/{entryPoint}
      */
     getBucketTestTypeAndCreateTrafficUsingGet: (
-      entryPoint: 'COMMON_ENTRY_POINT' | 'MOM_ENTRY_POINT',
-      params: RequestParams = {}
+      entryPoint: "COMMON_ENTRY_POINT" | "MOM_ENTRY_POINT",
+      params: RequestParams = {},
     ) =>
       this.request<BucketTestTypeGetResDto, void>({
         path: `/bucket-test-type/${entryPoint}`,
-        method: 'GET',
+        method: "GET",
         ...params,
       }),
   };
@@ -462,7 +493,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createUsingPost: (eventLogPostReqDto: EventLogPostReqDto, params: RequestParams = {}) =>
       this.request<EventLogPostResDto, void>({
         path: `/event-log`,
-        method: 'POST',
+        method: "POST",
         body: eventLogPostReqDto,
         type: ContentType.Json,
         ...params,
@@ -476,10 +507,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Event 발생 횟수 조회
      * @request GET:/event-log/{eventType}
      */
-    getEventCountUsingGet: (eventType: 'CLICK_CTA_BUTTON' | 'CLICK_SHARE_BUTTON', params: RequestParams = {}) =>
+    getEventCountUsingGet: (
+      eventType: "CLICK_CTA_BUTTON" | "CLICK_SHARE_BUTTON",
+      params: RequestParams = {},
+    ) =>
       this.request<number, void>({
         path: `/event-log/${eventType}`,
-        method: 'GET',
+        method: "GET",
         ...params,
       }),
   };
@@ -495,7 +529,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getAllQuestionAndPresetUsingGet: (params: RequestParams = {}) =>
       this.request<QuestionListResDto[], void>({
         path: `/questions`,
-        method: 'GET',
+        method: "GET",
         ...params,
       }),
   };
@@ -520,11 +554,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         W: number;
         job: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<DevtiResDto, void>({
         path: `/results`,
-        method: 'GET',
+        method: "GET",
         query: query,
         ...params,
       }),
@@ -537,10 +571,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary 답변 저장하여 결과 요청값 반환 받기
      * @request POST:/results
      */
-    getDevtiByAnswerUsingPost: (answerAttributeList: AnswerAttribute[], params: RequestParams = {}) =>
+    getDevtiByAnswerUsingPost: (
+      answerAttributeList: AnswerAttribute[],
+      params: RequestParams = {},
+    ) =>
       this.request<DevtiReqDto, void>({
         path: `/results`,
-        method: 'POST',
+        method: "POST",
         body: answerAttributeList,
         type: ContentType.Json,
         ...params,
@@ -558,7 +595,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createUsingPost1: (surveyPostReqDto: SurveyPostReqDto, params: RequestParams = {}) =>
       this.request<SurveyPostResDto, void>({
         path: `/survey`,
-        method: 'POST',
+        method: "POST",
         body: surveyPostReqDto,
         type: ContentType.Json,
         ...params,
